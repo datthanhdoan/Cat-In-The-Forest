@@ -6,18 +6,25 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    NavMeshAgent agent;
-    public Transform clickPos;
+    public NavMeshAgent agent;
+    public GameManagerment gameManagerment;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        gameManagerment = GameObject.Find("GameManager").GetComponent<GameManagerment>();
     }
 
     void Update()
     {
-        agent.SetDestination(clickPos.position);
+        if (gameManagerment.CheckClickInArea() && gameManagerment.clickPos.gameObject.activeSelf)
+        {
+            agent.SetDestination(gameManagerment.clickPos.position);
+        }
+
+
+
     }
 }
