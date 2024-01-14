@@ -50,4 +50,9 @@ public class GameManagerment : MonoBehaviour
         bool check = EventSystem.current.IsPointerOverGameObject();
         return check;
     }
+
+    public float CheckDistan(Vector2 x, Vector2 y)
+    {
+        return Vector2.Distance(x, y);
+    }
 }

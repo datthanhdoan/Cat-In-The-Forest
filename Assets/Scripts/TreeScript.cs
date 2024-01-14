@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,29 +12,29 @@ public class TreeScript : MonoBehaviour
     bool _hasFruit = false;
     float _timeToSpawn = 5f;
     float _timeToSpawnTimer = 0f;
-    [SerializeField] GameObject _sprite;
-    [SerializeField] GameObject _fruit;
+    [SerializeField] GameObject _treeSprite;
+    [SerializeField] Sprite[] _sprite;
 
     void Start()
     {
         _gameManagerment = GameObject.Find("GameManager").GetComponent<GameManagerment>();
-        _fruit.SetActive(true);
-        _hasFruit = _fruit.activeSelf;
+        _hasFruit = true;
+        _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[1];
     }
     void Update()
     {
-        // Player dung lai va nguoi choi khong an chuot thi moi cho an
         if (_hasBeenClicked)
         {
+            // Check if player click to other place do not take fruit
             if (Input.GetMouseButtonDown(0))
             {
                 _hasBeenClicked = false;
             }
-            else if (!_gameManagerment.CheckPlayerMoving())
+            else if (!_gameManagerment.CheckPlayerMoving() && DistanceToPlayer() <= 1.5f)
             {
                 _hasBeenClicked = false;
                 TakeFruit();
-                // TreeStretchAnim();
+                TreeStretchAnim();
             }
         }
         _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
@@ -43,12 +44,24 @@ public class TreeScript : MonoBehaviour
         }
 
     }
-    public void OnMouseDown()
+
+    public float DistanceToPlayer()
     {
-        // TreeStretchAnim();
+        float distance = Vector2.Distance(_gameManagerment.playerScript.transform.position, transform.position);
+        Debug.Log(distance);
+        return distance;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1.5f);
+    }
+    public void OnMouseUpAsButton()
+    {
+        TreeStretchAnim();
         _hasBeenClicked = true;
         Debug.Log("Click");
-        // return true;
     }
 
     public void TakeFruit()
@@ -56,7 +69,7 @@ public class TreeScript : MonoBehaviour
         if (_hasFruit)
         {
             _hasFruit = false;
-            _fruit.SetActive(false);
+            _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[0];
             _timeToSpawnTimer = 0f;
             _gameManagerment.Coint++;
         }
@@ -66,18 +79,17 @@ public class TreeScript : MonoBehaviour
     {
         if (!_hasFruit)
         {
-            // TreeStretchAnim();
+            TreeStretchAnim();
             _hasFruit = true;
-            _fruit.SetActive(true);
+            _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[1];
         }
     }
 
 
-    // private void TreeStretchAnim()
-    // {
-
-    //     _sprite.GetComponent<Animator>().CrossFade(TreeStretch, 0f);
-    // }
-    // private static readonly int TreeStretch = Animator.StringToHash("Tree-Stretch");
+    private void TreeStretchAnim()
+    {
+        _treeSprite.GetComponent<Animator>().CrossFade(TreeStretch, 0f);
+    }
+    private static readonly int TreeStretch = Animator.StringToHash("Tree-Stretch");
 
 }
