@@ -51,7 +51,7 @@ public class GameManagerment : MonoBehaviour
         return check;
     }
 
-    public float CheckDistan(Vector2 x, Vector2 y)
+    public float CheckDistance(Vector2 x, Vector2 y)
     {
         return Vector2.Distance(x, y);
     }
