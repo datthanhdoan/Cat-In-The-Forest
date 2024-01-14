@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class GameManagerment : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class GameManagerment : MonoBehaviour
 
     public Transform clickPos;
     // Inventory
-    public int fruitCount = 0;
+    public int Coint = 0;
 
     private void Update()
     {
@@ -42,5 +43,11 @@ public class GameManagerment : MonoBehaviour
             clickPos.gameObject.SetActive(false);
             return false;
         }
+    }
+
+    public bool CheckClickOnUI()
+    {
+        bool check = EventSystem.current.IsPointerOverGameObject();
+        return check;
     }
 }

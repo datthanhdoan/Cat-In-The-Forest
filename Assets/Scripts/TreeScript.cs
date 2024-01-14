@@ -1,40 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class TreeScript : MonoBehaviour
 {
-    public GameManagerment gameManagerment;
-    private bool hasBeenClicked = false;
-    private bool hasFruit = false;
-    private float timeToSpawn = 5f;
-    private float timeToSpawnTimer = 0f;
-    public GameObject treeImage;
-    [SerializeField] GameObject fruit;
+    GameManagerment _gameManagerment;
+    bool _hasBeenClicked = false;
+    bool _hasFruit = false;
+    float _timeToSpawn = 5f;
+    float _timeToSpawnTimer = 0f;
+    [SerializeField] GameObject _sprite;
+    [SerializeField] GameObject _fruit;
 
     void Start()
     {
-        fruit.SetActive(true);
-        hasFruit = fruit.activeSelf;
+        _gameManagerment = GameObject.Find("GameManager").GetComponent<GameManagerment>();
+        _fruit.SetActive(true);
+        _hasFruit = _fruit.activeSelf;
     }
     void Update()
     {
         // Player dung lai va nguoi choi khong an chuot thi moi cho an
-        if (hasBeenClicked)
+        if (_hasBeenClicked)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                hasBeenClicked = false;
+                _hasBeenClicked = false;
             }
-            else if (!gameManagerment.CheckPlayerMoving())
+            else if (!_gameManagerment.CheckPlayerMoving())
             {
-                hasBeenClicked = false;
+                _hasBeenClicked = false;
                 TakeFruit();
-                TreeStretchAnim();
+                // TreeStretchAnim();
             }
         }
-        timeToSpawnTimer = hasFruit ? 0f : timeToSpawnTimer + Time.deltaTime;
-        if (timeToSpawnTimer >= timeToSpawn)
+        _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
+        if (_timeToSpawnTimer >= _timeToSpawn)
         {
             SpawnFruit();
         }
@@ -42,38 +45,39 @@ public class TreeScript : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        TreeStretchAnim();
-        hasBeenClicked = true;
+        // TreeStretchAnim();
+        _hasBeenClicked = true;
+        Debug.Log("Click");
         // return true;
     }
 
     public void TakeFruit()
     {
-        if (hasFruit)
+        if (_hasFruit)
         {
-            hasFruit = false;
-            fruit.SetActive(false);
-            timeToSpawnTimer = 0f;
-            gameManagerment.fruitCount++;
+            _hasFruit = false;
+            _fruit.SetActive(false);
+            _timeToSpawnTimer = 0f;
+            _gameManagerment.Coint++;
         }
     }
 
     public void SpawnFruit()
     {
-        if (!hasFruit)
+        if (!_hasFruit)
         {
-            TreeStretchAnim();
-            hasFruit = true;
-            fruit.SetActive(true);
+            // TreeStretchAnim();
+            _hasFruit = true;
+            _fruit.SetActive(true);
         }
     }
 
 
-    private void TreeStretchAnim()
-    {
+    // private void TreeStretchAnim()
+    // {
 
-        treeImage.GetComponent<Animator>().CrossFade(TreeStretch, 0f);
-    }
-    private static readonly int TreeStretch = Animator.StringToHash("Tree-Stretch");
+    //     _sprite.GetComponent<Animator>().CrossFade(TreeStretch, 0f);
+    // }
+    // private static readonly int TreeStretch = Animator.StringToHash("Tree-Stretch");
 
 }
