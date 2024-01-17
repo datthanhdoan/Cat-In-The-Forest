@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (_gameManagerment.CheckClickInArea() && _gameManagerment.clickPos.gameObject.activeSelf)
+        if (_gameManagerment.CheckClickInArea() && !_gameManagerment.CheckClickOnUI())
         {
             agent.SetDestination(_gameManagerment.clickPos.position);
         }

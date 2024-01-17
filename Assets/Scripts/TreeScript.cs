@@ -71,7 +71,7 @@ public class TreeScript : MonoBehaviour
             _hasFruit = false;
             _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[0];
             _timeToSpawnTimer = 0f;
-            _gameManagerment.Coint++;
+            _gameManagerment.coint++;
         }
     }
 

@@ -11,7 +11,11 @@ public class GameManagerment : MonoBehaviour
 
     public Transform clickPos;
     // Inventory
-    public int Coint = 0;
+    public GameObject region;
+    public int coint = 0;
+    public int currentLevel = 1;
+    public int quantityOfFruit = 0;
+
 
     private void Update()
     {
