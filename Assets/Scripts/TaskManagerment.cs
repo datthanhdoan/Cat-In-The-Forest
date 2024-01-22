@@ -13,11 +13,11 @@ public class TaskManagerment : MonoBehaviour
     [SerializeField] public int quantityOfFruitRequire = 0;
     // create quantityOfFruit variable private set public get
     [SerializeField] public int quantityOfFruit = 0;
-    public int coint;
+    public int coin;
 
     //private
     GameManagerment _gm;
-    [SerializeField] bool _hasBeenClicked = false;
+    bool _hasBeenClicked = false;
     [SerializeField] GameObject _listTask;
     private void Start()
     {
@@ -67,7 +67,7 @@ public class TaskManagerment : MonoBehaviour
         if (!_gm.MaxLevelCheck())
         {
             completeTaskUI.SetActive(false);
-            string taskMessage = "UnlokLevel " + (_gm.currentLevel + 1) + "Need : " + quantityOfFruitRequire + " Fruit";
+            string taskMessage = "Unlock level " + (_gm.currentLevel + 1) + " need : " + quantityOfFruitRequire + " fruit";
             unlockLV_Text.text = taskMessage;
         }
     }

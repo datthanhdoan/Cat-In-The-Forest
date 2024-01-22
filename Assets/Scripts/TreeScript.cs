@@ -48,7 +48,6 @@ public class TreeScript : MonoBehaviour
     public float DistanceToPlayer()
     {
         float distance = Vector2.Distance(_gm.playerScript.transform.position, transform.position);
-        Debug.Log(distance);
         return distance;
     }
 
@@ -61,7 +60,6 @@ public class TreeScript : MonoBehaviour
     {
         TreeStretch_Anim();
         _hasBeenClicked = true;
-        Debug.Log("Click");
     }
 
     public void TakeFruit()
