@@ -13278,7 +13278,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskUI: {fileID: 774528561}
+  quantityOfFruitRequire: 0
+  quantityOfFruit: 0
+  coint: 0
   _hasBeenClicked: 0
+  _listTask: {fileID: 924155081}
 --- !u!4 &950222049
 Transform:
   m_ObjectHideFlags: 0
@@ -13720,9 +13724,6 @@ MonoBehaviour:
   Surface2D: {fileID: 497952642}
   clickPos: {fileID: 2048509014}
   region: {fileID: 1053536036}
-  coint: 0
-  currentLevel: 0
-  quantityOfFruit: 3
 --- !u!4 &1606479303
 Transform:
   m_ObjectHideFlags: 0
@@ -18336,8 +18337,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 924155083}
-        m_TargetAssemblyTypeName: ListTaskUI, Assembly-CSharp
+      - m_Target: {fileID: 950222048}
+        m_TargetAssemblyTypeName: TaskManagerment, Assembly-CSharp
         m_MethodName: CheckTask
         m_Mode: 1
         m_Arguments:

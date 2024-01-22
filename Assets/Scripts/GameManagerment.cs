@@ -11,18 +11,19 @@ public class GameManagerment : MonoBehaviour
 {
 
     public Player playerScript;
-    public NavMeshSurface Surface2D;
     public Transform clickPos;
-    // Inventory
     public GameObject region;
+    public int maxLevel; // equal region.childCount in Start()
     private TaskManagerment _taskManagerment;
-    [NonSerialized] public int currentLevel = 1;
+    public int currentLevel { get; private set; } = 1;
 
+    private NavMeshSurface Surface2D;
     private void Start()
     {
+        maxLevel = region.transform.childCount;
         _taskManagerment = GameObject.Find("TaskManager").GetComponent<TaskManagerment>();
-        Surface2D.BuildNavMeshAsync(); // Init NavMesh
         Surface2D = GameObject.Find("NavhMesh").GetComponent<NavMeshSurface>();
+        Surface2D.BuildNavMeshAsync(); // Init NavMesh
     }
     private void Update()
     {
@@ -32,6 +33,16 @@ public class GameManagerment : MonoBehaviour
     public void UpdateNavMesh()
     {
         Surface2D.UpdateNavMesh(Surface2D.navMeshData);
+    }
+
+    public bool MaxLevelCheck()
+    {
+        return currentLevel >= maxLevel ? true : false;
+    }
+
+    public void UpdateLevel()
+    {
+        currentLevel++;
     }
 
     public bool CheckPlayerMoving()

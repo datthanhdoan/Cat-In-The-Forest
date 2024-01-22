@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 // using UnityEngine.EventSystems;
 
 public class TaskManagerment : MonoBehaviour
 {
+    //public 
     [SerializeField] private GameObject taskUI;
+    [SerializeField] private GameObject completeTaskUI;
     [SerializeField] public int quantityOfFruitRequire = 0;
     // create quantityOfFruit variable private set public get
     [SerializeField] public int quantityOfFruit = 0;
     public int coint;
+
+    //private
     GameManagerment _gm;
     [SerializeField] bool _hasBeenClicked = false;
     [SerializeField] GameObject _listTask;
@@ -38,7 +43,27 @@ public class TaskManagerment : MonoBehaviour
     public void ListTaskUI()
     {
         GameObject task = _listTask.transform.GetChild(0).gameObject;
-        task.transform.GetChild(1).GetComponent<Text>().text = "UnlokLevel " + (_gm.currentLevel + 1) + "Need : " + quantityOfFruitRequire + " Fruit";
+        Text taskText = task.transform.GetChild(1).GetComponent<Text>();
+        if (_gm.MaxLevelCheck())
+        {
+            // hide all task
+            foreach (Transform child in _listTask.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+
+            // show complete message
+            string completeMessage = "You have completed all tasks";
+            completeTaskUI.SetActive(true);
+            completeTaskUI.GetComponent<Text>().text = completeMessage;
+
+        }
+        if (!_gm.MaxLevelCheck())
+        {
+            completeTaskUI.SetActive(false);
+            string taskMessage = "UnlokLevel " + (_gm.currentLevel + 1) + "Need : " + quantityOfFruitRequire + " Fruit";
+            taskText.text = taskMessage;
+        }
     }
     public void UpdateFruitRequire()
     {
@@ -49,14 +74,21 @@ public class TaskManagerment : MonoBehaviour
     {
         if (quantityOfFruit >= quantityOfFruitRequire)
         {
-            _gm.currentLevel++;
-            UpdateFruitRequire(); // Update new task
-            // remove bound of old level
-            GameObject childI = _gm.region.transform.GetChild(_gm.currentLevel - 2).gameObject;
-            childI.transform.GetChild(1).gameObject.SetActive(false);
-            // open new level
-            // _gm.region.transform.GetChild(_gm.currentLevel).gameObject.SetActive(true);
-            _gm.UpdateNavMesh();
+            if (!_gm.MaxLevelCheck())
+            {
+                _gm.UpdateLevel(); // Update new level
+                UpdateFruitRequire(); // Update new task
+
+                // remove bound of old level
+                GameObject boundOfPreviousLevel = _gm.region.transform.GetChild(_gm.currentLevel - 2).gameObject;
+                boundOfPreviousLevel.transform.GetChild(1).gameObject.SetActive(false);
+
+                // update UI
+                ListTaskUI();
+
+                // update navmesh
+                _gm.UpdateNavMesh();
+            }
         }
         else
         {
