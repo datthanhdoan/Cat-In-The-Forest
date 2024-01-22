@@ -42,27 +42,33 @@ public class TaskManagerment : MonoBehaviour
 
     public void ListTaskUI()
     {
-        GameObject task = _listTask.transform.GetChild(0).gameObject;
-        Text taskText = task.transform.GetChild(1).GetComponent<Text>();
+        GameObject unlockLV = _listTask.transform.GetChild(0).gameObject;
+        Text unlockLV_Text = unlockLV.transform.GetChild(1).GetComponent<Text>();
         if (_gm.MaxLevelCheck())
         {
-            // hide all task
-            foreach (Transform child in _listTask.transform)
-            {
-                child.gameObject.SetActive(false);
-            }
 
-            // show complete message
-            string completeMessage = "You have completed all tasks";
-            completeTaskUI.SetActive(true);
-            completeTaskUI.GetComponent<Text>().text = completeMessage;
+            // show max level message
+            string maxLevelMessage = "You have unlocked all levels";
+            unlockLV_Text.text = maxLevelMessage;
+            // hide button in unlockLV
+            unlockLV.transform.GetChild(2).gameObject.SetActive(false);
+
+            // this code use when player complete all task
+            // hide all task
+            // foreach (Transform child in _listTask.transform)
+            // {
+            //     child.gameObject.SetActive(false);
+            // }
+            // string completeMessage = "You have completed all tasks";
+            // completeTaskUI.SetActive(true);
+            // completeTaskUI.GetComponent<Text>().text = completeMessage;
 
         }
         if (!_gm.MaxLevelCheck())
         {
             completeTaskUI.SetActive(false);
             string taskMessage = "UnlokLevel " + (_gm.currentLevel + 1) + "Need : " + quantityOfFruitRequire + " Fruit";
-            taskText.text = taskMessage;
+            unlockLV_Text.text = taskMessage;
         }
     }
     public void UpdateFruitRequire()
