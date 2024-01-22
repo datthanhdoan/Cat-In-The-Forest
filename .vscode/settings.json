@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CatInTheForest.sln"
+    "dotnet.defaultSolution": "Cat-In-The-Forest.sln"
 }

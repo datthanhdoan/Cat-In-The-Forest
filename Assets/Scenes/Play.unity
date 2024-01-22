@@ -12487,6 +12487,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -13277,7 +13278,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskUI: {fileID: 774528561}
-  Surface2D: {fileID: 0}
   _hasBeenClicked: 0
 --- !u!4 &950222049
 Transform:
@@ -13717,6 +13717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 630692076}
+  Surface2D: {fileID: 497952642}
   clickPos: {fileID: 2048509014}
   region: {fileID: 1053536036}
   coint: 0

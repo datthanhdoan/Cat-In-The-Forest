@@ -11,13 +11,4 @@ public class ListTaskUI : MonoBehaviour
         _taskManagerment = GameObject.Find("TaskManager").GetComponent<TaskManagerment>();
     }
 
-    private void OnEnable()
-    {
-        _taskManagerment.ListTaskUI(gameObject);
-    }
-    // Update is called once per frame
-    public void CheckTask()
-    {
-        _taskManagerment.CheckTask();
-    }
 }

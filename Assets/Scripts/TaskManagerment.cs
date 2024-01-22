@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using NavMeshPlus.Components;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 // using UnityEngine.EventSystems;
@@ -9,13 +7,17 @@ using UnityEngine.UI;
 public class TaskManagerment : MonoBehaviour
 {
     [SerializeField] private GameObject taskUI;
+    [SerializeField] public int quantityOfFruitRequire = 0;
+    // create quantityOfFruit variable private set public get
+    [SerializeField] public int quantityOfFruit = 0;
+    public int coint;
     GameManagerment _gm;
-    public NavMeshSurface Surface2D;
     [SerializeField] bool _hasBeenClicked = false;
-    int _quantityOfFruitRequire = 0;
+    [SerializeField] GameObject _listTask;
     private void Start()
     {
         _gm = GameObject.Find("GameManager").GetComponent<GameManagerment>();
+        UpdateFruitRequire();
     }
     void Update()
     {
@@ -26,35 +28,39 @@ public class TaskManagerment : MonoBehaviour
             {
                 _hasBeenClicked = false;
                 taskUI.SetActive(true);
+                ListTaskUI();
             }
         }
     }
 
     #region MathRecipe
 
-    public void ListTaskUI(GameObject list)
+    public void ListTaskUI()
     {
-        CreateTask();
-        GameObject task = list.transform.GetChild(0).gameObject;
-        task.transform.GetChild(1).GetComponent<Text>().text = "UnlokLevel " + (_gm.currentLevel + 1) + " : " + _quantityOfFruitRequire + " Fruit";
+        GameObject task = _listTask.transform.GetChild(0).gameObject;
+        task.transform.GetChild(1).GetComponent<Text>().text = "UnlokLevel " + (_gm.currentLevel + 1) + "Need : " + quantityOfFruitRequire + " Fruit";
     }
-    public void CreateTask()
+    public void UpdateFruitRequire()
     {
-        _gm.quantityOfFruit += (int)(_gm.currentLevel * Random.Range(2.5f, 5.5f));
+        quantityOfFruitRequire += (int)(_gm.currentLevel * Random.Range(2.5f, 5.5f));
     }
 
     public void CheckTask()
     {
-        if (_gm.quantityOfFruit >= _quantityOfFruitRequire)
+        if (quantityOfFruit >= quantityOfFruitRequire)
         {
             _gm.currentLevel++;
-            _gm.coint += _gm.currentLevel * 10;
+            UpdateFruitRequire(); // Update new task
             // remove bound of old level
-            GameObject childI = _gm.region.transform.GetChild(_gm.currentLevel - 1).gameObject;
+            GameObject childI = _gm.region.transform.GetChild(_gm.currentLevel - 2).gameObject;
             childI.transform.GetChild(1).gameObject.SetActive(false);
             // open new level
-            _gm.region.transform.GetChild(_gm.currentLevel).gameObject.SetActive(true);
-            Surface2D.UpdateNavMesh(Surface2D.navMeshData);
+            // _gm.region.transform.GetChild(_gm.currentLevel).gameObject.SetActive(true);
+            _gm.UpdateNavMesh();
+        }
+        else
+        {
+            Debug.Log("Not enough fruit");
         }
     }
 

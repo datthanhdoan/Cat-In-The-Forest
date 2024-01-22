@@ -7,17 +7,17 @@ using UnityEngine.EventSystems;
 
 public class TreeScript : MonoBehaviour
 {
-    GameManagerment _gameManagerment;
+    [SerializeField] Sprite[] _sprite;
+    [SerializeField] GameObject _treeSprite;
     bool _hasBeenClicked = false;
     bool _hasFruit = false;
     float _timeToSpawn = 5f;
     float _timeToSpawnTimer = 0f;
-    [SerializeField] GameObject _treeSprite;
-    [SerializeField] Sprite[] _sprite;
+    GameManagerment _gm;
 
     void Start()
     {
-        _gameManagerment = GameObject.Find("GameManager").GetComponent<GameManagerment>();
+        _gm = GameObject.Find("GameManager").GetComponent<GameManagerment>();
         _hasFruit = true;
         _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[1];
     }
@@ -30,11 +30,11 @@ public class TreeScript : MonoBehaviour
             {
                 _hasBeenClicked = false;
             }
-            else if (!_gameManagerment.CheckPlayerMoving() && DistanceToPlayer() <= 1.5f)
+            else if (!_gm.CheckPlayerMoving() && DistanceToPlayer() <= 1.5f)
             {
                 _hasBeenClicked = false;
                 TakeFruit();
-                TreeStretchAnim();
+                TreeStretch_Anim();
             }
         }
         _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
@@ -47,7 +47,7 @@ public class TreeScript : MonoBehaviour
 
     public float DistanceToPlayer()
     {
-        float distance = Vector2.Distance(_gameManagerment.playerScript.transform.position, transform.position);
+        float distance = Vector2.Distance(_gm.playerScript.transform.position, transform.position);
         Debug.Log(distance);
         return distance;
     }
@@ -59,7 +59,7 @@ public class TreeScript : MonoBehaviour
     }
     public void OnMouseUpAsButton()
     {
-        TreeStretchAnim();
+        TreeStretch_Anim();
         _hasBeenClicked = true;
         Debug.Log("Click");
     }
@@ -71,7 +71,7 @@ public class TreeScript : MonoBehaviour
             _hasFruit = false;
             _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[0];
             _timeToSpawnTimer = 0f;
-            _gameManagerment.coint++;
+            _gm.UpdateQuantityOfFruit(1);
         }
     }
 
@@ -79,14 +79,14 @@ public class TreeScript : MonoBehaviour
     {
         if (!_hasFruit)
         {
-            TreeStretchAnim();
+            TreeStretch_Anim();
             _hasFruit = true;
             _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[1];
         }
     }
 
 
-    private void TreeStretchAnim()
+    private void TreeStretch_Anim()
     {
         _treeSprite.GetComponent<Animator>().CrossFade(TreeStretch, 0f);
     }
