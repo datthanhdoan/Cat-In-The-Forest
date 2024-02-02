@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using NavMeshPlus.Components;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,9 +10,9 @@ public class GameManagerment : MonoBehaviour
     public Player playerScript;
     public Transform clickPos;
     public GameObject region;
-    public int maxLevel; // equal region.childCount in Start()
     private TaskManagerment _taskManagerment;
-    public int currentLevel { get; private set; } = 1;
+    public int currentLevel { get; private set; } = 1;   //private
+    public int maxLevel; // equal region.childCount in Start()
 
     private NavMeshSurface Surface2D;
     private void Start()
@@ -25,6 +22,21 @@ public class GameManagerment : MonoBehaviour
         Surface2D = GameObject.Find("NavhMesh").GetComponent<NavMeshSurface>();
         Surface2D.BuildNavMeshAsync(); // Init NavMesh
     }
+
+    public bool CheckFirstTimeInGame()
+    {
+        if (PlayerPrefs.GetInt("FirstTimeInGame") == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) clickPos = GetMousePosition();
@@ -35,25 +47,13 @@ public class GameManagerment : MonoBehaviour
         Surface2D.UpdateNavMesh(Surface2D.navMeshData);
     }
 
-    public bool MaxLevelCheck()
-    {
-        return currentLevel >= maxLevel ? true : false;
-    }
-
-    public void UpdateLevel()
-    {
-        currentLevel++;
-    }
 
     public bool CheckPlayerMoving()
     {
         return playerScript.agent.velocity == Vector3.zero ? false : true;
     }
 
-    public void UpdateQuantityOfFruit(int quantity)
-    {
-        _taskManagerment.quantityOfFruit += quantity;
-    }
+
     public Transform GetMousePosition()
     {
         Transform trans = clickPos;
@@ -81,7 +81,6 @@ public class GameManagerment : MonoBehaviour
         bool check = EventSystem.current.IsPointerOverGameObject();
         return check;
     }
-
     public float CheckDistance(Vector2 x, Vector2 y)
     {
         return Vector2.Distance(x, y);

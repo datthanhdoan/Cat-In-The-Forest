@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
         if (_gameManagerment.CheckClickInArea() && !_gameManagerment.CheckClickOnUI())
         {
             agent.SetDestination(_gameManagerment.clickPos.position);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
         PlayerAnim();
     }

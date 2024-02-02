@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 
 public class TreeScript : MonoBehaviour
@@ -13,10 +9,11 @@ public class TreeScript : MonoBehaviour
     bool _hasFruit = false;
     float _timeToSpawn = 5f;
     float _timeToSpawnTimer = 0f;
+    ProgressManager _pm;
     GameManagerment _gm;
-
     void Start()
     {
+        _pm = GameObject.Find("ProgressManager").GetComponent<ProgressManager>();
         _gm = GameObject.Find("GameManager").GetComponent<GameManagerment>();
         _hasFruit = true;
         _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[1];
@@ -33,10 +30,13 @@ public class TreeScript : MonoBehaviour
             else if (!_gm.CheckPlayerMoving() && DistanceToPlayer() <= 1.5f)
             {
                 _hasBeenClicked = false;
-                TakeFruit();
+                TakeFruitAnim();
+                _pm.UpdateApple(1);
                 TreeStretch_Anim();
             }
         }
+
+        // Timer to spawn fruit
         _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
         if (_timeToSpawnTimer >= _timeToSpawn)
         {
@@ -62,14 +62,13 @@ public class TreeScript : MonoBehaviour
         _hasBeenClicked = true;
     }
 
-    public void TakeFruit()
+    public void TakeFruitAnim()
     {
         if (_hasFruit)
         {
             _hasFruit = false;
             _treeSprite.GetComponent<SpriteRenderer>().sprite = _sprite[0];
             _timeToSpawnTimer = 0f;
-            _gm.UpdateQuantityOfFruit(1);
         }
     }
 

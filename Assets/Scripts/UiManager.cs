@@ -1,32 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializeField] TaskManagerment _taskManagerment;
+    [SerializeField] ProgressManager _pm;
     [SerializeField] GameObject _coinGO;
-    [SerializeField] GameObject _fruitGO;
+    [SerializeField] GameObject _appleGO;
     void Start()
     {
-        _taskManagerment = GameObject.Find("TaskManager").GetComponent<TaskManagerment>();
+        _pm = GameObject.Find("ProgressManager").GetComponent<ProgressManager>();
     }
     void Update()
     {
         UpdateCoin();
-        UpdateFruit();
+        UpdateApple();
     }
 
     void UpdateCoin()
     {
-        string coin = _taskManagerment.coin.ToString();
+        string coin = _pm.coin.ToString();
         _coinGO.GetComponent<Text>().text = "Coin : " + coin;
     }
 
-    void UpdateFruit()
+    void UpdateApple()
     {
-        string fruit = _taskManagerment.quantityOfFruit.ToString();
-        _fruitGO.GetComponent<Text>().text = "Fruit : " + fruit + "/" + _taskManagerment.quantityOfFruitRequire.ToString();
+        string apple = _pm.apple.ToString();
+        _appleGO.GetComponent<Text>().text = "Apple: " + apple;
     }
 }
