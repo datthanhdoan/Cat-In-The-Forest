@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class T_Apple : Task
 {
     int _appleRequire = 0;
@@ -10,9 +10,10 @@ public class T_Apple : Task
     {
         base.Start();
         _gm = GameObject.Find("GameManager").GetComponent<GameManagerment>();
-        UpdateAppleRequire();
-        string t1 = "Unlock level " + (_gm.currentLevel + 1);
-        string t2 = _appleRequire.ToString() + " apple ";
+        UpdateAppleRequire(0); // baseRequire
+        UpdateCoinReward(_gm.currentLevel, 10, 0.3f);
+        string t1 = _appleRequire.ToString();
+        string t2 = _coinReward.ToString();
         UpdateTaskContent(t1, t2);
     }
 
@@ -25,17 +26,22 @@ public class T_Apple : Task
     {
         if (_pm.apple >= _appleRequire)
         {
-            // _button.interactable = true;
-
+            _pm.apple -= _appleRequire;
+            _pm.coin += _coinReward;
+            UpdateAppleRequire(10); // baseRequire
+            UpdateCoinReward(_gm.currentLevel, 10, 0.3f);
+            string t1 = _appleRequire.ToString();
+            string t2 = _coinReward.ToString();
+            UpdateTaskContent(t1, t2);
         }
         else
         {
             Debug.Log("Not enough apple");
         }
     }
-    void UpdateAppleRequire()
+    void UpdateAppleRequire(int baseRequire)
     {
-        _appleRequire = _pm.apple + _gm.currentLevel * 2 + 1;
+        _appleRequire = baseRequire + _gm.currentLevel * 2 + Random.Range(0, 3);
     }
 
     public void UpdateCoinReward(int level, float a, float b)

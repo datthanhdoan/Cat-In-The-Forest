@@ -18,20 +18,19 @@ public class Task : MonoBehaviour
         _pm = GameObject.Find("ProgressManager").GetComponent<ProgressManager>();
         _map = GameObject.Find("MapManager").GetComponent<MapManager>();
 
-        // _button.onClick.AddListener(CheckTask);
-        _text = transform.GetChild(1).GetComponent<Text>();
-        _bText = transform.GetChild(2).GetComponentInChildren<Text>();
-        _button = transform.GetChild(2).GetComponent<Button>();
-        _bImage = transform.GetChild(2).GetComponent<Image>();
+        _text = transform.GetChild(0).GetComponentInChildren<Text>();
+
+        _bText = transform.GetChild(1).GetComponentInChildren<Text>();
+        _button = transform.GetChild(1).GetComponent<Button>();
+        _button.onClick.AddListener(CheckTask);
+        _bImage = transform.GetChild(1).GetComponent<Image>();
     }
 
 
     protected void UpdateTaskContent(string t1, string t2)
     {
-        _text = transform.GetChild(1).GetComponent<Text>();
         _text.text = t1;
-        _bText = transform.GetChild(2).GetComponentInChildren<Text>();
         _bText.text = t2;
     }
-    protected void CheckTask() { }
+    protected virtual void CheckTask() { }
 }
