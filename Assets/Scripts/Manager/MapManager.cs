@@ -1,17 +1,25 @@
-
-using System;
 using NavMeshPlus.Components;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.EventSystems;
 
 public class MapManager : MonoBehaviour
 {
+    public static MapManager instance { get; private set; }
     private NavMeshSurface Surface2D;
     public GameObject region;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     private void Start()
     {
-        Surface2D = GameObject.Find("NavhMesh").GetComponent<NavMeshSurface>();
+        Surface2D = GameObject.FindGameObjectWithTag("NavhMesh").GetComponent<NavMeshSurface>();
         Surface2D.BuildNavMeshAsync(); // Init NavMesh
     }
 

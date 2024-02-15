@@ -66,5 +66,8 @@
   "codegraphy.selectedD3Color": "Spectral",
   "codegraphy.selectedNodeColor": "#fff",
   "codegraphy.favoriteNodeColor": "#ffd700",
-  "codegraphy.outlineColor": "#ffd700"
+  "codegraphy.outlineColor": "#ffd700",
+  "helium-icon-theme.hidesExplorerArrows": true,
+  "vsicons.presets.hideExplorerArrows": false,
+  "prettier.arrowParens": "avoid"
 }

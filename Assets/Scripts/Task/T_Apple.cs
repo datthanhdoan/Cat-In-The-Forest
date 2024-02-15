@@ -5,11 +5,9 @@ public class T_Apple : Task
 {
     int _appleRequire = 0;
     int _coinReward = 0;
-    GameManagerment _gm;
     new void Start()
     {
         base.Start();
-        _gm = GameObject.Find("GameManager").GetComponent<GameManagerment>();
         UpdateAppleRequire(0); // baseRequire
         UpdateCoinReward(_gm.currentLevel, 10, 0.3f);
         string t1 = _appleRequire.ToString();

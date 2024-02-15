@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class Task : MonoBehaviour
 {
-    protected TaskManagerment _tm;
     protected ProgressManager _pm;
     protected MapManager _map;
+    protected GameManagerment _gm;
     // [SerializeField] protected GameObject _taskPrefab;
     protected Text _text;
     protected Text _bText;
@@ -14,9 +14,9 @@ public class Task : MonoBehaviour
 
     protected void Start()
     {
-        _tm = GameObject.FindGameObjectWithTag("TaskManager").GetComponent<TaskManagerment>();
-        _pm = GameObject.Find("ProgressManager").GetComponent<ProgressManager>();
-        _map = GameObject.Find("MapManager").GetComponent<MapManager>();
+        _pm = ProgressManager.instance;
+        _map = MapManager.instance;
+        _gm = GameManagerment.instance;
 
         _text = transform.GetChild(0).GetComponentInChildren<Text>();
 

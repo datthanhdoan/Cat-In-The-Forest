@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class ProgressManager : MonoBehaviour
 {
-
-
+    public static ProgressManager instance { get; private set; }
 
     // resources
     public int coin = 0;
@@ -14,6 +16,18 @@ public class ProgressManager : MonoBehaviour
     [SerializeField] public GameObject region;
     public int level { get; private set; } = 1;
     public int maxLevel { get; private set; } = 0;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Start()
     {

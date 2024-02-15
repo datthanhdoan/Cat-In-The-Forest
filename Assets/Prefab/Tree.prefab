@@ -62,10 +62,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba2f2ef7f4f75444b5fd23103904929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _treeSprite: {fileID: 7144128991136806771}
   _sprite:
   - {fileID: -977294811, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   - {fileID: -1866991913, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+  _treeSprite: {fileID: 7144128991136806783}
+  _treeAnim: {fileID: 7144128991136806782}
 --- !u!1 &7144128991136806771
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +81,7 @@ GameObject:
   - component: {fileID: 7144128991136806783}
   - component: {fileID: 7144128991136806782}
   m_Layer: 0
-  m_Name: TreeSprite
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

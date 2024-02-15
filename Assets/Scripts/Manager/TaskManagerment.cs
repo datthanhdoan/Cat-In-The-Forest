@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TaskManagerment : MonoBehaviour
 {
+
     [SerializeField] GameObject taskUI;
     [SerializeField] GameObject _listTask;
     [SerializeField] GameObject _taskPrefab;
@@ -9,11 +10,13 @@ public class TaskManagerment : MonoBehaviour
 
 
     // tasks
+    Player _player;
     GameManagerment _gm;
     bool _hasBeenClicked = false;
     private void Start()
     {
-        _gm = GameObject.Find("GameManager").GetComponent<GameManagerment>();
+        _player = Player.instance;
+        _gm = GameManagerment.instance;
     }
 
     void Update()
@@ -21,7 +24,7 @@ public class TaskManagerment : MonoBehaviour
 
         if (_hasBeenClicked)
         {
-            if (!_gm.CheckPlayerMoving() && CheckDistance() <= 1.5f)
+            if (!_player.CheckMoving() && CheckDistance() <= 1.5f)
             {
                 _hasBeenClicked = false;
                 taskUI.SetActive(true);
@@ -96,7 +99,7 @@ public class TaskManagerment : MonoBehaviour
 
     #region CheckDistance
     public void OnMouseUpAsButton() => _hasBeenClicked = true;
-    float CheckDistance() => Vector2.Distance(transform.position, _gm.playerScript.transform.position);
+    float CheckDistance() => Vector2.Distance(transform.position, _player.transform.position);
 
     #endregion
 }

@@ -1,26 +1,27 @@
 using System;
-using NavMeshPlus.Components;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class GameManagerment : MonoBehaviour
 {
-
-    public Player playerScript;
+    public static GameManagerment instance { get; private set; }
     public Transform clickPos;
-    public GameObject region;
-    private TaskManagerment _taskManagerment;
     public int currentLevel { get; private set; } = 1;   //private
     public int maxLevel; // equal region.childCount in Start()
-
-    private NavMeshSurface Surface2D;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     private void Start()
     {
-        maxLevel = region.transform.childCount;
-        _taskManagerment = GameObject.Find("TaskManager").GetComponent<TaskManagerment>();
-        Surface2D = GameObject.Find("NavhMesh").GetComponent<NavMeshSurface>();
-        Surface2D.BuildNavMeshAsync(); // Init NavMesh
     }
 
     public bool CheckFirstTimeInGame()
@@ -42,16 +43,7 @@ public class GameManagerment : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) clickPos = GetMousePosition();
     }
 
-    public void UpdateNavMesh()
-    {
-        Surface2D.UpdateNavMesh(Surface2D.navMeshData);
-    }
 
-
-    public bool CheckPlayerMoving()
-    {
-        return playerScript.agent.velocity == Vector3.zero ? false : true;
-    }
 
 
     public Transform GetMousePosition()
