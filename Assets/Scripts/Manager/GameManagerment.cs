@@ -7,8 +7,6 @@ public class GameManagerment : MonoBehaviour
 {
     public static GameManagerment instance { get; private set; }
     public Transform clickPos;
-    public int currentLevel { get; private set; } = 1;   //private
-    public int maxLevel; // equal region.childCount in Start()
     private void Awake()
     {
         if (instance == null)

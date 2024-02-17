@@ -10,6 +10,7 @@ public class ProgressManager : MonoBehaviour
     // resources
     public int coin = 0;
     public int apple = 0;
+    public int grape = 0;
 
 
     // level
@@ -38,6 +39,7 @@ public class ProgressManager : MonoBehaviour
 
     public void UpdateCoin(int value) => coin += value;
     public void UpdateApple(int value) => apple += value;
+    public void UpdateGrape(int value) => grape += value;
 
 
     // get resources

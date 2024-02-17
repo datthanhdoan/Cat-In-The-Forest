@@ -1,22 +1,22 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
-
-
-public class TreeScript : MonoBehaviour
+public class Tree : MonoBehaviour
 {
-    [SerializeField] Sprite[] _sprite;
-    [SerializeField] SpriteRenderer _treeSprite;
-    [SerializeField] Animator _treeAnim;
+    [Tooltip("0: No fruit, 1: Has fruit")]
+    [SerializeField] protected Sprite[] _sprite;
+    [SerializeField] protected SpriteRenderer _treeSprite;
+    [Tooltip("Tree stretch animation from treeSprite object")]
+    [SerializeField] protected Animator _treeAnim;
 
-    bool _hasBeenClicked = false;
-    bool _hasFruit = false;
-    float _timeToSpawn = 8f;
-    float _timeToSpawnTimer = 0f;
-
-    ProgressManager _pm;
-    GameManagerment _gm;
-    Player _player;
-    void Start()
+    protected bool _hasBeenClicked = false;
+    protected bool _hasFruit = false;
+    protected float _timeToSpawn = 8f;
+    protected float _timeToSpawnTimer = 0f;
+    protected int _fruitValue = 1;
+    protected ProgressManager _pm;
+    protected GameManagerment _gm;
+    protected Player _player;
+    protected void Start()
     {
         _pm = ProgressManager.instance;
         _gm = GameManagerment.instance;
@@ -24,7 +24,7 @@ public class TreeScript : MonoBehaviour
         _hasFruit = true;
         _treeSprite.sprite = _sprite[1];
     }
-    void Update()
+    protected void Update()
     {
         if (_hasBeenClicked)
         {
@@ -37,7 +37,11 @@ public class TreeScript : MonoBehaviour
             {
                 _hasBeenClicked = false;
                 TakeFruitAnim();
-                _pm.UpdateApple(1);
+
+                // Update number of fruit 
+                // _pm.UpdateApple(1);
+                UpdateFruit(1);
+
                 TreeStretch_Anim();
             }
         }
@@ -51,13 +55,27 @@ public class TreeScript : MonoBehaviour
 
     }
 
+    public void SpawnFruit()
+    {
+        if (!_hasFruit)
+        {
+            TreeStretch_Anim();
+            _hasFruit = true;
+            _treeSprite.sprite = _sprite[1];
+        }
+    }
+
+    protected virtual void UpdateFruit(int value)
+    {
+    }
+
     public float DistanceToPlayer()
     {
         float distance = Vector2.Distance(_player.transform.position, transform.position);
         return distance;
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 1.5f);
@@ -78,15 +96,6 @@ public class TreeScript : MonoBehaviour
         }
     }
 
-    public void SpawnFruit()
-    {
-        if (!_hasFruit)
-        {
-            TreeStretch_Anim();
-            _hasFruit = true;
-            _treeSprite.sprite = _sprite[1];
-        }
-    }
 
 
     private void TreeStretch_Anim()

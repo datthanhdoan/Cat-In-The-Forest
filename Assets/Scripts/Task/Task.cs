@@ -12,18 +12,18 @@ public class Task : MonoBehaviour
     protected Button _button;
     protected Image _bImage;
 
-    protected void Start()
+    protected void Awake()
     {
         _pm = ProgressManager.instance;
         _map = MapManager.instance;
         _gm = GameManagerment.instance;
 
         _text = transform.GetChild(0).GetComponentInChildren<Text>();
-
         _bText = transform.GetChild(1).GetComponentInChildren<Text>();
         _button = transform.GetChild(1).GetComponent<Button>();
-        _button.onClick.AddListener(CheckTask);
         _bImage = transform.GetChild(1).GetComponent<Image>();
+
+        _button.onClick.AddListener(CheckTask);
     }
 
 

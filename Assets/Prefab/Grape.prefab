@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7144128990101866926}
   - component: {fileID: 7144128990101866921}
-  - component: {fileID: 7144128990101866920}
+  - component: {fileID: 6928825168085380836}
   m_Layer: 0
-  m_Name: Tree
+  m_Name: Grape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.5, y: 1.9375}
   m_Direction: 0
---- !u!114 &7144128990101866920
+--- !u!114 &6928825168085380836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,12 +59,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7144128990101866913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ba2f2ef7f4f75444b5fd23103904929, type: 3}
+  m_Script: {fileID: 11500000, guid: 247ba0f8c842f374498125ece811a36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite:
-  - {fileID: -977294811, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
-  - {fileID: -1866991913, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+  - {fileID: -206635364, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+  - {fileID: -1251615509, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   _treeSprite: {fileID: 7144128991136806783}
   _treeAnim: {fileID: 7144128991136806782}
 --- !u!1 &7144128991136806771
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.9375}
+    oldSize: {x: 0.625, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -185,7 +185,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -977294811, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+  m_Sprite: {fileID: -206635364, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

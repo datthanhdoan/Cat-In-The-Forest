@@ -5,9 +5,8 @@ public class T_Level : Task
     [SerializeField] int _coinRequire;
     [SerializeField] int unlockLevel;
 
-    new void Start()
+    void Start()
     {
-        base.Start();
         string t1 = "Locked";
         string t2 = _coinRequire.ToString();
         UpdateTaskContent(t1, t2);

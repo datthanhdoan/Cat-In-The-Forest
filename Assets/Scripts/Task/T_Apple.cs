@@ -5,19 +5,13 @@ public class T_Apple : Task
 {
     int _appleRequire = 0;
     int _coinReward = 0;
-    new void Start()
+    void Start()
     {
-        base.Start();
         UpdateAppleRequire(0); // baseRequire
-        UpdateCoinReward(_gm.currentLevel, 10, 0.3f);
+        UpdateCoinReward(_pm.level, 10, 0.3f);
         string t1 = _appleRequire.ToString();
         string t2 = _coinReward.ToString();
         UpdateTaskContent(t1, t2);
-    }
-
-    void Update()
-    {
-
     }
 
     public new void CheckTask()
@@ -27,7 +21,7 @@ public class T_Apple : Task
             _pm.apple -= _appleRequire;
             _pm.coin += _coinReward;
             UpdateAppleRequire(10); // baseRequire
-            UpdateCoinReward(_gm.currentLevel, 10, 0.3f);
+            UpdateCoinReward(_pm.level, 10, 0.3f);
             string t1 = _appleRequire.ToString();
             string t2 = _coinReward.ToString();
             UpdateTaskContent(t1, t2);
@@ -39,7 +33,7 @@ public class T_Apple : Task
     }
     void UpdateAppleRequire(int baseRequire)
     {
-        _appleRequire = baseRequire + _gm.currentLevel * 2 + Random.Range(0, 3);
+        _appleRequire = baseRequire + _pm.level * 2 + Random.Range(0, 3);
     }
 
     public void UpdateCoinReward(int level, float a, float b)

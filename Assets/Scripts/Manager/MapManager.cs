@@ -4,7 +4,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public static MapManager instance { get; private set; }
-    private NavMeshSurface Surface2D;
+    [SerializeField] NavMeshSurface Surface2D;
     public GameObject region;
     private void Awake()
     {
@@ -19,7 +19,6 @@ public class MapManager : MonoBehaviour
     }
     private void Start()
     {
-        Surface2D = GameObject.FindGameObjectWithTag("NavhMesh").GetComponent<NavMeshSurface>();
         Surface2D.BuildNavMeshAsync(); // Init NavMesh
     }
 
