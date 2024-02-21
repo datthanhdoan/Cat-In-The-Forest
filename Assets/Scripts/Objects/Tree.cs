@@ -8,6 +8,8 @@ public class Tree : MonoBehaviour
     [Tooltip("Tree stretch animation from treeSprite object")]
     [SerializeField] protected Animator _treeAnim;
 
+    [SerializeField] protected GameObject _particle;
+
     protected bool _hasBeenClicked = false;
     protected bool _hasFruit = false;
     protected float _timeToSpawn = 8f;
@@ -40,7 +42,7 @@ public class Tree : MonoBehaviour
 
                 // Update number of fruit 
                 // _pm.UpdateApple(1);
-                UpdateFruit(1);
+                UpdateFruit(_fruitValue);
 
                 TreeStretch_Anim();
             }

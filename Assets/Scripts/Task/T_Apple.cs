@@ -7,8 +7,9 @@ public class T_Apple : Task
     int _coinReward = 0;
     void Start()
     {
-        UpdateAppleRequire(0); // baseRequire
+        UpdateAppleRequire(0); // baseRequire = 0
         UpdateCoinReward(_pm.level, 10, 0.3f);
+
         string t1 = _appleRequire.ToString();
         string t2 = _coinReward.ToString();
         UpdateTaskContent(t1, t2);
@@ -18,10 +19,12 @@ public class T_Apple : Task
     {
         if (_pm.apple >= _appleRequire)
         {
-            _pm.apple -= _appleRequire;
-            _pm.coin += _coinReward;
+            _pm.UpdateApple(-_appleRequire); // minus apple
+            _pm.SetCoin(_coinReward); // plus coin
+
             UpdateAppleRequire(10); // baseRequire
             UpdateCoinReward(_pm.level, 10, 0.3f);
+
             string t1 = _appleRequire.ToString();
             string t2 = _coinReward.ToString();
             UpdateTaskContent(t1, t2);

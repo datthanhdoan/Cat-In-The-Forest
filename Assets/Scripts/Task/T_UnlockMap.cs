@@ -1,8 +1,12 @@
 using UnityEngine;
 
-public class T_Level : Task
+/// <summary>
+/// Dùng dấu chân mèo để mở map mới
+/// </summary>
+public class T_UnlockMap : Task
 {
     [SerializeField] int _coinRequire;
+    [Tooltip("Level to unlock - R_Region")]
     [SerializeField] int unlockLevel;
 
     void Start()
@@ -26,7 +30,7 @@ public class T_Level : Task
 
                 // update map
                 _pm.region.transform.GetChild(unlockLevel - 1).gameObject.SetActive(true);
-                _map.UpdateNavMesh();
+                MapManager.instance.UpdateNavMesh();
                 gameObject.SetActive(false);
             }
         }

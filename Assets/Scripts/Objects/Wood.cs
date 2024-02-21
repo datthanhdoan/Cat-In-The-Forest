@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class Apple : Tree
+public class Wood : Tree
 {
     new protected int _fruitValue = 1;
-    new protected float _timeToSpawn = 8f;
+    new protected float _timeToSpawn = 10f;
     new protected void Start()
     {
         base.Start();
     }
     protected override void UpdateFruit(int value)
     {
-        _pm.UpdateApple(value); // value is _fruitValue
+        _pm.UpdateWood(value); // value is _fruitValue
     }
 }

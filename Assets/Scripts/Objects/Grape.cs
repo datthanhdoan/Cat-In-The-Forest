@@ -6,6 +6,6 @@ public class Grape : Tree
     new protected float _timeToSpawn = 13f;
     protected override void UpdateFruit(int value)
     {
-        _pm.UpdateGrape(value);
+        _pm.UpdateGrape(value); // value is _fruitValue
     }
 }

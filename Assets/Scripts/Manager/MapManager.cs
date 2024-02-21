@@ -6,6 +6,11 @@ public class MapManager : MonoBehaviour
     public static MapManager instance { get; private set; }
     [SerializeField] NavMeshSurface Surface2D;
     public GameObject region;
+
+    public static MapManager Instance()
+    {
+        return instance;
+    }
     private void Awake()
     {
         if (instance == null)
@@ -22,5 +27,8 @@ public class MapManager : MonoBehaviour
         Surface2D.BuildNavMeshAsync(); // Init NavMesh
     }
 
-    public void UpdateNavMesh() => Surface2D.UpdateNavMesh(Surface2D.navMeshData);
+    public void UpdateNavMesh()
+    {
+        Surface2D.UpdateNavMesh(Surface2D.navMeshData);
+    }
 }
