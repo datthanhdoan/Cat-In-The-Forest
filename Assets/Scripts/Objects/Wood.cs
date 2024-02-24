@@ -8,8 +8,8 @@ public class Wood : Tree
     {
         base.Start();
     }
-    protected override void UpdateFruit(int value)
-    {
-        _pm.UpdateWood(value); // value is _fruitValue
-    }
+    // protected override void UpdateFruit(int value)
+    // {
+    //     _pm.UpdateWood(value); // value is _fruitValue
+    // }
 }

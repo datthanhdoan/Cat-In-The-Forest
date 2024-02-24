@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Quest : MonoBehaviour
@@ -32,9 +33,7 @@ public class Quest : MonoBehaviour
         }
     }
 
-    #region CheckDistance
     public void OnMouseUpAsButton() => _hasBeenClicked = true;
     float CheckDistance() => Vector2.Distance(transform.position, _player.transform.position);
 
-    #endregion
 }

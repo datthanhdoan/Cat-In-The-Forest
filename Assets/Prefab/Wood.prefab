@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7414167500014119624}
   - component: {fileID: 7414167500014119625}
   - component: {fileID: 7414167500014119626}
+  - component: {fileID: 14517725769114168}
+  - component: {fileID: 6652260046017018385}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -66,7 +68,31 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: -1001747798, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   _treeSprite: {fileID: 7414167500105159157}
-  _treeAnim: {fileID: 7414167500105159161}
+  _particle: {fileID: 0}
+--- !u!114 &14517725769114168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414167500014119627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49fab0107abcd9041b3d5beb88086217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6652260046017018385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414167500014119627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298ef1aac037d264ebc70210d29cea33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7414167500105159162
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +102,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7414167500105159158}
-  - component: {fileID: 7414167500105159159}
   - component: {fileID: 7414167500105159160}
   - component: {fileID: 7414167500105159157}
   - component: {fileID: 7414167500105159161}
@@ -102,32 +127,6 @@ Transform:
   m_Father: {fileID: 7414167500014119624}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &7414167500105159159
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7414167500105159162}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.004014015, y: -0.22045922}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.625}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0199184, y: 1.0917277}
-  m_EdgeRadius: 0
 --- !u!114 &7414167500105159160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +183,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1001747798, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

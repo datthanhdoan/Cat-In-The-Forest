@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Dùng dấu chân mèo để mở map mới
+/// Dùng huy hiệu chân mèo để mở map mới
 /// </summary>
 public class T_UnlockMap : Task
 {
@@ -9,8 +9,9 @@ public class T_UnlockMap : Task
     [Tooltip("Level to unlock - R_Region")]
     [SerializeField] int unlockLevel;
 
-    void Start()
+    protected new void Start()
     {
+        base.Start();
         string t1 = "Locked";
         string t2 = _coinRequire.ToString();
         UpdateTaskContent(t1, t2);
@@ -18,18 +19,20 @@ public class T_UnlockMap : Task
 
     protected override void CheckTask()
     {
-        Debug.Log("CheckTask");
-        if (_pm.coin >= _coinRequire)
+        Debug.Log("Call Check Task");
+        if (_resource.coin >= _coinRequire)
         {
             // _button.interactable = true;
-            if (!_pm.CheckMaxLevel())
+            if (!_map.CheckMaxLevel())
             {
-                _pm.UpdateCoin(-_coinRequire);
+                Debug.Log("Unlock map");
+                int coinAfter = _resource.coin - _coinRequire;
+                _resource.SetCoin(coinAfter);
 
-                _pm.UpdateLevel();
+                _map.UpdateLevel();
 
                 // update map
-                _pm.region.transform.GetChild(unlockLevel - 1).gameObject.SetActive(true);
+                _map.region.transform.GetChild(unlockLevel - 1).gameObject.SetActive(true);
                 MapManager.instance.UpdateNavMesh();
                 gameObject.SetActive(false);
             }

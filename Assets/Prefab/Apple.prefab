@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7144128990101866926}
   - component: {fileID: 7144128990101866921}
   - component: {fileID: 7144128990101866920}
+  - component: {fileID: 2871424889215431549}
+  - component: {fileID: 7745457449437178454}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Untagged
@@ -66,7 +68,31 @@ MonoBehaviour:
   - {fileID: -977294811, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   - {fileID: -1866991913, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   _treeSprite: {fileID: 7144128991136806783}
-  _treeAnim: {fileID: 7144128991136806782}
+  _particle: {fileID: 0}
+--- !u!114 &2871424889215431549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144128990101866913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49fab0107abcd9041b3d5beb88086217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7745457449437178454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144128990101866913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298ef1aac037d264ebc70210d29cea33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7144128991136806771
 GameObject:
   m_ObjectHideFlags: 0

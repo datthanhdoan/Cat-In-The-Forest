@@ -4,12 +4,18 @@ public class Apple : Tree
 {
     new protected int _fruitValue = 1;
     new protected float _timeToSpawn = 8f;
-    new protected void Start()
+    ResourceManager.Resource apple;
+    protected new void Start()
     {
         base.Start();
+        apple = _resourceManager.GetResource(ResourceManager.ResourceName.Apple);
+        if (_resourceManager == null)
+        {
+            Debug.Log("Resource Manager is null");
+        }
     }
     protected override void UpdateFruit(int value)
     {
-        _pm.UpdateApple(value); // value is _fruitValue
+        apple.SetQuantity(apple.quantity + value);
     }
 }

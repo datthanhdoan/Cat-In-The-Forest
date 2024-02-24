@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7414167500014119624}
   - component: {fileID: 7414167500014119625}
   - component: {fileID: 7414167500014119626}
+  - component: {fileID: 280813631649692959}
+  - component: {fileID: 7971781833064444391}
   m_Layer: 0
   m_Name: Grape
   m_TagString: Untagged
@@ -63,10 +65,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite:
-  - {fileID: 876457355, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+  - {fileID: 74995212, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   - {fileID: -54595187, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   _treeSprite: {fileID: 7414167500105159157}
-  _treeAnim: {fileID: 7414167500105159161}
+  _particle: {fileID: 0}
+--- !u!114 &280813631649692959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414167500014119627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298ef1aac037d264ebc70210d29cea33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7971781833064444391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414167500014119627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49fab0107abcd9041b3d5beb88086217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7414167500105159162
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +219,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7414167500105159161
