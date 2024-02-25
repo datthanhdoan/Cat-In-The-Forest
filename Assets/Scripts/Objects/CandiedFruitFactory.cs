@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,15 +23,18 @@ public class CandiedFruitFactory : MonoBehaviour
     [Header("Slider")]
     [SerializeField] Slider _slider;
 
-    bool _allConditions = false;
-    bool _playerInRange = false;
+    [NonSerialized] public bool _allConditions = false;
+    [NonSerialized] public bool playerInRange = false;
 
     public int fruitRequired = 1;
     public int woodRequired = 1;
 
     float _timeToCook = 12f;
     float _timer = 0;
-    bool _isCooking = false;
+    [NonSerialized] public bool _isCooking = false;
+    [SerializeField] CanvasGroup _canvasGroup;
+
+
 
 
     private void Start()
@@ -50,24 +54,32 @@ public class CandiedFruitFactory : MonoBehaviour
         _woodText.text = woodRequired.ToString();
         _fruitResultText.text = "1";
 
+        _slider.maxValue = _timeToCook;
+        _slider.value = 0;
+        _slider.gameObject.SetActive(false);
+
         _buttonImage.sprite = _imageForButton[0];
     }
 
     private void Update()
     {
         CheckDistance();
-        if (_playerInRange)
+        if (playerInRange)
         {
             CheckConditions();
         }
         if (_isCooking)
         {
-            Debug.Log("Cooking");
+            _canvasGroup.interactable = false;
+
+            _slider.gameObject.SetActive(true);
             _timer += Time.deltaTime;
-            _slider.value = _timer / _timeToCook;
+            _slider.value = _timer;
+            Debug.Log(_slider.value);
             if (_timer >= _timeToCook)
             {
-                Debug.Log("Candied Fruit is ready");
+                _canvasGroup.interactable = true;
+
                 fruitResult.SetQuantity(fruitResult.quantity + 1);
                 _timer = 0;
 
@@ -75,6 +87,9 @@ public class CandiedFruitFactory : MonoBehaviour
                 _allConditions = false;
 
                 _buttonImage.sprite = _imageForButton[0];
+
+                _slider.value = 0;
+                _slider.gameObject.SetActive(false);
             }
         }
     }
@@ -106,11 +121,11 @@ public class CandiedFruitFactory : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, _player.transform.position) < 2)
         {
-            _playerInRange = true;
+            playerInRange = true;
         }
         else
         {
-            _playerInRange = false;
+            playerInRange = false;
         }
     }
 

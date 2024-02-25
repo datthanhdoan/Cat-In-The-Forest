@@ -14,7 +14,9 @@ public class ResourceManager : MonoBehaviour
     {
         Apple,
         Grape,
-        Wood
+        CandiedApple,
+        CandiedGrape,
+        Wood,
     }
     [System.Serializable]
     public class Resource
