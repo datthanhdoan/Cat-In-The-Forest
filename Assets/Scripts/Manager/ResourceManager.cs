@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// Quản lý tài nguyên trong game (ví dụ: quản lý số lượng quả táo, nho, gỗ)
@@ -8,7 +9,7 @@ public class ResourceManager : MonoBehaviour
 
     public static ResourceManager instance { get; private set; }
     // resources
-    public int coin { get; private set; } = 0;
+    public int coin = 0;
     public enum ResourceName
     {
         Apple,

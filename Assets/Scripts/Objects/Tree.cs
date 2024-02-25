@@ -93,9 +93,4 @@ public class Tree : MonoBehaviour
             _effect.Effect(); // take fruit effect
         }
     }
-
-
-
-    private static readonly int TreeStretch = Animator.StringToHash("Tree-Stretch");
-
 }

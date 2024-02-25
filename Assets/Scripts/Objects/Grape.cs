@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Grape : Tree
 {
-    new protected int _fruitValue = 1;
-    new protected float _timeToSpawn = 13f;
     ResourceManager.Resource grape;
-    new protected void Start()
+    protected new void Start()
     {
         base.Start();
+        _fruitValue = 1;
+        _timeToSpawn = 13f;
         grape = _resourceManager.GetResource(ResourceManager.ResourceName.Grape);
     }
 

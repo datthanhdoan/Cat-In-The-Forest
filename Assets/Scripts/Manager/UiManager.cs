@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] ResourceManager _resource;
-    [SerializeField] GameObject _coinGO;
-    [SerializeField] GameObject _appleGO;
+    [SerializeField] Text _coinGO;
+    [SerializeField] Text _appleGO;
     void Start()
     {
         _resource = ResourceManager.instance;
@@ -19,12 +19,12 @@ public class UiManager : MonoBehaviour
     void UpdateCoin()
     {
         string coin = _resource.coin.ToString();
-        _coinGO.GetComponent<Text>().text = "Coin : " + coin;
+        _coinGO.text = "Coin : " + coin;
     }
 
     void UpdateApple()
     {
         var appleQuantity = _resource.GetResource(ResourceManager.ResourceName.Apple).quantity;
-        _appleGO.GetComponent<Text>().text = "Apple: " + appleQuantity.ToString();
+        _appleGO.text = "Apple: " + appleQuantity.ToString();
     }
 }
