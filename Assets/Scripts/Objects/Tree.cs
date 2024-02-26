@@ -16,10 +16,9 @@ public class Tree : MonoBehaviour
     protected float _timeToSpawnTimer = 0f;
     protected int _fruitValue = 1;
     protected Player _player;
-    protected ResourceManager _resourceManager;
+    [SerializeField] protected ResourceSO _resourceSO;
     protected void Start()
     {
-        _resourceManager = ResourceManager.instance;
         _player = Player.instance;
         _effect = GetComponent<IEffect>();
         _hasFruit = true;
@@ -39,7 +38,7 @@ public class Tree : MonoBehaviour
                 _hasBeenClicked = false;
                 TakeFruit();
                 // Update number of fruit 
-                UpdateFruit(_fruitValue);
+                UpdateFruit();
             }
         }
 
@@ -62,9 +61,6 @@ public class Tree : MonoBehaviour
         }
     }
 
-    protected virtual void UpdateFruit(int value)
-    {
-    }
 
     public float DistanceToPlayer()
     {
@@ -93,4 +89,6 @@ public class Tree : MonoBehaviour
             _effect.Effect(); // take fruit effect
         }
     }
+
+    protected virtual void UpdateFruit() { }
 }

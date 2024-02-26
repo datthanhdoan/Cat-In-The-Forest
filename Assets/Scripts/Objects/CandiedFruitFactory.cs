@@ -1,4 +1,5 @@
 using System;
+using System.Resources;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,11 +8,12 @@ using UnityEngine.UI;
 public class CandiedFruitFactory : MonoBehaviour
 {
     Player _player;
-    public ResourceManager.ResourceName fruitName;
-    public ResourceManager.ResourceName fruitResultName;
-    ResourceManager.Resource wood;
-    ResourceManager.Resource fruit;
-    ResourceManager.Resource fruitResult;
+    [SerializeField] ResourceSO _resourceSO;
+    public ResourceName fruitName;
+    public ResourceName fruitResultName;
+    Resource wood;
+    Resource fruit;
+    Resource fruitResult;
     [Header("Text")]
     [SerializeField] TextMeshProUGUI _fruitText, _woodText, _fruitResultText;
     [Header("Image")]
@@ -41,10 +43,9 @@ public class CandiedFruitFactory : MonoBehaviour
     {
         _player = Player.instance;
 
-        var _resourceManager = ResourceManager.instance;
-        wood = _resourceManager.GetResource(ResourceManager.ResourceName.Wood);
-        fruit = _resourceManager.GetResource(fruitName);
-        fruitResult = _resourceManager.GetResource(fruitResultName);
+        wood = _resourceSO.resources.Find(x => x.name == ResourceName.Wood);
+        fruit = _resourceSO.resources.Find(x => x.name == fruitName);
+        fruitResult = _resourceSO.resources.Find(x => x.name == fruitResultName);
 
         _fruitImage.sprite = fruit.sprite; // 
         _woodImage.sprite = wood.sprite;

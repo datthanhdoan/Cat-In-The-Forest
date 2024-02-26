@@ -2,19 +2,17 @@ using UnityEngine;
 
 public class Apple : Tree
 {
+    Resource _apple;
     protected new void Start()
     {
         base.Start();
         _fruitValue = 1;
         _timeToSpawn = 8f;
-        if (_resourceManager == null)
-        {
-            Debug.Log("Resource Manager is null");
-        }
+        _apple = _resourceSO.resources.Find(x => x.name == ResourceName.Apple);
     }
-    protected override void UpdateFruit(int value)
+    protected override void UpdateFruit()
     {
-        var apple = _resourceManager.GetResource(ResourceManager.ResourceName.Apple);
-        apple.SetQuantity(apple.quantity + value);
+        _apple.SetQuantity(_apple.quantity + _fruitValue);
+        Debug.Log("Apple: " + _apple.quantity);
     }
 }

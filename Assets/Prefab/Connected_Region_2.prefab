@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df31b03a22c7ea44bab2e56dd25617bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resource: {fileID: 11400000, guid: 44940e57f2fb5054bb9e05ceea6d3c43, type: 2}
   _coinRequire: 10
   unlockLevel: 2
 --- !u!1 &8394328977193118786

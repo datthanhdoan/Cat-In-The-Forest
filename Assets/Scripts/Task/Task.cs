@@ -3,14 +3,13 @@ using UnityEngine.UI;
 
 public class Task : MonoBehaviour
 {
+    [SerializeField] protected ResourceSO _resource;
     protected MapManager _map;
     protected GameManagerment _gm;
-    // [SerializeField] protected GameObject _taskPrefab;
     protected Text _text;
     protected Text _bText;
     protected Button _button;
     protected Image _bImage;
-    protected ResourceManager _resource;
 
     protected void Awake()
     {
@@ -27,7 +26,6 @@ public class Task : MonoBehaviour
         // Check if the instance is null
         _map = MapManager.instance;
         _gm = GameManagerment.instance;
-        _resource = ResourceManager.instance;
         Debug.Log("Task Start");
     }
 

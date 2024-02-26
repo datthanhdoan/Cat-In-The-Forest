@@ -2,19 +2,16 @@ using UnityEngine;
 
 public class Wood : Tree
 {
+    Resource wood;
     protected new void Start()
     {
         base.Start();
         _fruitValue = 1;
         _timeToSpawn = 10f;
-        if (_resourceManager == null)
-        {
-            Debug.Log("Resource Manager is null");
-        }
+        wood = _resourceSO.resources.Find(x => x.name == ResourceName.Wood);
     }
-    protected override void UpdateFruit(int value)
+    protected override void UpdateFruit()
     {
-        var wood = _resourceManager.GetResource(ResourceManager.ResourceName.Wood);
-        wood.SetQuantity(wood.quantity + value);
+        wood.SetQuantity(wood.quantity + _fruitValue);
     }
 }

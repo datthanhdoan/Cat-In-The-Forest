@@ -69,6 +69,7 @@ MonoBehaviour:
   - {fileID: -1001747798, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   _treeSprite: {fileID: 7414167500105159157}
   _particle: {fileID: 0}
+  _resourceSO: {fileID: 11400000, guid: 44940e57f2fb5054bb9e05ceea6d3c43, type: 2}
 --- !u!114 &14517725769114168
 MonoBehaviour:
   m_ObjectHideFlags: 0

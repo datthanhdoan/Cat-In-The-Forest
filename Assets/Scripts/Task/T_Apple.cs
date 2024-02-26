@@ -6,7 +6,7 @@ public class T_Apple : Task
 {
     int _appleRequire = 0;
     int _coinReward = 0;
-    ResourceManager.Resource apple; // Change this line
+    Resource apple;
     protected new void Start()
     {
         base.Start();
@@ -16,8 +16,7 @@ public class T_Apple : Task
         string t1 = _appleRequire.ToString();
         string t2 = _coinReward.ToString();
         UpdateTaskContent(t1, t2);
-        // _resource.GetResource(ResourceManager.ResourceName.Apple).quantity = 0;
-        apple = _resource.GetResource(ResourceManager.ResourceName.Apple);
+        apple = _resource.resources.Find(x => x.name == ResourceName.Apple);
     }
 
     public new void CheckTask()

@@ -23312,6 +23312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e33a965b78ff840a190415c3d755d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resouce: {fileID: 0}
   coin: 0
   ResourcesList:
   - name: 0
@@ -23447,7 +23448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1e06ec477d0754aa35b636269bbf31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resource: {fileID: 450907446}
+  _resourceSO: {fileID: 11400000, guid: 44940e57f2fb5054bb9e05ceea6d3c43, type: 2}
   _coinText: {fileID: 1613261897}
 --- !u!1 &497952640
 GameObject:
@@ -31684,6 +31685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df31b03a22c7ea44bab2e56dd25617bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resource: {fileID: 0}
   _coinRequire: 0
   unlockLevel: 0
 --- !u!1 &8119617779668860401
@@ -31903,3 +31905,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4670a267ae1d62d4b90cfaccd95bc87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resource: {fileID: 11400000, guid: 44940e57f2fb5054bb9e05ceea6d3c43, type: 2}

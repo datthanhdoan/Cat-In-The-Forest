@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97059789e03be5428ec1a298827c719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resourceSO: {fileID: 11400000, guid: 44940e57f2fb5054bb9e05ceea6d3c43, type: 2}
   fruitName: 0
   fruitResultName: 2
   _fruitText: {fileID: 1897967399800318012}
