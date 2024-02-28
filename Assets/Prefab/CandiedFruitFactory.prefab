@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 1897967399097281511}
   - component: {fileID: 1897967399097281508}
   - component: {fileID: 1897967399097281509}
+  - component: {fileID: 5250368895480765493}
   m_Layer: 0
   m_Name: CandiedFruitFactory
   m_TagString: Untagged
@@ -406,6 +407,22 @@ MonoBehaviour:
   _canvasGroup: {fileID: 1897967400111167004}
   _resourceTrans: {fileID: 1897967398551696014}
   _buttonTrans: {fileID: 1897967400396541285}
+--- !u!58 &5250368895480765493
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897967399097281510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.004669428}
+  serializedVersion: 2
+  m_Radius: 2.1670587
 --- !u!1 &1897967399152047981
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,24 +1,13 @@
 using NavMeshPlus.Components;
 using UnityEngine;
 
-public class MapManager : MonoBehaviour
+public class MapManager : GenericSingleton<MapManager>
 {
-    public static MapManager instance { get; private set; }
     [SerializeField] NavMeshSurface Surface2D;
     public GameObject region;
     public int level { get; private set; } = 1;
     public int maxLevel { get; private set; } = 0;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+
     private void Start()
     {
         Surface2D.BuildNavMeshAsync(); // Init NavMesh

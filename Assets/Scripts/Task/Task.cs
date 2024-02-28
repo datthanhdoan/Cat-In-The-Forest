@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Task : MonoBehaviour
 {
+    public static event Action OnResourceChanged;
+
     [SerializeField] protected ResourceSO _resource;
     protected MapManager _map;
     protected GameManagerment _gm;
@@ -24,8 +27,8 @@ public class Task : MonoBehaviour
     protected void Start()
     {
         // Check if the instance is null
-        _map = MapManager.instance;
-        _gm = GameManagerment.instance;
+        _map = MapManager.Instance;
+        _gm = GameManagerment.Instance;
         Debug.Log("Task Start");
     }
 
@@ -35,5 +38,9 @@ public class Task : MonoBehaviour
         _text.text = t1;
         _bText.text = t2;
     }
-    protected virtual void CheckTask() { }
+    protected virtual void CheckTask()
+    {
+
+        OnResourceChanged?.Invoke();
+    }
 }

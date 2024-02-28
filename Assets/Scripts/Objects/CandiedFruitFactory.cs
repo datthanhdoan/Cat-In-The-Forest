@@ -1,12 +1,12 @@
 using System;
 using System.Resources;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CandiedFruitFactory : MonoBehaviour
 {
+    public static event Action OnResourceChanged;
     Player _player;
     [SerializeField] ResourceSO _resourceSO;
     public ResourceName fruitName;
@@ -41,7 +41,7 @@ public class CandiedFruitFactory : MonoBehaviour
 
     private void Start()
     {
-        _player = Player.instance;
+        _player = Player.Instance;
 
         wood = _resourceSO.resources.Find(x => x.name == ResourceName.Wood);
         fruit = _resourceSO.resources.Find(x => x.name == fruitName);
@@ -91,6 +91,8 @@ public class CandiedFruitFactory : MonoBehaviour
 
                 _slider.value = 0;
                 _slider.gameObject.SetActive(false);
+
+                OnResourceChanged?.Invoke();
             }
         }
     }
@@ -104,6 +106,7 @@ public class CandiedFruitFactory : MonoBehaviour
             _isCooking = true;
         }
     }
+
     public void CheckConditions()
     {
         if (wood.quantity >= woodRequired && fruit.quantity >= fruitRequired)

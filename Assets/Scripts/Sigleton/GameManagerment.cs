@@ -5,24 +5,9 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Quản lý game
 /// </summary>
-public class GameManagerment : MonoBehaviour
+public class GameManagerment : GenericSingleton<GameManagerment>
 {
-    public static GameManagerment instance { get; private set; }
     public Transform clickPos;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    private void Start()
-    {
-    }
 
     public bool CheckFirstTimeInGame()
     {

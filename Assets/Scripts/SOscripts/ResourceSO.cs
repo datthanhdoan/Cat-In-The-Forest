@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceSO : ScriptableObject
 {
-    public int coin { get; private set; } = 0;
+    [field: SerializeField] public int coin { get; private set; } = 0;
 
     public List<Resource> resources = new List<Resource>();
     public void SetCoin(int value) => coin = value;

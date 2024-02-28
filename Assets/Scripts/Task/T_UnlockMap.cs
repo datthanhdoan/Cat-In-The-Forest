@@ -33,7 +33,7 @@ public class T_UnlockMap : Task
 
                 // update map
                 _map.region.transform.GetChild(unlockLevel - 1).gameObject.SetActive(true);
-                MapManager.instance.UpdateNavMesh();
+                MapManager.Instance.UpdateNavMesh();
                 gameObject.SetActive(false);
             }
         }

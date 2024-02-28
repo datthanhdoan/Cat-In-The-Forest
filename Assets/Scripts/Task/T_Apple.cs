@@ -19,11 +19,10 @@ public class T_Apple : Task
         apple = _resource.resources.Find(x => x.name == ResourceName.Apple);
     }
 
-    public new void CheckTask()
+    protected override void CheckTask()
     {
         if (apple.quantity >= _appleRequire)
         {
-
             apple.SetQuantity(apple.quantity - _appleRequire); // minus apple
             _resource.SetCoin(_resource.coin + _coinReward); // plus coin
 
@@ -33,11 +32,14 @@ public class T_Apple : Task
             string t1 = _appleRequire.ToString();
             string t2 = _coinReward.ToString();
             UpdateTaskContent(t1, t2);
+
+
         }
         else
         {
             Debug.Log("Not enough apple");
         }
+        base.CheckTask();
     }
 
     void UpdateAppleRequire(int baseRequire)

@@ -1,7 +1,9 @@
 
+using System;
 using UnityEngine;
 public class Tree : MonoBehaviour
 {
+    public static event Action OnResourceChanged;
     [Tooltip("0: No fruit, 1: Has fruit")]
     [SerializeField] protected Sprite[] _sprite;
     [SerializeField] protected SpriteRenderer _treeSprite;
@@ -17,9 +19,10 @@ public class Tree : MonoBehaviour
     protected int _fruitValue = 1;
     protected Player _player;
     [SerializeField] protected ResourceSO _resourceSO;
-    protected void Start()
+    protected Resource _treeType;
+    protected virtual void Start()
     {
-        _player = Player.instance;
+        _player = Player.Instance;
         _effect = GetComponent<IEffect>();
         _hasFruit = true;
         _treeSprite.sprite = _sprite[1];
@@ -90,5 +93,10 @@ public class Tree : MonoBehaviour
         }
     }
 
-    protected virtual void UpdateFruit() { }
+    protected void UpdateFruit()
+    {
+        // Observer pattern
+        _treeType.SetQuantity(_treeType.quantity + _fruitValue);
+        OnResourceChanged?.Invoke();
+    }
 }

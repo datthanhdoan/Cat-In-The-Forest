@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f460646fc5df7ab4998d37bb1567577e, type: 3}
   m_Name: Resource
   m_EditorClassIdentifier: 
+  <coin>k__BackingField: 13
   resources:
   - name: 0
     sprite: {fileID: 1196403243, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
-    quantity: 2
+    quantity: 6
   - name: 1
     sprite: {fileID: 1404689465, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
     quantity: 3
+  - name: 4
+    sprite: {fileID: -884411332, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+    quantity: 19
   - name: 2
     sprite: {fileID: 2085139030, guid: d4db1bf6466437f4b91f56e0bae43476, type: 3}
     quantity: 0
   - name: 3
     sprite: {fileID: 824171642, guid: d4db1bf6466437f4b91f56e0bae43476, type: 3}
     quantity: 0
-  - name: 4
-    sprite: {fileID: -884411332, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
-    quantity: 3
