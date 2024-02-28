@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] ResourceSO _resourceSO;
+    [SerializeField] Transform _slotParent;
     PoolingObject _poolingObject;
     // [SerializeField] List<GameObject> _slots = new List<GameObject>();
     Dictionary<ResourceName, GameObject> _slotDict = new Dictionary<ResourceName, GameObject>();
@@ -18,11 +19,12 @@ public class Inventory : MonoBehaviour
             {
                 GameObject slot = SpawnSlot();
                 var slot_transform = slot.transform;
-                slot.transform.localScale = Vector3.one;
+                slot_transform.localScale = Vector3.one;
+
                 var slot_image = slot_transform.GetChild(0).GetComponent<Image>();
                 var slot_text = slot_transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
-                slot_transform.SetParent(transform);
+                slot_transform.SetParent(_slotParent);
                 slot_transform.position = Vector3.zero;
                 slot_image.sprite = resource.sprite;
                 slot_text.text = resource.quantity.ToString();
@@ -70,7 +72,7 @@ public class Inventory : MonoBehaviour
                     var slotSpawn_text = slotSpawn_transform.GetChild(1).GetComponent<TextMeshProUGUI>();
                     ///
 
-                    slotSpawn_transform.SetParent(transform);
+                    slotSpawn_transform.SetParent(_slotParent);
                     slotSpawn_transform.position = Vector3.zero;
                     slotSpawn_transform.localScale = Vector3.one;
 
