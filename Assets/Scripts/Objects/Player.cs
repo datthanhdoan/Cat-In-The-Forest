@@ -5,26 +5,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : GenericSingleton<Player>
 {
-    public static Player instance { get; private set; }
     [NonSerialized] public NavMeshAgent agent;
     GameManagerment _gm;
 
     [SerializeField] Animator _anim;
     [SerializeField] float _speed = 5;
 
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
     void Start()
     {
         _gm = GameManagerment.instance;

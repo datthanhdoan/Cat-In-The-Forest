@@ -16,7 +16,7 @@ public class Quest : MonoBehaviour
     bool _hasBeenClicked = false;
     private void Start()
     {
-        _player = Player.instance;
+        _player = Player.Instance;
         _gm = GameManagerment.instance;
     }
 

@@ -2,24 +2,24 @@
 using UnityEngine;
 public class Tree : MonoBehaviour
 {
+    // TODO : tach rieng effect
     [Tooltip("0: No fruit, 1: Has fruit")]
     [SerializeField] protected Sprite[] _sprite;
     [SerializeField] protected SpriteRenderer _treeSprite;
-    [Tooltip("Tree stretch animation from treeSprite object")]
-    // [SerializeField] protected Animator _treeAnim;
+    [SerializeField] protected ItemType _fruitType;
+
     IEffect _effect;
 
-    [SerializeField] protected GameObject _particle;
-
-    protected bool _hasBeenClicked = false, _hasFruit = true;
+    protected bool _hasBeenClicked = false;
+    protected bool _hasFruit = true;
     protected float _timeToSpawn = 8f;
     protected float _timeToSpawnTimer = 0f;
-    protected int _fruitValue = 1;
     protected Player _player;
-    [SerializeField] protected ResourceSO _resourceSO;
+    protected ResourceManager _rM;
     protected void Start()
     {
-        _player = Player.instance;
+        _player = Player.Instance;
+        _rM = ResourceManager.Instance;
         _effect = GetComponent<IEffect>();
         _hasFruit = true;
         _treeSprite.sprite = _sprite[1];
@@ -90,5 +90,10 @@ public class Tree : MonoBehaviour
         }
     }
 
-    protected virtual void UpdateFruit() { }
+    protected void UpdateFruit()
+    {
+        // plus 1 fruit
+        int newAmout = _rM.GetItem(_fruitType).amount += 1;
+        _rM.SetAmoutItem(_fruitType, newAmout);
+    }
 }
