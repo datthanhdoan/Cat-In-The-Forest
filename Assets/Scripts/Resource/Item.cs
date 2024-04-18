@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public Sprite image;
+    public Sprite sprite;
     public ItemType type;
     public int amount;
 }

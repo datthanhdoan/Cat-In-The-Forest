@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47a7e79d59cfc14db6425f3d2b5e0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 824171642, guid: d4db1bf6466437f4b91f56e0bae43476, type: 3}
+  sprite: {fileID: 824171642, guid: d4db1bf6466437f4b91f56e0bae43476, type: 3}
   type: 4
   amount: 0

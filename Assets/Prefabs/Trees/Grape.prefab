@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7414167500014119624}
   - component: {fileID: 7414167500014119625}
-  - component: {fileID: 7414167500014119626}
   - component: {fileID: 280813631649692959}
   - component: {fileID: 7971781833064444391}
+  - component: {fileID: 8682437081604906345}
   m_Layer: 0
   m_Name: Grape
   m_TagString: Untagged
@@ -52,24 +52,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0040688515, y: -0.021277785}
   m_Size: {x: 1.0199442, y: 1.0199444}
   m_Direction: 0
---- !u!114 &7414167500014119626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7414167500014119627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 247ba0f8c842f374498125ece811a36a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sprite:
-  - {fileID: 74995212, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
-  - {fileID: -54595187, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
-  _treeSprite: {fileID: 7414167500105159157}
-  _particle: {fileID: 0}
-  _resourceSO: {fileID: 11400000, guid: 44940e57f2fb5054bb9e05ceea6d3c43, type: 2}
 --- !u!114 &280813631649692959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +76,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fab0107abcd9041b3d5beb88086217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8682437081604906345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414167500014119627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f32c4f2772ea640bacc1177b8295a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprite:
+  - {fileID: 74995212, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+  - {fileID: -54595187, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
+  _treeSprite: {fileID: 7414167500105159157}
+  _fruitType: 2
 --- !u!1 &7414167500105159162
 GameObject:
   m_ObjectHideFlags: 0
