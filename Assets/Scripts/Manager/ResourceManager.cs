@@ -22,10 +22,6 @@ public class ResourceManager : Subject
         }
     }
 
-    private void Start()
-    {
-        NotifyObservers();
-    }
 
     public List<Item> GetItemList()
     {

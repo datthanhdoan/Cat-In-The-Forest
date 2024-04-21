@@ -10,15 +10,20 @@ public class Inventory : MonoBehaviour, IObserver
     [SerializeField] private GameObject[] slotList;
     private ResourceManager _rM;
 
+
     private void Start()
     {
         _rM = ResourceManager.Instance;
+        VisualItemInInventory();
     }
 
     private void VisualItemInInventory()
     {
-        Debug.Log("VisualItemInInventory");
         int index = 0;
+
+        // Nếu không có item nào thì thoát
+        if (_rM.GetItemList().Count <= 0) return;
+
         foreach (Item item in _rM.GetItemList())
         {
             var slotIndexImage = slotList[index].transform.GetChild(0).GetComponent<Image>();
@@ -39,8 +44,6 @@ public class Inventory : MonoBehaviour, IObserver
                 slotIndexImage.gameObject.SetActive(false);
                 slotIndexText.gameObject.SetActive(false);
             }
-            Debug.Log("index: " + index);
-
         }
     }
 

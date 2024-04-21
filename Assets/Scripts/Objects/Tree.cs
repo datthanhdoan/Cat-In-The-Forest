@@ -23,7 +23,6 @@ public class Tree : MonoBehaviour
         _effect = GetComponent<IEffect>();
         _hasFruit = true;
         _treeSprite.sprite = _sprite[1];
-        Debug.Log("Tree Start called");
     }
     protected void Update()
     {
