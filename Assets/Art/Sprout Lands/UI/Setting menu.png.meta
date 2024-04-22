@@ -144,13 +144,13 @@ TextureImporter:
       name: Setting menu_0
       rect:
         serializedVersion: 2
-        x: 11
+        x: 3
         y: 10
         width: 106
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 42, y: 2, z: 5, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -165,12 +165,12 @@ TextureImporter:
       name: Setting menu_1
       rect:
         serializedVersion: 2
-        x: 139
+        x: 131
         y: 10
         width: 106
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
