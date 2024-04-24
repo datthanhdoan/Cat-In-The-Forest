@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
 public class ResourceManager : Subject
 {
     // Quan ly resource
+
+    [SerializeField] private ItemSO _itemSO;
+    private int _coin;
+    private int _diamond;
+    #region Singleton
     private static ResourceManager instance;
 
     public static ResourceManager Instance
@@ -30,9 +36,6 @@ public class ResourceManager : Subject
             return instance;
         }
     }
-    [SerializeField] private ItemSO _itemSO;
-    [SerializeField] private MoneySO _moneySO;
-
     public virtual void Awake()
     {
         // create the instance
@@ -45,6 +48,60 @@ public class ResourceManager : Subject
         {
             Destroy(gameObject);
         }
+    }
+
+    #endregion
+
+    #region Setters
+    public void SetDiamond(int diamond)
+    {
+        _diamond = diamond;
+        NotifyObservers();
+    }
+
+    public void SetCoin(int coin)
+    {
+        _coin = coin;
+        NotifyObservers();
+    }
+
+    public void SetAmoutItem(ItemType itemType, int amount)
+    {
+        foreach (GameObject item in _itemSO.itemList)
+        {
+            if (item.GetComponent<Item>().type == itemType)
+            {
+                item.GetComponent<Item>().amount = amount;
+            }
+        }
+        NotifyObservers();
+    }
+    public void SetItemDataList(List<ItemData> itemDataList)
+    {
+        for (int i = 0; i < itemDataList.Count; i++)
+        {
+            foreach (GameObject item in _itemSO.itemList)
+            {
+                if (item.GetComponent<Item>().type.ToString() == itemDataList[i].name)
+                {
+                    item.GetComponent<Item>().amount = itemDataList[i].amount;
+                }
+            }
+        }
+        NotifyObservers();
+    }
+
+    #endregion
+
+    #region Getters
+    public int GetCoin()
+    {
+        return _coin;
+    }
+
+    public int GetDiamond()
+    {
+        return _diamond;
     }
 
     public List<ItemData> GetItemDataList()
@@ -62,20 +119,6 @@ public class ResourceManager : Subject
         return itemDataList;
     }
 
-    public void SetItemDataList(List<ItemData> itemDataList)
-    {
-        for (int i = 0; i < itemDataList.Count; i++)
-        {
-            foreach (GameObject item in _itemSO.itemList)
-            {
-                if (item.GetComponent<Item>().type.ToString() == itemDataList[i].name)
-                {
-                    item.GetComponent<Item>().amount = itemDataList[i].amount;
-                }
-            }
-        }
-        NotifyObservers();
-    }
     public List<GameObject> GetGameObjectList()
     {
         return _itemSO.itemList;
@@ -101,17 +144,6 @@ public class ResourceManager : Subject
         return null;
     }
 
-    public void SetAmoutItem(ItemType itemType, int amount)
-    {
-        foreach (GameObject item in _itemSO.itemList)
-        {
-            if (item.GetComponent<Item>().type == itemType)
-            {
-                item.GetComponent<Item>().amount = amount;
-            }
-        }
-        NotifyObservers();
-    }
 
     public void CleaAmountOfAllItems()
     {
@@ -121,6 +153,8 @@ public class ResourceManager : Subject
         }
         NotifyObservers();
     }
+
+    #endregion
 
 }
 

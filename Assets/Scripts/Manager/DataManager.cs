@@ -45,7 +45,7 @@ public class DataManager : MonoBehaviour
 
         List<ItemData> itemDataList = _rM.GetItemDataList();
 
-        ItemDataList itemDataListWrapper = new ItemDataList
+        Resource itemDataListWrapper = new Resource
         {
             itemList = itemDataList
         };
@@ -73,8 +73,11 @@ public class DataManager : MonoBehaviour
             {
                 string json = reader.ReadToEnd();
                 Debug.Log(json);
-                ItemDataList itemDataListWrapper = JsonUtility.FromJson<ItemDataList>(json);
+                Resource itemDataListWrapper = JsonUtility.FromJson<Resource>(json);
+                _rM.SetCoin(itemDataListWrapper.coin);
+                _rM.SetDiamond(itemDataListWrapper.diamond);
                 _rM.SetItemDataList(itemDataListWrapper.itemList);
+
             }
         }
         else

@@ -14,8 +14,10 @@ public class ItemData
     public string name;
     public int amount;
 }
-public class ItemDataList
+public class Resource
 {
+    public int coin;
+    public int diamond;
     public List<ItemData> itemList;
 }
 

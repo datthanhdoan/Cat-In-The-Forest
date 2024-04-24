@@ -1,38 +1,37 @@
-// using UnityEngine;
-// using UnityEngine.UI;
+using UnityEngine;
+using UnityEngine.UI;
 
-// public class Task : MonoBehaviour
-// {
-//     protected MapManager _map;
-//     protected GameManagerment _gm;
-//     protected Text _text;
-//     protected Text _bText;
-//     protected Button _button;
-//     protected Image _bImage;
+public class Task : MonoBehaviour
+{
+    protected MapManager _mapManager;
+    protected ResourceManager _rM;
+    protected Text _text;
+    protected Text _bText;
+    protected Button _button;
+    protected Image _bImage;
 
-//     protected void Awake()
-//     {
-//         _text = transform.GetChild(0).GetComponentInChildren<Text>();
-//         _bText = transform.GetChild(1).GetComponentInChildren<Text>();
-//         _button = transform.GetChild(1).GetComponent<Button>();
-//         _bImage = transform.GetChild(1).GetComponent<Image>();
+    protected void Awake()
+    {
+        _text = transform.GetChild(0).GetComponentInChildren<Text>();
+        _bText = transform.GetChild(1).GetComponentInChildren<Text>();
+        _button = transform.GetChild(1).GetComponent<Button>();
+        _bImage = transform.GetChild(1).GetComponent<Image>();
 
-//         _button.onClick.AddListener(CheckTask);
-//     }
+        _button.onClick.AddListener(CheckTask);
+    }
 
-//     protected void Start()
-//     {
-//         // Check if the instance is null
-//         _map = MapManager.instance;
-//         _gm = GameManagerment.instance;
-//         Debug.Log("Task Start");
-//     }
+    protected virtual void Start()
+    {
+        // Check if the instance is null
+        _mapManager = MapManager.Instance;
+        _rM = ResourceManager.Instance;
+    }
 
 
-//     protected void UpdateTaskContent(string t1, string t2)
-//     {
-//         _text.text = t1;
-//         _bText.text = t2;
-//     }
-//     protected virtual void CheckTask() { }
-// }
+    protected void UpdateTaskContent(string t1, string t2)
+    {
+        _text.text = t1;
+        _bText.text = t2;
+    }
+    protected virtual void CheckTask() { }
+}

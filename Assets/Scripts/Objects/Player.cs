@@ -8,14 +8,14 @@ using UnityEngine.UI;
 public class Player : GenericSingleton<Player>
 {
     [NonSerialized] public NavMeshAgent agent;
-    GameManagerment _gm;
+    InputManager _inputManager;
 
     [SerializeField] Animator _anim;
     [SerializeField] float _speed = 5;
 
     void Start()
     {
-        _gm = GameManagerment.instance;
+        _inputManager = InputManager.Instance;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -24,9 +24,9 @@ public class Player : GenericSingleton<Player>
 
     void Update()
     {
-        if (_gm.CheckClickInArea() && !_gm.CheckClickOnUI())
+        if (_inputManager.CheckClickInArea() && !_inputManager.CheckClickOnUI())
         {
-            agent.SetDestination(_gm.clickPos.position);
+            agent.SetDestination(_inputManager.clickPos);
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
         PlayerAnim();
