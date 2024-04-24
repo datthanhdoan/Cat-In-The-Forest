@@ -51,7 +51,7 @@ public class DataManager : MonoBehaviour
         };
 
         string json = JsonUtility.ToJson(itemDataListWrapper);
-        string path = Application.dataPath + "/Json/item.json";
+        string path = Application.dataPath + "/Json/resource.json";
         Debug.Log(json);
         Debug.Log("Save Data to: " + path);
 
@@ -66,7 +66,7 @@ public class DataManager : MonoBehaviour
     {
 
         // TODO : Fix can't load data from json
-        string path = Application.dataPath + "/Json/item.json";
+        string path = Application.dataPath + "/Json/resource.json";
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
