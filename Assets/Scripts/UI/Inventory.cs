@@ -14,15 +14,18 @@ public class Inventory : MonoBehaviour, IObserver
     private void Start()
     {
         _rM = ResourceManager.Instance;
+        Debug.Log("Inventory Start");
+        Debug.Log(_rM);
         VisualItemInInventory();
     }
 
     private void VisualItemInInventory()
     {
+        if (_rM == null) _rM = ResourceManager.Instance;
         int index = 0;
 
         // Nếu không có item nào thì thoát
-        if (_rM.GetItemList().Count <= 0) return;
+        if (_rM.GetGameObjectList().Count <= 0) return;
 
         foreach (GameObject itemGo in _rM.GetGameObjectList())
         {

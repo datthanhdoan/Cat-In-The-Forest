@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MapManager : GenericSingleton<MapManager>
 {
-    public static MapManager instance { get; private set; }
     [SerializeField] NavMeshSurface Surface2D;
     public GameObject region;
     private int level = 1; // 4 is just for the testing 

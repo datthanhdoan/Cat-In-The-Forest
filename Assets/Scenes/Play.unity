@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 148054978}
   - component: {fileID: 148054977}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CointReward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25925,6 +25925,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _questInfoList:
     questList: []
+  _questVFX: {fileID: 1665052268}
+  _itemWantedImage: {fileID: 1979254191}
+  _itemWantedAmountText: {fileID: 1779896007}
+  _nameRequesterText: {fileID: 297848868}
+  _majorRequesterText: {fileID: 1670352847}
+  _coinRewardText: {fileID: 148054977}
 --- !u!1 &755779827
 GameObject:
   m_ObjectHideFlags: 0
@@ -26225,6 +26231,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _questInfoList:
     questList: []
+  _questVFX: {fileID: 0}
+  _itemWantedImage: {fileID: 0}
+  _itemWantedAmountText: {fileID: 0}
+  _nameRequesterText: {fileID: 0}
+  _majorRequesterText: {fileID: 0}
+  _coinRewardText: {fileID: 0}
 --- !u!4 &950222049
 Transform:
   m_ObjectHideFlags: 0
@@ -29507,7 +29519,7 @@ GameObject:
   - component: {fileID: 1670352848}
   - component: {fileID: 1670352847}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Major
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29857,7 +29869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1743426245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32829,7 +32841,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2139521864}
   m_Layer: 5
-  m_Name: Info Of Customer
+  m_Name: Info Of Requester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

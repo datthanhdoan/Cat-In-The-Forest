@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 [System.Serializable]
 public class Item : MonoBehaviour
@@ -7,6 +8,12 @@ public class Item : MonoBehaviour
     public int amount;
 }
 
+[Serializable]
+public class ItemData
+{
+    public string name;
+    public int amount;
+}
 public class ItemDataList
 {
     public List<ItemData> itemList;

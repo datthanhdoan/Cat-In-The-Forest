@@ -2,32 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-[Serializable]
-public class ItemData
-{
-    public string name;
-    public int amount;
-}
 
 public class ResourceManager : Subject
 {
     // Quan ly resource
-    public static ResourceManager Instance;
+    private static ResourceManager instance;
+
+    public static ResourceManager Instance
+    {
+        get
+        {
+            // if instance is null
+            if (instance == null)
+            {
+                // find the generic instance
+                instance = FindObjectOfType<ResourceManager>();
+
+                // if it's null again create a new object
+                // and attach the generic instance
+                if (instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = typeof(ResourceManager).Name;
+                    instance = obj.AddComponent<ResourceManager>();
+                }
+            }
+            return instance;
+        }
+    }
     [SerializeField] private ItemSO _itemSO;
     [SerializeField] private MoneySO _moneySO;
 
-
-
-    private void Awake()
+    public virtual void Awake()
     {
-        // sigleton
-        if (Instance != null && Instance != this)
+        // create the instance
+        if (instance == null)
         {
-            Destroy(this.gameObject);
+            instance = this as ResourceManager;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            Instance = this;
+            Destroy(gameObject);
         }
     }
 

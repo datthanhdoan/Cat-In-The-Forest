@@ -5,14 +5,17 @@ using UnityEditor;
 
 public class DataManager : MonoBehaviour
 {
+
     private ResourceManager _rM;
     private MapManager _mapManager;
     private QuestManager _questManager;
+
     private void Start()
     {
         _rM = ResourceManager.Instance;
         _mapManager = MapManager.Instance;
         _questManager = QuestManager.Instance;
+        LoadAllData();
     }
 
     public void SaveAllData()
@@ -24,6 +27,7 @@ public class DataManager : MonoBehaviour
 
     public void LoadAllData()
     {
+        Debug.Log("Load All Data");
         // Resource
         LoadResourceData();
 
