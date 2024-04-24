@@ -23608,7 +23608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &306023045
 Transform:
   m_ObjectHideFlags: 0
@@ -23810,6 +23810,7 @@ Transform:
   - {fileID: 1606479303}
   - {fileID: 997259313}
   - {fileID: 450907445}
+  - {fileID: 1343139808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24387,7 +24388,7 @@ GameObject:
   - component: {fileID: 513656319}
   - component: {fileID: 513656318}
   m_Layer: 5
-  m_Name: Hide
+  m_Name: Load
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24458,9 +24459,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1665052268}
-        m_TargetAssemblyTypeName: QuestVFX, Assembly-CSharp
-        m_MethodName: OnHide
+      - m_Target: {fileID: 1466426441}
+        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
+        m_MethodName: LoadAllData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24696,51 +24697,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 532048172}
-    m_ColliderPaths:
-    - - X: -10000000
-        Y: -30000000
-      - X: -30000000
-        Y: -30000000
-      - X: -30000000
-        Y: -50000000
-      - X: -57500000
-        Y: -50000000
-      - X: -60000000
-        Y: -53750000
-      - X: -60000000
-        Y: -87500000
-      - X: -56250000
-        Y: -90000000
-      - X: -30000000
-        Y: -90000000
-      - X: -30000000
-        Y: -97500000
-      - X: -26250000
-        Y: -100000000
-      - X: 27500000
-        Y: -100000000
-      - X: 30000000
-        Y: -98125000
-      - X: 30000000
-        Y: -90000000
-      - X: 37500000
-        Y: -90000000
-      - X: 40000000
-        Y: -88125000
-      - X: 40000000
-        Y: -62500000
-      - X: 36250000
-        Y: -60000000
-      - X: 30000000
-        Y: -60000000
-      - X: 30000000
-        Y: -52500000
-      - X: 26250000
-        Y: -50000000
-      - X: -10000000
-        Y: -50000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 2.7499917, y: -10}
@@ -25507,7 +25464,7 @@ GameObject:
   - component: {fileID: 548391989}
   - component: {fileID: 548391988}
   m_Layer: 5
-  m_Name: Show
+  m_Name: Save
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25578,9 +25535,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1665052268}
-        m_TargetAssemblyTypeName: QuestVFX, Assembly-CSharp
-        m_MethodName: OnShow
+      - m_Target: {fileID: 1466426441}
+        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
+        m_MethodName: SaveAllData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26112,11 +26069,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1897967399337277968, guid: 76fddcbc9cb78e648a416ea323fd1913, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1897967399337277968, guid: 76fddcbc9cb78e648a416ea323fd1913, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76fddcbc9cb78e648a416ea323fd1913, type: 3}
@@ -26220,6 +26177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981b705c11c66c14e826ee118aad93a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _questInfoList:
+    questList: []
 --- !u!4 &950222049
 Transform:
   m_ObjectHideFlags: 0
@@ -27116,69 +27075,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1287756834}
-    m_ColliderPaths:
-    - - X: -40000000
-        Y: 106250000
-      - X: -40000000
-        Y: 100000000
-      - X: -67500000
-        Y: 100000000
-      - X: -70000000
-        Y: 96250000
-      - X: -70000000
-        Y: 80000000
-      - X: -77500000
-        Y: 80000000
-      - X: -80000000
-        Y: 76250000
-      - X: -80000000
-        Y: 52500000
-      - X: -76250000
-        Y: 50000000
-      - X: -70000000
-        Y: 50000000
-      - X: -70000000
-        Y: 42500000
-      - X: -66250000
-        Y: 40000000
-      - X: -32500000
-        Y: 40000000
-      - X: -30000000
-        Y: 41875000
-      - X: -30000000
-        Y: 50000000
-      - X: -10000000
-        Y: 50000000
-      - X: -10000000
-        Y: 20000000
-      - X: 10000000
-        Y: 20000000
-      - X: 10000000
-        Y: 40000000
-      - X: 27500000
-        Y: 40000000
-      - X: 30000000
-        Y: 41875000
-      - X: 30000000
-        Y: 50000000
-      - X: 67500000
-        Y: 50000000
-      - X: 70000000
-        Y: 51875000
-      - X: 70000000
-        Y: 97500000
-      - X: 66250000
-        Y: 100000000
-      - X: 40000000
-        Y: 100000000
-      - X: 40000000
-        Y: 107500000
-      - X: 36250000
-        Y: 110000000
-      - X: -37500000
-        Y: 110000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 0.99997073, y: 2}
@@ -28349,6 +28246,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5506029035994663765, guid: 1efd2a0551f74b841a0b99af2f67bd05, type: 3}
   m_PrefabInstance: {fileID: 1134054786}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1343139807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1343139808}
+  - component: {fileID: 1343139809}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1343139808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343139807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 399639064}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1343139809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343139807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981b705c11c66c14e826ee118aad93a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _questInfoList:
+    questList: []
 --- !u!1 &1360521498
 GameObject:
   m_ObjectHideFlags: 0
@@ -28407,7 +28350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Show
+  m_text: Save
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -28681,6 +28624,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7414167500014119624, guid: 2df39d9cb3d90834780175eabd8ca459, type: 3}
   m_PrefabInstance: {fileID: 1952093296}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1466426440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1466426442}
+  - component: {fileID: 1466426441}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1466426441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466426440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33880f815660af140b6df03eca6ec618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1466426442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466426440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.4925408, y: 701.4062, z: -1.8531265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1504501816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28927,7 +28914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1595676995
 Transform:
   m_ObjectHideFlags: 0
@@ -29870,7 +29857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1743426245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31126,7 +31113,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hide
+  m_text: Load
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31929,45 +31916,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1959133031}
-    m_ColliderPaths:
-    - - X: 60000000
-        Y: -27500000
-      - X: 63750000
-        Y: -30000000
-      - X: 70000000
-        Y: -30000000
-      - X: 70000000
-        Y: -37500000
-      - X: 73750000
-        Y: -40000000
-      - X: 107500000
-        Y: -40000000
-      - X: 110000000
-        Y: -38125000
-      - X: 110000000
-        Y: 17500000
-      - X: 106250000
-        Y: 20000000
-      - X: 80000000
-        Y: 20000000
-      - X: 80000000
-        Y: 27500000
-      - X: 76250000
-        Y: 30000000
-      - X: 62500000
-        Y: 30000000
-      - X: 60000000
-        Y: 26250000
-      - X: 60000000
-        Y: 20000000
-      - X: 30000000
-        Y: 20000000
-      - X: 30000000
-        Y: 0
-      - X: 60000000
-        Y: 0
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 10.749991, y: -4}
@@ -32575,7 +32524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1959796219
 Transform:
   m_ObjectHideFlags: 0
@@ -32973,11 +32922,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1897967399337277968, guid: 76fddcbc9cb78e648a416ea323fd1913, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1897967399337277968, guid: 76fddcbc9cb78e648a416ea323fd1913, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1897967399800318012, guid: 76fddcbc9cb78e648a416ea323fd1913, type: 3}
       propertyPath: m_fontColor.b

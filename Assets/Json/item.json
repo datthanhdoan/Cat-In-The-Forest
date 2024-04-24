@@ -1,0 +1,9 @@
+{
+  "itemList": [
+    { "name": "Apple", "amount": 5 },
+    { "name": "AppleCandy", "amount": 0 },
+    { "name": "Grape", "amount": 1 },
+    { "name": "GrapeCandy", "amount": 1 },
+    { "name": "Wood", "amount": 0 }
+  ]
+}

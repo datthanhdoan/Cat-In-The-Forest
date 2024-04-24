@@ -53,9 +53,9 @@ public class CandiedFruitFactory : MonoBehaviour
         wood = _rM.GetItem(ItemType.Wood);
         itemResult = _rM.GetItem(itemTypeResult);
 
-        _itemInputImage.sprite = itemInput.sprite;
-        _woodImage.sprite = wood.sprite;
-        _itemResultImage.sprite = itemResult.sprite;
+        _itemInputImage.sprite = itemInput.gameObject.GetComponent<SpriteRenderer>().sprite;
+        _woodImage.sprite = wood.gameObject.GetComponent<SpriteRenderer>().sprite;
+        _itemResultImage.sprite = itemResult.gameObject.GetComponent<SpriteRenderer>().sprite;
 
         _itemInputText.text = fruitRequired.ToString();
         _woodText.text = woodRequired.ToString();

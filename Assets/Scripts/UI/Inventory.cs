@@ -24,16 +24,19 @@ public class Inventory : MonoBehaviour, IObserver
         // Nếu không có item nào thì thoát
         if (_rM.GetItemList().Count <= 0) return;
 
-        foreach (Item item in _rM.GetItemList())
+        foreach (GameObject itemGo in _rM.GetGameObjectList())
         {
+            var item = itemGo.GetComponent<Item>();
+
             var slotIndexImage = slotList[index].transform.GetChild(0).GetComponent<Image>();
             var slotIndexText = slotList[index].transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+
 
             if (item.amount > 0)
             {
                 // Nếu số lượng item > 0 thì hiển thị item đó
                 index += 1;
-                slotIndexImage.sprite = item.sprite;
+                slotIndexImage.sprite = itemGo.GetComponent<SpriteRenderer>().sprite;
                 slotIndexText.text = item.amount.ToString();
 
                 slotIndexImage.gameObject.SetActive(true);
