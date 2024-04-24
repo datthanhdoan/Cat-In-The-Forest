@@ -11,7 +11,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         _rM = ResourceManager.Instance;
-        _mapManager = MapManager.instance;
+        _mapManager = MapManager.Instance;
         _questManager = QuestManager.Instance;
     }
 
@@ -34,6 +34,7 @@ public class DataManager : MonoBehaviour
         LoadQuestInfoListData();
     }
 
+    // Resource ---------------------
 
     public void SaveResourceData()
     {
@@ -78,16 +79,8 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void SaveRegionDataUnLocked()
-    {
-        int index = _mapManager.level;
-        string path = Application.dataPath + "/Json/region.json";
-        Debug.Log("Save Data to: " + path);
-        using (StreamWriter writer = new StreamWriter(path))
-        {
-            writer.Write(index);
-        }
-    }
+
+    // Quest ---------------------
 
     public void LoadQuestInfoListData()
     {
@@ -97,9 +90,8 @@ public class DataManager : MonoBehaviour
             using (StreamReader reader = new StreamReader(path))
             {
                 string json = reader.ReadToEnd();
-                Debug.Log(json);
                 QuestInfoList questInfoListWrapper = JsonUtility.FromJson<QuestInfoList>(json);
-                Debug.Log(questInfoListWrapper.questList);
+                Debug.Log("Start Load Quest Info List");
                 _questManager.SetQuestInfoList(questInfoListWrapper);
             }
         }
@@ -108,8 +100,23 @@ public class DataManager : MonoBehaviour
             Debug.Log("File not found");
         }
     }
+
+    // Map ---------------------
+    public void SaveRegionDataUnLocked()
+    {
+        int index = _mapManager.GetLevel();
+        string path = Application.dataPath + "/Json/region.json";
+        // string json = JsonUtility.ToJson(_mapManager);
+        Debug.Log("Save Data to: " + path);
+        using (StreamWriter writer = new StreamWriter(path))
+        {
+            writer.Write(index);
+        }
+    }
+
     public void LoadRegionDataUnLocked()
     {
+        // Read from json file
         int index = 0;
         string path = Application.dataPath + "/Json/region.json";
         if (File.Exists(path))
@@ -126,14 +133,17 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log("File not found");
         }
+
+        // Load
         // index is current level , player has unlocked
+
+        _mapManager.Setlevel(index);
+
+        // Set active region
         for (int i = 0; i < index; i++)
         {
             _mapManager.region.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
-
-
-
 
 }
