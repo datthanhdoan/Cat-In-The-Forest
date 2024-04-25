@@ -338,7 +338,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 30305906}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: CheckAward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &37485478
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +540,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickPos: {x: 0, y: 0, z: 0}
+--- !u!1 &88656772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88656773}
+  - component: {fileID: 88656775}
+  - component: {fileID: 88656774}
+  m_Layer: 5
+  m_Name: Diamond
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &88656773
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88656772}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1757305397}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -7.3, y: 0.00008010864}
+  m_SizeDelta: {x: 128.52, y: 38.76}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &88656774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88656772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: b70ba92b261641f4a8d1cdc985d9b582, type: 3}
+    m_FontSize: 17
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Diamond:'
+--- !u!222 &88656775
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88656772}
+  m_CullTransparentMesh: 1
 --- !u!4 &96682604 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7414167500014119624, guid: e9830d552d169634b98d47c3796418c9, type: 3}
@@ -24138,9 +24230,8 @@ GameObject:
   - component: {fileID: 455297482}
   - component: {fileID: 455297481}
   - component: {fileID: 455297480}
-  - component: {fileID: 455297484}
   m_Layer: 5
-  m_Name: 'UI '
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24232,18 +24323,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &455297484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455297479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c1e06ec477d0754aa35b636269bbf31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &482833378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28667,7 +28746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.740009, y: 0.00008010864}
+  m_AnchoredPosition: {x: -133.84, y: 0.00008010864}
   m_SizeDelta: {x: 128.52, y: 38.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1613261897
@@ -30661,6 +30740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1757305397}
+  - component: {fileID: 1757305398}
   m_Layer: 5
   m_Name: UI - Top
   m_TagString: Untagged
@@ -30681,6 +30761,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1613261896}
+  - {fileID: 88656773}
   m_Father: {fileID: 455297483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30689,6 +30770,20 @@ RectTransform:
   m_AnchoredPosition: {x: -68, y: -24}
   m_SizeDelta: {x: 100, y: -20.032288}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1757305398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757305396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1e06ec477d0754aa35b636269bbf31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinText: {fileID: 1613261897}
+  _diamondText: {fileID: 88656774}
 --- !u!1 &1764027798
 GameObject:
   m_ObjectHideFlags: 0
@@ -32285,7 +32380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248ce9534744d424a8750ed814806f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _subject: {fileID: 450907446}
   slotList:
   - {fileID: 415246675}
   - {fileID: 1112599260}

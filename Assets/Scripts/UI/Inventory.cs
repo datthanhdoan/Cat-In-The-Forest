@@ -4,24 +4,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour, IObserver
+public class Inventory : MonoBehaviour
 {
-    [SerializeField] private Subject _subject;
     [SerializeField] private GameObject[] slotList;
     private ResourceManager _rM;
 
 
-    private void Start()
+    private void Awake()
     {
         _rM = ResourceManager.Instance;
-        Debug.Log("Inventory Start");
-        Debug.Log(_rM);
         VisualItemInInventory();
     }
 
     private void VisualItemInInventory()
     {
-        if (_rM == null) _rM = ResourceManager.Instance;
+        // if (_rM == null) _rM = ResourceManager.Instance;
         int index = 0;
 
         // Nếu không có item nào thì thoát
@@ -55,12 +52,12 @@ public class Inventory : MonoBehaviour, IObserver
 
     private void OnEnable()
     {
-        _subject.AddObserver(this);
+        ResourceManager.OnResourceChange += OnNotify;
     }
 
     private void OnDisable()
     {
-        _subject.RemoveObserver(this);
+        ResourceManager.OnResourceChange -= OnNotify;
     }
 
     public void OnNotify()

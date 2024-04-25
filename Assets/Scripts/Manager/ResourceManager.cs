@@ -4,65 +4,25 @@ using UnityEngine;
 using System;
 
 
-public class ResourceManager : Subject
+public class ResourceManager : GenericSingleton<ResourceManager>
 {
     // Quan ly resource
-
+    public static event Action OnResourceChange;
     [SerializeField] private ItemSO _itemSO;
-    private int _coin;
-    private int _diamond;
-    #region Singleton
-    private static ResourceManager instance;
-
-    public static ResourceManager Instance
-    {
-        get
-        {
-            // if instance is null
-            if (instance == null)
-            {
-                // find the generic instance
-                instance = FindObjectOfType<ResourceManager>();
-
-                // if it's null again create a new object
-                // and attach the generic instance
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject();
-                    obj.name = typeof(ResourceManager).Name;
-                    instance = obj.AddComponent<ResourceManager>();
-                }
-            }
-            return instance;
-        }
-    }
-    public virtual void Awake()
-    {
-        // create the instance
-        if (instance == null)
-        {
-            instance = this as ResourceManager;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    #endregion
+    private int _coin = 0;
+    private int _diamond = 0;
 
     #region Setters
     public void SetDiamond(int diamond)
     {
         _diamond = diamond;
-        NotifyObservers();
+        OnResourceChange?.Invoke();
     }
 
     public void SetCoin(int coin)
     {
         _coin = coin;
-        NotifyObservers();
+        OnResourceChange?.Invoke();
     }
 
     public void SetAmoutItem(ItemType itemType, int amount)
@@ -74,7 +34,7 @@ public class ResourceManager : Subject
                 item.GetComponent<Item>().amount = amount;
             }
         }
-        NotifyObservers();
+        OnResourceChange?.Invoke();
     }
     public void SetItemDataList(List<ItemData> itemDataList)
     {
@@ -88,7 +48,7 @@ public class ResourceManager : Subject
                 }
             }
         }
-        NotifyObservers();
+        OnResourceChange?.Invoke();
     }
 
     #endregion
@@ -144,6 +104,17 @@ public class ResourceManager : Subject
         return null;
     }
 
+    public int GetAmountOfItem(ItemType itemType)
+    {
+        foreach (GameObject item in _itemSO.itemList)
+        {
+            if (item.GetComponent<Item>().type == itemType)
+            {
+                return item.GetComponent<Item>().amount;
+            }
+        }
+        return 0;
+    }
 
     public void CleaAmountOfAllItems()
     {
@@ -151,7 +122,7 @@ public class ResourceManager : Subject
         {
             item.GetComponent<Item>().amount = 0;
         }
-        NotifyObservers();
+        OnResourceChange?.Invoke();
     }
 
     #endregion

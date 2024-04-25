@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.InteropServices;
 
 public class QuestManager : GenericSingleton<QuestManager>
 {
@@ -28,8 +29,9 @@ public class QuestManager : GenericSingleton<QuestManager>
 
 
 
-    public void Start()
+    public override void Awake()
     {
+        base.Awake();
         _rM = ResourceManager.Instance;
 
 
@@ -94,14 +96,26 @@ public class QuestManager : GenericSingleton<QuestManager>
 
     public void CheckAward()
     {
-        // if (_itemWantedAmount <= 0)
-        // {
-        //     // Award
-        //     Debug.Log("Award");
-        //     Award();
-        //     // Next Quest
-        //     NextQuest();
-        // }
+        var itemWanted = _questInfoList.questList[_currentQuestIndex].itemRequest;
+        var amountWanted = _questInfoList.questList[_currentQuestIndex].amountRequest;
+        var coinReward = _questInfoList.questList[_currentQuestIndex].coinReward;
+
+        var itemWantedType = (ItemType)Enum.Parse(typeof(ItemType), itemWanted);
+        var item = _rM.GetItem(itemWantedType);
+        Debug.Log("Item wanted type :" + itemWantedType);
+        if (_rM.GetAmountOfItem(itemWantedType) >= amountWanted)
+        {
+            int coinAfter = _rM.GetCoin() + coinReward;
+            int amountAfter = _rM.GetAmountOfItem(itemWantedType) - amountWanted;
+
+            _rM.SetAmoutItem(itemWantedType, amountAfter);
+            _rM.SetCoin(coinAfter);
+            _questVFX.OnHide();
+        }
+        else
+        {
+            Debug.Log("Not enough item");
+        }
     }
 
 }
