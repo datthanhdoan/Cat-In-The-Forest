@@ -7,7 +7,7 @@ using System;
 public class ResourceManager : GenericSingleton<ResourceManager>
 {
     // Quan ly resource
-    public static event Action OnResourceChange;
+    public static event Action OnResourceChanged;
     [SerializeField] private ItemSO _itemSO;
     private int _coin = 0;
     private int _diamond = 0;
@@ -16,13 +16,13 @@ public class ResourceManager : GenericSingleton<ResourceManager>
     public void SetDiamond(int diamond)
     {
         _diamond = diamond;
-        OnResourceChange?.Invoke();
+        OnResourceChanged?.Invoke();
     }
 
     public void SetCoin(int coin)
     {
         _coin = coin;
-        OnResourceChange?.Invoke();
+        OnResourceChanged?.Invoke();
     }
 
     public void SetAmoutItem(ItemType itemType, int amount)
@@ -34,7 +34,7 @@ public class ResourceManager : GenericSingleton<ResourceManager>
                 item.GetComponent<Item>().amount = amount;
             }
         }
-        OnResourceChange?.Invoke();
+        OnResourceChanged?.Invoke();
     }
     public void SetItemDataList(List<ItemData> itemDataList)
     {
@@ -48,7 +48,7 @@ public class ResourceManager : GenericSingleton<ResourceManager>
                 }
             }
         }
-        OnResourceChange?.Invoke();
+        OnResourceChanged?.Invoke();
     }
 
     #endregion
@@ -104,6 +104,18 @@ public class ResourceManager : GenericSingleton<ResourceManager>
         return null;
     }
 
+    public Item GetItem(string itemName)
+    {
+        foreach (GameObject item in _itemSO.itemList)
+        {
+            if (item.GetComponent<Item>().type.ToString() == itemName)
+            {
+                return item.GetComponent<Item>();
+            }
+        }
+        return null;
+    }
+
     public int GetAmountOfItem(ItemType itemType)
     {
         foreach (GameObject item in _itemSO.itemList)
@@ -122,7 +134,7 @@ public class ResourceManager : GenericSingleton<ResourceManager>
         {
             item.GetComponent<Item>().amount = 0;
         }
-        OnResourceChange?.Invoke();
+        OnResourceChanged?.Invoke();
     }
 
     #endregion

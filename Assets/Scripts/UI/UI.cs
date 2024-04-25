@@ -48,12 +48,12 @@ public class UI : MonoBehaviour
 
     private void OnEnable()
     {
-        ResourceManager.OnResourceChange += OnNotify;
+        ResourceManager.OnResourceChanged += OnNotify;
     }
 
     private void OnDisable()
     {
-        ResourceManager.OnResourceChange -= OnNotify;
+        ResourceManager.OnResourceChanged -= OnNotify;
     }
 
 

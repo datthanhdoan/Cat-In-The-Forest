@@ -3,11 +3,11 @@ using UnityEngine;
 /// <summary>
 /// Dùng huy hiệu chân mèo để mở map mới
 /// </summary>
-public class T_UnlockMap : Task
+public class ConnectedRegion : Task
 {
-    [SerializeField] int _coinRequire;
+    [SerializeField] private int _coinRequire;
     [Tooltip("Level to unlock - R_Region")]
-    [SerializeField] int unlockLevel;
+    [SerializeField] private int unlockLevel;
 
     protected override void Start()
     {
@@ -17,6 +17,10 @@ public class T_UnlockMap : Task
         UpdateTaskContent(t1, t2);
     }
 
+    public int GetCoinRequire()
+    {
+        return _coinRequire;
+    }
     protected override void CheckTask()
     {
         Debug.Log("Call Check Task");

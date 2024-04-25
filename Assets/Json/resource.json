@@ -1,5 +1,5 @@
 {
-  "coin": 100,
+  "coin": 1,
   "diamond": 0,
   "itemList": [
     { "name": "Apple", "amount": 25 },

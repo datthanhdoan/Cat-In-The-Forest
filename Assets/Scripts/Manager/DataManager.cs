@@ -52,8 +52,6 @@ public class DataManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(itemDataListWrapper);
         string path = Application.dataPath + "/Json/resource.json";
-        Debug.Log(json);
-        Debug.Log("Save Data to: " + path);
 
         using (StreamWriter writer = new StreamWriter(path))
         {
@@ -72,7 +70,6 @@ public class DataManager : MonoBehaviour
             using (StreamReader reader = new StreamReader(path))
             {
                 string json = reader.ReadToEnd();
-                Debug.Log(json);
                 Resource itemDataListWrapper = JsonUtility.FromJson<Resource>(json);
                 _rM.SetCoin(itemDataListWrapper.coin);
                 _rM.SetDiamond(itemDataListWrapper.diamond);
@@ -98,7 +95,6 @@ public class DataManager : MonoBehaviour
             {
                 string json = reader.ReadToEnd();
                 QuestInfoList questInfoListWrapper = JsonUtility.FromJson<QuestInfoList>(json);
-                Debug.Log("Start Load Quest Info List");
                 _questManager.SetQuestInfoList(questInfoListWrapper);
             }
         }
@@ -114,7 +110,6 @@ public class DataManager : MonoBehaviour
         int index = _mapManager.GetLevel();
         string path = Application.dataPath + "/Json/region.json";
         // string json = JsonUtility.ToJson(_mapManager);
-        Debug.Log("Save Data to: " + path);
         using (StreamWriter writer = new StreamWriter(path))
         {
             writer.Write(index);
@@ -133,7 +128,6 @@ public class DataManager : MonoBehaviour
                 string json = reader.ReadToEnd();
                 Debug.Log(json);
                 index = int.Parse(json);
-                Debug.Log("Load Data from: " + path);
             }
         }
         else

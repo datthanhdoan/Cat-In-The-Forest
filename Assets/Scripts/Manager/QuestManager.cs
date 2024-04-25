@@ -33,8 +33,6 @@ public class QuestManager : GenericSingleton<QuestManager>
     {
         base.Awake();
         _rM = ResourceManager.Instance;
-
-
     }
 
     private void Update()
@@ -45,10 +43,7 @@ public class QuestManager : GenericSingleton<QuestManager>
 
         if (_timer >= timeCheck)
         {
-            Debug.Log("TimeCheck!");
             _timer = 0;
-            Debug.Log(_questInfoList.questList.Count);
-            Debug.Log(_questInfoList.questList[0].nameRequester);
 
             SetQuestInfo(_questInfoList.questList[_currentQuestIndex].nameRequester,
                          _questInfoList.questList[_currentQuestIndex].majorRequester,
@@ -57,10 +52,6 @@ public class QuestManager : GenericSingleton<QuestManager>
                          _questInfoList.questList[_currentQuestIndex].coinReward);
             _questVFX.OnShow();
 
-            if (_currentQuestIndex < _questInfoList.questList.Count - 1)
-            {
-                _currentQuestIndex++;
-            }
 
         }
     }
@@ -100,17 +91,22 @@ public class QuestManager : GenericSingleton<QuestManager>
         var amountWanted = _questInfoList.questList[_currentQuestIndex].amountRequest;
         var coinReward = _questInfoList.questList[_currentQuestIndex].coinReward;
 
-        var itemWantedType = (ItemType)Enum.Parse(typeof(ItemType), itemWanted);
-        var item = _rM.GetItem(itemWantedType);
-        Debug.Log("Item wanted type :" + itemWantedType);
-        if (_rM.GetAmountOfItem(itemWantedType) >= amountWanted)
+        // ItemType itemWantedType = (ItemType)Enum.Parse(typeof(ItemType), itemWanted);
+
+        Item item = _rM.GetItem(itemWanted);
+        ItemType itemType = item.type;
+        Debug.Log(itemType);
+
+        if (_rM.GetAmountOfItem(itemType) >= amountWanted)
         {
             int coinAfter = _rM.GetCoin() + coinReward;
-            int amountAfter = _rM.GetAmountOfItem(itemWantedType) - amountWanted;
+            int amountAfter = _rM.GetAmountOfItem(itemType) - amountWanted;
 
-            _rM.SetAmoutItem(itemWantedType, amountAfter);
+            _rM.SetAmoutItem(itemType, amountAfter);
             _rM.SetCoin(coinAfter);
             _questVFX.OnHide();
+
+            _currentQuestIndex++;
         }
         else
         {
