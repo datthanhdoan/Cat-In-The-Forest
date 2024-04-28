@@ -1,0 +1,11 @@
+{
+  "coin": 123,
+  "diamond": 123,
+  "itemList": [
+    { "name": "Apple", "amount": 5 },
+    { "name": "AppleCandy", "amount": 5 },
+    { "name": "Grape", "amount": 5 },
+    { "name": "GrapeCandy", "amount": 0 },
+    { "name": "Wood", "amount": 5 }
+  ]
+}

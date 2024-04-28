@@ -2,6 +2,8 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using UnityEditor;
+using Unity.Mathematics;
+using UnityEngine.UI;
 
 public class DataManager : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class DataManager : MonoBehaviour
     private ResourceManager _rM;
     private MapManager _mapManager;
     private QuestManager _questManager;
+
+    private const string FOLDER_NAME = "Data";
+
 
     private void Start()
     {
@@ -20,6 +25,10 @@ public class DataManager : MonoBehaviour
 
     public void SaveAllData()
     {
+        if (!Directory.Exists(Application.dataPath + Path.DirectorySeparatorChar + FOLDER_NAME))
+        {
+            Directory.CreateDirectory(Application.dataPath + Path.DirectorySeparatorChar + FOLDER_NAME);
+        }
         SaveResourceData();
 
         SaveRegionDataUnLocked();
@@ -27,8 +36,9 @@ public class DataManager : MonoBehaviour
 
     public void LoadAllData()
     {
-        // Debug.Log("Load All Data");
-        // Resource
+
+        CheckFolderCreate();
+
         LoadResourceData();
 
         // Map
@@ -38,30 +48,19 @@ public class DataManager : MonoBehaviour
         LoadQuestInfoListData();
     }
 
+    public void CheckFolderCreate()
+    {
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar;
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+    }
     // Resource ---------------------
-
-    // public void SaveResourceData() // wrong
-    // {
-
-    //     List<ItemData> itemDataList = _rM.GetItemDataList();
-
-    //     Resource itemDataListWrapper = new Resource
-    //     {
-    //         itemList = itemDataList
-    //     };
-
-    //     string json = JsonUtility.ToJson(itemDataListWrapper);
-    //     string path = Application.dataPath + Path.DirectorySeparatorChar + "resource.json";
-
-    //     using (StreamWriter writer = new StreamWriter(path))
-    //     {
-    //         writer.Write(json);
-    //     }
-
-    // }
 
     public void SaveResourceData()
     {
+
         List<ItemData> itemDataList = _rM.GetItemDataList();
         Resource itemDataListWrapper = new Resource
         {
@@ -70,8 +69,9 @@ public class DataManager : MonoBehaviour
             itemList = itemDataList
         };
 
+
         string json = JsonUtility.ToJson(itemDataListWrapper);
-        string path = Application.dataPath + Path.DirectorySeparatorChar + "resource.json";
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar + "resource.json";
 
         using (StreamWriter writer = new StreamWriter(path))
         {
@@ -79,25 +79,46 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public void SaveRegionDataUnLocked()
+    {
+        int index = _mapManager.GetLevel();
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar + "region.json";
+        // Windows path : C:\Users\{username}\AppData\LocalLow\{company name}\{project name}
+        using (StreamWriter writer = new StreamWriter(path))
+        {
+            writer.Write(index);
+        }
+    }
+
+
     public void LoadResourceData()
     {
-        // TODO : Fix can't load data from json
-        string path = Application.dataPath + Path.DirectorySeparatorChar + "resource.json";
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar + "resource.json";
         if (File.Exists(path))
         {
-            using (StreamReader reader = new StreamReader(path))
-            {
-                string json = reader.ReadToEnd();
-                Resource itemDataListWrapper = JsonUtility.FromJson<Resource>(json);
-                _rM.SetCoin(itemDataListWrapper.coin);
-                _rM.SetDiamond(itemDataListWrapper.diamond);
-                _rM.SetItemDataList(itemDataListWrapper.itemList);
-
-            }
+            using var reader = new StreamReader(path);
+            string json = reader.ReadToEnd();
+            Resource itemDataListWrapper = JsonUtility.FromJson<Resource>(json);
+            _rM.SetCoin(itemDataListWrapper.coin);
+            _rM.SetDiamond(itemDataListWrapper.diamond);
+            _rM.SetItemDataList(itemDataListWrapper.itemList);
         }
         else
         {
-            Debug.Log("File not found");
+            File.Create(path).Dispose();
+            // Load default data from Resources folder
+            TextAsset itemDataList = Resources.Load<TextAsset>("resource");
+            Resource itemDataListWrapper = JsonUtility.FromJson<Resource>(itemDataList.text);
+            // Load default data from Resources folder
+
+            _rM.SetCoin(itemDataListWrapper.coin);
+            _rM.SetDiamond(itemDataListWrapper.diamond);
+            _rM.SetItemDataList(itemDataListWrapper.itemList);
+
+            // Write the default data to the new file
+            using var writer = new StreamWriter(path, false);
+            string json = JsonUtility.ToJson(itemDataListWrapper);
+            writer.Write(json);
         }
     }
 
@@ -106,7 +127,7 @@ public class DataManager : MonoBehaviour
 
     public void LoadQuestInfoListData()
     {
-        string path = Application.dataPath + Path.DirectorySeparatorChar + "quest.json";
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar + "quest.json";
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -118,27 +139,30 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("File not found");
+            File.Create(path).Dispose();
+            // Load default data from Resources folder
+            TextAsset questInfoList = Resources.Load<TextAsset>("quest");
+            QuestInfoList questInfoListWrapper = JsonUtility.FromJson<QuestInfoList>(questInfoList.text);
+            // Load default data from Resources folder
+
+            _questManager.SetQuestInfoList(questInfoListWrapper);
+
+            // Write the default data to the new file
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                string json = JsonUtility.ToJson(questInfoListWrapper);
+                writer.Write(json);
+            }
         }
     }
 
     // Map ---------------------
-    public void SaveRegionDataUnLocked()
-    {
-        int index = _mapManager.GetLevel();
-        string path = Application.dataPath + Path.DirectorySeparatorChar + "region.json";
-        // string json = JsonUtility.ToJson(_mapManager);
-        using (StreamWriter writer = new StreamWriter(path))
-        {
-            writer.Write(index);
-        }
-    }
 
     public void LoadRegionDataUnLocked()
     {
         // Read from json file
         int index = 0;
-        string path = Application.dataPath + Path.DirectorySeparatorChar + "region.json";
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar + "region.json";
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -149,7 +173,10 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("File not found");
+            File.Create(path).Dispose();
+            TextAsset regionData = Resources.Load<TextAsset>("region");
+            int regionDataWrapper = int.Parse(regionData.text);
+            index = regionDataWrapper;
         }
 
         // Load

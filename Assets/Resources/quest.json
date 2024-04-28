@@ -1,0 +1,25 @@
+{
+  "questList": [
+    {
+      "nameRequester": "John",
+      "majorRequester": "Fammer",
+      "itemRequest": "Apple",
+      "amountRequest": 10,
+      "coinReward": 15
+    },
+    {
+      "nameRequester": "Hana",
+      "majorRequester": "Baker",
+      "itemRequest": "Grape",
+      "amountRequest": 2,
+      "coinReward": 40
+    },
+    {
+      "nameRequester": "Fox",
+      "majorRequester": "Thief",
+      "itemRequest": "Grape",
+      "amountRequest": 2,
+      "coinReward": 100
+    }
+  ]
+}
