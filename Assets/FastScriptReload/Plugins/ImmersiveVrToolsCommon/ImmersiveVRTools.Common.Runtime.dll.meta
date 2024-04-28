@@ -4,8 +4,7 @@ PluginImporter:
   externalObjects: {}
   serializedVersion: 2
   iconMap: {}
-  executionOrder:
-    ImmersiveVRTools.Runtime.Common.Debug.RuntimeDebugDraw: 9990
+  executionOrder: {}
   defineConstraints:
   - UNITY_EDITOR || LiveScriptReload_IncludeInBuild_Enabled
   isPreloaded: 0

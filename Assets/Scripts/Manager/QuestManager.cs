@@ -4,14 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.InteropServices;
+using System.Collections;
+using System.Threading;
+
+/// <summary>
+/// This file is still in testing phase
+/// </summary>
 
 public class QuestManager : GenericSingleton<QuestManager>
 {
     [field: SerializeField] private QuestInfoList _questInfoList;
     private int _currentQuestIndex = 0;
-    private float _timer = 0;
-    [SerializeField] private QuestVFX _questVFX;
-    private ResourceManager _rM;
+    private float _timerTesting = 0;
+    private bool _testIsSetQuest = false;
+    [SerializeField] private QuestVFX _questVFX; // Import in Unity Editor
+    [SerializeField] private ResourceManager _rM; // Import in Unity Editor
 
     // Item Wanted
     [Header("Item Wanted")]
@@ -27,40 +34,22 @@ public class QuestManager : GenericSingleton<QuestManager>
     // Reward
     [SerializeField] private TextMeshProUGUI _coinRewardText;
 
-
-
-    public override void Awake()
-    {
-        base.Awake();
-        _rM = ResourceManager.Instance;
-    }
-
     private void Update()
     {
-        _timer += Time.deltaTime;
-
-        var timeCheck = 5f;
-
-        if (_timer >= timeCheck)
+        if (_testIsSetQuest) return;
+        _timerTesting += Time.deltaTime;
+        if (_timerTesting >= 2)
         {
-            _timer = 0;
-
             SetQuestInfo(_questInfoList.questList[_currentQuestIndex].nameRequester,
                          _questInfoList.questList[_currentQuestIndex].majorRequester,
                          _questInfoList.questList[_currentQuestIndex].itemRequest,
                          _questInfoList.questList[_currentQuestIndex].amountRequest,
                          _questInfoList.questList[_currentQuestIndex].coinReward);
             _questVFX.OnShow();
-
-
+            _testIsSetQuest = true;
         }
     }
-    public void ShowQuest()
-    {
 
-        _questVFX.ToggleQuest();
-
-    }
 
     public void SetQuestInfoList(QuestInfoList questInfoList)
     {
@@ -69,11 +58,12 @@ public class QuestManager : GenericSingleton<QuestManager>
     public void SetQuestInfo(string nameRequester, string majorRequester, string itemRequest, int amountRequest, int coinReward)
     {
 
-        if (Enum.TryParse(itemRequest, out ItemType itemType))
-        {
-            _itemWantedImage.sprite = _rM.GetItem(itemType).gameObject.GetComponent<SpriteRenderer>().sprite;
-        }
-
+        // if (Enum.TryParse(itemRequest, out ItemType itemType))
+        // {
+        //     _itemWantedImage.sprite = _rM.GetItem(itemType).gameObject.GetComponent<SpriteRenderer>().sprite;
+        // }
+        var item = _rM.GetItem(itemRequest);
+        _itemWantedImage.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
 
         // nameRequester
         _nameRequesterText.text = nameRequester;
@@ -105,8 +95,6 @@ public class QuestManager : GenericSingleton<QuestManager>
             _rM.SetAmoutItem(itemType, amountAfter);
             _rM.SetCoin(coinAfter);
             _questVFX.OnHide();
-
-            _currentQuestIndex++;
         }
         else
         {

@@ -14,6 +14,7 @@ public class ConnectedRegion : Task
         base.Start();
         string t1 = "Locked";
         string t2 = _coinRequire.ToString();
+
         UpdateTaskContent(t1, t2);
     }
 
@@ -23,25 +24,59 @@ public class ConnectedRegion : Task
     }
     protected override void CheckTask()
     {
-        Debug.Log("Call Check Task");
-        if (_rM.GetCoin() >= _coinRequire)
+        if (HasEnoughCoins())
         {
-            // _button.interactable = true;
-            if (!_mapManager.CheckMaxLevel())
+            // Check if the level to unlock is not greater than the maximum level
+            if (IsUnlockLevelValid())
             {
-                int coinAfter = _rM.GetCoin() - _coinRequire;
-                _rM.SetCoin(coinAfter);
+                DeductCoins();
 
-                // Update Map
-                int currentLevel = _mapManager.GetLevel();
-                _mapManager.Setlevel(currentLevel + 1);
+                // Update level if the current level is less than the maximum level
+                UpdateLevel();
 
-                // update map
-                _mapManager.region.transform.GetChild(unlockLevel - 1).gameObject.SetActive(true);
+                // Update map
+                UnlockRegionInMap();
+
+                // Update the navigation mesh
                 _mapManager.UpdateNavMesh();
-                gameObject.SetActive(false);
+
+                Destroy(this.gameObject);
             }
+            else
+            {
+                Debug.Log("Map is still in progress");
+            }
+        }
+
+
+    }
+    private bool HasEnoughCoins()
+    {
+        return _rM.GetCoin() >= _coinRequire;
+    }
+
+    private bool IsUnlockLevelValid()
+    {
+        return unlockLevel <= _mapManager.GetMaxLevel();
+    }
+
+    private void DeductCoins()
+    {
+        int coinAfter = _rM.GetCoin() - _coinRequire;
+        _rM.SetCoin(coinAfter);
+    }
+
+    private void UpdateLevel()
+    {
+        int currentLevel = _mapManager.GetLevel();
+        if (currentLevel < _mapManager.GetMaxLevel())
+        {
+            _mapManager.Setlevel(currentLevel + 1);
         }
     }
 
+    private void UnlockRegionInMap()
+    {
+        _mapManager.region.transform.GetChild(unlockLevel - 1).gameObject.SetActive(true);
+    }
 }

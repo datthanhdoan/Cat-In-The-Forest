@@ -7,6 +7,7 @@ public class MapManager : GenericSingleton<MapManager>
     public GameObject region;
     private int level = 1; // 4 is just for the testing 
     private int maxLevel = 0;
+
     private void Start()
     {
         Surface2D.BuildNavMeshAsync(); // Init NavMesh
@@ -17,7 +18,7 @@ public class MapManager : GenericSingleton<MapManager>
     {
         Surface2D.UpdateNavMesh(Surface2D.navMeshData);
     }
-    public bool CheckMaxLevel() => level > maxLevel;
+    public int GetMaxLevel() => maxLevel;
     public void Setlevel(int level) => this.level = level;
     public int GetLevel() => level;
 

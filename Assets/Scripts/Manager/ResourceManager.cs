@@ -72,7 +72,7 @@ public class ResourceManager : GenericSingleton<ResourceManager>
             ItemData itemData = new ItemData();
             itemData.name = item.GetComponent<Item>().type.ToString();
             itemData.amount = item.GetComponent<Item>().amount;
-            Debug.Log(itemData.name + " " + itemData.amount);
+            // Debug.Log(itemData.name + " " + itemData.amount);
             itemDataList.Add(itemData);
         }
         Debug.Log(itemDataList);
