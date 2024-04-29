@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     private ResourceManager _rM;
 
 
-    private void Awake()
+    private void Start()
     {
         _rM = ResourceManager.Instance;
         VisualItemInInventory();

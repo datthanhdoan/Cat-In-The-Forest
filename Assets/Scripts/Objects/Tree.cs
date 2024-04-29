@@ -26,13 +26,18 @@ public class Tree : MonoBehaviour
     }
     protected void Update()
     {
+        // Change order layer
+        float rangeradius = 1.5f;
+
+        ChangeOrderLayer();
         if (_hasBeenClicked)
         {
+            // if player click in other position then tree will not take fruit
             if (Input.GetMouseButtonDown(0))
             {
                 _hasBeenClicked = false;
             }
-            else if (!_player.CheckMoving() && DistanceToPlayer() <= 1.5f && _hasFruit)
+            else if (_player.playerState == PlayerState.Idle && DistanceToPlayer() <= rangeradius && _hasFruit)
             {
                 _hasBeenClicked = false;
                 TakeFruit();
@@ -46,6 +51,19 @@ public class Tree : MonoBehaviour
         if (_timeToSpawnTimer >= _timeToSpawn)
         {
             SpawnFruit();
+        }
+    }
+
+    public void ChangeOrderLayer()
+    {
+        float cheatDistance = 0.5f;
+        if (_player.transform.position.y + cheatDistance > transform.position.y)
+        {
+            _treeSprite.sortingOrder = 10;
+        }
+        else
+        {
+            _treeSprite.sortingOrder = 3;
         }
     }
 
