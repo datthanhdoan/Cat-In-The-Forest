@@ -3,6 +3,8 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     // TODO : tach rieng effect
+    [SerializeField] private bool _useOrderLayer = true;
+
     [Tooltip("0: No fruit, 1: Has fruit")]
     [SerializeField] protected Sprite[] _sprite;
     [SerializeField] protected SpriteRenderer _treeSprite;
@@ -16,6 +18,7 @@ public class Tree : MonoBehaviour
     protected float _timeToSpawnTimer = 0f;
     protected Player _player;
     protected ResourceManager _rM;
+
     protected void Start()
     {
         _player = Player.Instance;
@@ -56,6 +59,7 @@ public class Tree : MonoBehaviour
 
     public void ChangeOrderLayer()
     {
+        if (!_useOrderLayer) return;
         float cheatDistance = 0.5f;
         if (_player.transform.position.y + cheatDistance > transform.position.y)
         {

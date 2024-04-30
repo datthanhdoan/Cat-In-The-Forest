@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -11,16 +12,19 @@ public enum PlayerState
     Move
 
 }
+
 public class Player : GenericSingleton<Player>
 {
     public static event Action<PlayerState> OnPlayerStateChanged;
     public PlayerState playerState { get; private set; } = PlayerState.Idle;
-    PlayerState previousState;
+    private PlayerState previousState = PlayerState.Idle;
     [NonSerialized] public NavMeshAgent agent;
-    InputManager _inputManager;
+    private InputManager _inputManager;
 
-    [SerializeField] Animator _anim;
     [SerializeField] float _speed = 5;
+
+    private Vector3 _previousPosition;
+    private Vector3 _currentPosition;
 
     void Start()
     {
@@ -29,42 +33,67 @@ public class Player : GenericSingleton<Player>
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = _speed;
+
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        previousState = playerState;
+
 
         // If player clicks on the screen 
-        if (CheckClick())
+        if (_previousPosition != _currentPosition)
         {
             // Move player to the clicked position
             DoMove();
-            playerState = PlayerState.Move;
+            _previousPosition = _currentPosition;
         }
-
         // If player is not moving
-        bool notMove = playerState != PlayerState.Idle && agent.velocity == Vector3.zero;
-        if (notMove)
-        {
-            playerState = PlayerState.Idle;
-        }
+
+        UpdatePlayerState();
 
         // Only invoke the event if the state has actually changed
+        DetectStateChange();
+    }
+
+    private void DetectStateChange()
+    {
         if (playerState != previousState)
         {
             OnPlayerStateChanged?.Invoke(playerState);
+            previousState = playerState;
+            Debug.Log("State changed to: " + playerState);
         }
     }
 
-    public bool CheckClick()
+    public void UpdatePlayerState()
     {
-        return _inputManager.CheckClickInArea() && !_inputManager.CheckClickOnUI();
+        if (agent.velocity == Vector3.zero)
+        {
+            playerState = PlayerState.Idle;
+        }
+        else
+        {
+            playerState = PlayerState.Move;
+        }
+    }
+
+    public void OnClick(Vector3 clickPos)
+    {
+        _currentPosition = clickPos;
+    }
+
+    private void OnEnable()
+    {
+        InputManager.OnClick += OnClick;
+    }
+    private void OnDisable()
+    {
+        InputManager.OnClick -= OnClick;
     }
 
     public void DoMove()
     {
-        agent.SetDestination(_inputManager.clickPos);
+        agent.SetDestination(_currentPosition);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
     public void PlayerSpeed(float newSpeed)

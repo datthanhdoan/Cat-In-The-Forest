@@ -9,10 +9,14 @@ public class CandiedFactoryVFX : MonoBehaviour
     [SerializeField] RectTransform _buttonTrans;
     Vector3 _originalButtonTrans => _buttonTrans.position; // Changed here
 
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    private Player _player;
+
     float _animTime = 0.5f;
     float _gap = 15f;
     private void Start()
     {
+        _player = Player.Instance;
         _candiedFruitFactory = GetComponent<CandiedFruitFactory>();
         _resourceTrans.localPosition = new Vector3(0, -_gap, 0);
         _buttonTrans.position = _originalButtonTrans; // Changed here
@@ -26,6 +30,7 @@ public class CandiedFactoryVFX : MonoBehaviour
     State _state = State.Hide;
     void Update()
     {
+        ChangeOrderLayer();
         if (_candiedFruitFactory.playerInRange)
         {
             if (_state == State.Hide)
@@ -41,6 +46,21 @@ public class CandiedFactoryVFX : MonoBehaviour
                 HideResource();
                 _state = State.Hide;
             }
+        }
+    }
+
+
+    private void ChangeOrderLayer()
+    {
+
+        float cheatDistance = 0.5f;
+        if (_player.transform.position.y + cheatDistance > transform.position.y)
+        {
+            _spriteRenderer.sortingOrder = 10;
+        }
+        else
+        {
+            _spriteRenderer.sortingOrder = 3;
         }
     }
 

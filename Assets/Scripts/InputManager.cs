@@ -6,10 +6,17 @@ using UnityEngine.EventSystems;
 public class InputManager : GenericSingleton<InputManager>
 {
     public Vector3 clickPos;
-
+    public static event Action<Vector3> OnClick;
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) clickPos = GetMousePosition();
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                clickPos = GetMousePosition();
+                OnClick?.Invoke(clickPos);
+            }
+        }
     }
 
     public Vector3 GetMousePosition()
@@ -34,8 +41,10 @@ public class InputManager : GenericSingleton<InputManager>
 
     public bool CheckClickOnUI()
     {
-        bool check = EventSystem.current.IsPointerOverGameObject();
-        return check;
+        // bool check = EventSystem.current.IsPointerOverGameObject();
+        // return check;
+        // kiểm tra xem có click vào UI không
+        return EventSystem.current.IsPointerOverGameObject();
     }
     public float CheckDistance(Vector2 x, Vector2 y)
     {

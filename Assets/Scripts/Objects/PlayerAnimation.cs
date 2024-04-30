@@ -15,7 +15,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         // Todo: replace animation with DOTween
 
-        Debug.Log("Player state: " + state);
         switch (state)
         {
             case PlayerState.Idle:
