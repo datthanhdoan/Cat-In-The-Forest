@@ -33,13 +33,11 @@ public class Player : GenericSingleton<Player>
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = _speed;
-
+        OnPlayerStateChanged?.Invoke(playerState);
     }
 
     private void FixedUpdate()
     {
-
-
         // If player clicks on the screen 
         if (_previousPosition != _currentPosition)
         {

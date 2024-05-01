@@ -5,11 +5,8 @@ using UnityEngine.AI;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
-
-    private void Update()
-    {
-
-    }
+    [SerializeField] private ParticleSystem _trailEffect;
+    private Sequence _currentSequence;
 
     private void OnPlayerStateChanged(PlayerState state)
     {
@@ -19,30 +16,43 @@ public class PlayerAnimation : MonoBehaviour
         {
             case PlayerState.Idle:
                 // remove previous animation
-                this.transform.DOKill();
-
-                IdleAnimation();
+                IdleState();
+                _trailEffect.Stop();
                 break;
             case PlayerState.Move:
                 // remove previous animation
-                this.transform.DOKill();
-
-                MoveAnimation();
+                MoveState();
+                _trailEffect.Play();
                 break;
         }
     }
 
     // replace Animator.CrossFade with DOTween
-    private void MoveAnimation()
+    private void MoveState()
     {
-        // _spriteRenderer.transform.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
-        // Lắc lư lặp lại vô hạn trái phải
-        // Debug.Log("Move Animation");
-        // this.transform.DORotate(new Vector3(0, 0, 10), 0.1f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+        transform.DOKill();
+
+        _currentSequence = DOTween.Sequence();
+
+        // Add animations to the Sequence
+        _currentSequence.Append(transform.DORotate(new Vector3(0, 0, 9.45f), 0.2f).SetEase(Ease.Linear));
+        _currentSequence.Append(transform.DORotate(new Vector3(0, 0, -9.45f), 0.2f).SetEase(Ease.Linear));
+
+        _currentSequence.SetLoops(-1, LoopType.Yoyo);
+
+        // Start the Sequence
+        _currentSequence.Play();
     }
 
-    private void IdleAnimation()
+    private void IdleState()
     {
+        // remove previous animation and reset scale
+        _currentSequence?.Kill();
+
+        transform.DOKill();
+        transform.DOScale(new Vector3(1, 1, 1), 0.1f);
+        transform.DORotate(new Vector3(0, 0, 0), 0.1f);
+
         var originalScale = new Vector3(1, 1, 1);
         var duration = 0.5f;
 
