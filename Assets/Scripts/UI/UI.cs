@@ -1,11 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
     [SerializeField] private ResourceManager _rM;
-    [SerializeField] private Text _coinText;
-    [SerializeField] private Text _diamondText;
+    [SerializeField] private TextMeshProUGUI _coinText;
+    [SerializeField] private TextMeshProUGUI _diamondText;
 
 
     public void UpdateUI()
@@ -17,13 +18,13 @@ public class UI : MonoBehaviour
     private void UpdateCoin()
     {
         string coin = _rM.GetCoin().ToString();
-        _coinText.text = "Coin : " + coin;
+        _coinText.text = coin;
     }
 
     private void UpdateDiamond()
     {
         string diamond = _rM.GetDiamond().ToString();
-        _diamondText.text = "Diamond : " + diamond;
+        _diamondText.text = diamond;
     }
 
     public void OnNotify()

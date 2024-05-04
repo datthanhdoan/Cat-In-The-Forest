@@ -1,53 +1,35 @@
 
 using UnityEngine;
-public class Tree : MonoBehaviour
+using UnityEngine.UIElements;
+public class Tree : ClickableWithLayerChange
 {
     // TODO : tach rieng effect
-    [SerializeField] private bool _useOrderLayer = true;
 
     [Tooltip("0: No fruit, 1: Has fruit")]
     [SerializeField] protected Sprite[] _sprite;
     [SerializeField] protected SpriteRenderer _treeSprite;
     [SerializeField] protected ItemType _fruitType;
 
-    IEffect _effect;
+    private IEffect _effect;
 
-    protected bool _hasBeenClicked = false;
-    protected bool _hasFruit = true;
-    protected float _timeToSpawn = 8f;
-    protected float _timeToSpawnTimer = 0f;
-    protected Player _player;
-    protected ResourceManager _rM;
+    private bool _hasFruit = true;
+    private float _timeToSpawn = 8f;
+    private float _timeToSpawnTimer = 0f;
+    private ResourceManager _rM;
 
-    protected void Start()
+    protected override void Start()
     {
-        _player = Player.Instance;
+        base.Start();
         _rM = ResourceManager.Instance;
         _effect = GetComponent<IEffect>();
         _hasFruit = true;
         _treeSprite.sprite = _sprite[1];
     }
-    protected void Update()
+    protected override void Update()
     {
+        base.Update();
         // Change order layer
-        float rangeradius = 1.5f;
-
-        ChangeOrderLayer();
-        if (_hasBeenClicked)
-        {
-            // if player click in other position then tree will not take fruit
-            if (Input.GetMouseButtonDown(0))
-            {
-                _hasBeenClicked = false;
-            }
-            else if (_player.playerState == PlayerState.Idle && DistanceToPlayer() <= rangeradius && _hasFruit)
-            {
-                _hasBeenClicked = false;
-                TakeFruit();
-                // Update number of fruit 
-                UpdateFruit();
-            }
-        }
+        ChangeOrderLayer(_treeSprite, _useOrderLayer, _cheatDistance, _orderToFront, _orderToBack);
 
         // Timer to spawn fruit
         _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
@@ -57,19 +39,20 @@ public class Tree : MonoBehaviour
         }
     }
 
-    public void ChangeOrderLayer()
+
+
+    protected override void HandleClick()
     {
-        if (!_useOrderLayer) return;
-        float cheatDistance = 0.5f;
-        if (_player.transform.position.y + cheatDistance > transform.position.y)
+        float rangeradius = 1.5f;
+        if (_player.playerState == PlayerState.Idle && DistanceToPlayer() <= rangeradius && _hasFruit)
         {
-            _treeSprite.sortingOrder = 10;
-        }
-        else
-        {
-            _treeSprite.sortingOrder = 3;
+            _hasBeenClicked = false;
+            TakeFruit();
+            // Update number of fruit 
+            UpdateFruit();
         }
     }
+
 
     public void SpawnFruit()
     {
@@ -87,16 +70,6 @@ public class Tree : MonoBehaviour
     {
         float distance = Vector2.Distance(_player.transform.position, transform.position);
         return distance;
-    }
-
-    protected void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1.5f);
-    }
-    public void OnMouseUpAsButton()
-    {
-        _hasBeenClicked = true;
     }
 
     public void TakeFruit()
@@ -117,4 +90,10 @@ public class Tree : MonoBehaviour
         int newAmout = _rM.GetItem(_fruitType).amount += 1;
         _rM.SetAmoutItem(_fruitType, newAmout);
     }
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1.5f);
+    }
+
 }
