@@ -7,6 +7,7 @@ using System;
 public class ResourceManager : GenericSingleton<ResourceManager>
 {
     // Quan ly resource
+
     public static event Action OnResourceChanged;
     [SerializeField] private ItemSO _itemSO;
     private int _coin = 0;

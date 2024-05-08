@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using UnityEditor;
 using Unity.Mathematics;
 using UnityEngine.UI;
+using System;
+
+// TODO : Tạo SAVE cho quest
 
 public class DataManager : MonoBehaviour
 {
-
+    public static event Action OnDataLoaded;
     private ResourceManager _rM;
     private MapManager _mapManager;
-    private QuestManager _questManager;
+    [SerializeField] private QuestManager _questManager;
 
     private const string FOLDER_NAME = "Data";
 
@@ -19,7 +22,6 @@ public class DataManager : MonoBehaviour
     {
         _rM = ResourceManager.Instance;
         _mapManager = MapManager.Instance;
-        _questManager = QuestManager.Instance;
         LoadAllData();
     }
 
@@ -30,7 +32,7 @@ public class DataManager : MonoBehaviour
             Directory.CreateDirectory(Application.dataPath + Path.DirectorySeparatorChar + FOLDER_NAME);
         }
         SaveResourceData();
-
+        SaveQuestData();
         SaveRegionDataUnLocked();
     }
 
@@ -45,7 +47,8 @@ public class DataManager : MonoBehaviour
         LoadRegionDataUnLocked();
         _mapManager.UpdateNavMesh(); // Update NavMesh after load Region
 
-        LoadQuestInfoListData();
+        LoadQuestData();
+        OnDataLoaded?.Invoke();
     }
 
     public void CheckFolderCreate()
@@ -90,6 +93,18 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public void SaveQuestData()
+    {
+        QuestData questInfoListWrapper = _questManager._questInfoList;
+        string json = JsonUtility.ToJson(questInfoListWrapper);
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar + "quest.json";
+
+        using (StreamWriter writer = new StreamWriter(path))
+        {
+            writer.Write(json);
+        }
+    }
+
 
     public void LoadResourceData()
     {
@@ -125,7 +140,7 @@ public class DataManager : MonoBehaviour
 
     // Quest ---------------------
 
-    public void LoadQuestInfoListData()
+    public void LoadQuestData()
     {
         string path = Application.persistentDataPath + Path.DirectorySeparatorChar + FOLDER_NAME + Path.DirectorySeparatorChar + "quest.json";
         if (File.Exists(path))
@@ -133,8 +148,8 @@ public class DataManager : MonoBehaviour
             using (StreamReader reader = new StreamReader(path))
             {
                 string json = reader.ReadToEnd();
-                QuestInfoList questInfoListWrapper = JsonUtility.FromJson<QuestInfoList>(json);
-                _questManager.SetQuestInfoList(questInfoListWrapper);
+                QuestData questInfoListWrapper = JsonUtility.FromJson<QuestData>(json);
+                _questManager.SetQuestData(questInfoListWrapper);
             }
         }
         else
@@ -142,10 +157,10 @@ public class DataManager : MonoBehaviour
             File.Create(path).Dispose();
             // Load default data from Resources folder
             TextAsset questInfoList = Resources.Load<TextAsset>("quest");
-            QuestInfoList questInfoListWrapper = JsonUtility.FromJson<QuestInfoList>(questInfoList.text);
+            QuestData questInfoListWrapper = JsonUtility.FromJson<QuestData>(questInfoList.text);
             // Load default data from Resources folder
-
-            _questManager.SetQuestInfoList(questInfoListWrapper);
+            Debug.Log(questInfoList.text);
+            _questManager.SetQuestData(questInfoListWrapper);
 
             // Write the default data to the new file
             using (StreamWriter writer = new StreamWriter(path, false))

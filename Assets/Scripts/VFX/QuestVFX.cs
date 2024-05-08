@@ -5,13 +5,28 @@ using UnityEngine.UI;
 public class QuestVFX : MonoBehaviour
 {
     [SerializeField] private RectTransform _tableDescription;
+    [SerializeField] private GameObject _exclamationMark;
     private bool _isTableDesShow = false;
     private bool _isQuestShow = false;
+
     private RectTransform _rectTransform;
 
     private void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
+    }
+
+
+    private void ControlShowHideQuest(VisualStatus status)
+    {
+        if (status == VisualStatus.Show)
+        {
+            OnShow();
+        }
+        if (status == VisualStatus.Hide)
+        {
+            OnHide();
+        }
     }
     public void OnShow()
     {
@@ -40,17 +55,7 @@ public class QuestVFX : MonoBehaviour
 
     }
 
-    public void ToggleQuest()
-    {
-        if (_isQuestShow)
-        {
-            OnHide();
-        }
-        else
-        {
-            OnShow();
-        }
-    }
+
 
     public void ShowTableDescription()
     {
@@ -97,5 +102,28 @@ public class QuestVFX : MonoBehaviour
         {
             ShowTableDescription();
         }
+    }
+
+
+    private void ExclamationMarkStatus(bool hasBeenViewed)
+    {
+        if (hasBeenViewed)
+        {
+            _exclamationMark.SetActive(false);
+        }
+        else
+        {
+            _exclamationMark.SetActive(true);
+        }
+    }
+    private void OnEnable()
+    {
+        QuestManager.NotifyStatusChanged += ControlShowHideQuest;
+        QuestManager.OnHasBeenViewedChange += ExclamationMarkStatus;
+    }
+    private void OnDisable()
+    {
+        QuestManager.NotifyStatusChanged -= ControlShowHideQuest;
+        QuestManager.OnHasBeenViewedChange -= ExclamationMarkStatus;
     }
 }

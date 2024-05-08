@@ -1,25 +1,62 @@
 {
+  "hasBeenViewed": false,
+  "currentQuestIndex": 0,
   "questList": [
     {
       "nameRequester": "John",
       "majorRequester": "Fammer",
       "itemRequest": "Apple",
-      "amountRequest": 10,
-      "coinReward": 15
+      "amountRequest": 4,
+      "coinReward": 15,
+      "status": 0
     },
     {
       "nameRequester": "Hana",
       "majorRequester": "Baker",
       "itemRequest": "Grape",
       "amountRequest": 2,
-      "coinReward": 40
+      "coinReward": 10,
+      "status": 0
+    },
+    {
+      "nameRequester": "Fox",
+      "majorRequester": "Thief",
+      "itemRequest": "Apple",
+      "amountRequest": 8,
+      "coinReward": 25,
+      "status": 0
+    },
+    {
+      "nameRequester": "Henry",
+      "majorRequester": "Carpenter",
+      "itemRequest": "Wood",
+      "amountRequest": 3,
+      "coinReward": 20,
+      "status": 0
+    },
+    {
+      "nameRequester": "Jerry",
+      "majorRequester": "Mouse",
+      "itemRequest": "Carpenter",
+      "amountRequest": 2,
+      "coinReward": 60,
+      "status": 0
+    },
+    {
+      "nameRequester": "John",
+      "majorRequester": "Fammer",
+      "itemRequest": "Apple",
+      "amountRequest": 20,
+      "coinReward": 40,
+      "status": 0
     },
     {
       "nameRequester": "Fox",
       "majorRequester": "Thief",
       "itemRequest": "Grape",
-      "amountRequest": 2,
-      "coinReward": 100
+      "amountRequest": 8,
+      "coinReward": 55,
+      "status": 0
     }
   ]
 }

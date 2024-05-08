@@ -10,9 +10,14 @@ public class QuestInfo
     public string itemRequest;
     public int amountRequest;
     public int coinReward;
+    public int status;
 }
+
 [System.Serializable]
-public class QuestInfoList
+public class QuestData
 {
+    // tạo một biến xem quest đã được người chơi seen chưa
+    public bool hasBeenViewed;
+    public int currentQuestIndex;
     public List<QuestInfo> questList;
 }

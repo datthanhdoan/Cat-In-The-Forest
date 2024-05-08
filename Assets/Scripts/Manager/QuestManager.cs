@@ -1,23 +1,34 @@
-using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Runtime.InteropServices;
 using System.Collections;
-using System.Threading;
+
 
 /// <summary>
 /// This file is still in testing phase
 /// </summary>
 
-public class QuestManager : GenericSingleton<QuestManager>
+public enum Status
 {
-    [field: SerializeField] private QuestInfoList _questInfoList;
-    private int _currentQuestIndex = 0;
+    COMPLETED = 1,
+    INCOMPLETE = 0
+}
+
+public enum VisualStatus
+{
+    Show,
+    Hide
+}
+public class QuestManager : MonoBehaviour
+{
+    public static event Action<VisualStatus> NotifyStatusChanged;
+    public static event Action<bool> OnHasBeenViewedChange;
+    [field: SerializeField] public QuestData _questInfoList { get; private set; }
     private float _timerTesting = 0;
+    private float _timeToNextQuest = 0;
     private bool _testIsSetQuest = false;
-    [SerializeField] private QuestVFX _questVFX; // Import in Unity Editor
+    private VisualStatus _visualStatus = VisualStatus.Show;
     [SerializeField] private ResourceManager _rM; // Import in Unity Editor
 
     // Item Wanted
@@ -34,34 +45,129 @@ public class QuestManager : GenericSingleton<QuestManager>
     // Reward
     [SerializeField] private TextMeshProUGUI _coinRewardText;
 
-    private void Update()
+
+
+    private void LoadData()
     {
-        if (_testIsSetQuest) return;
-        _timerTesting += Time.deltaTime;
-        if (_timerTesting >= 2)
+        int curIndex = _questInfoList.currentQuestIndex;
+        Debug.Log("Current Quest Index: " + curIndex);
+        Debug.Log("Quest List Count: " + _questInfoList.questList.Count);
+        var curQuest = _questInfoList.questList[curIndex];
+        SetQuestInfo(curQuest.nameRequester, curQuest.majorRequester, curQuest.itemRequest, curQuest.amountRequest, curQuest.coinReward);
+
+        _visualStatus = VisualStatus.Show;
+        NotifyStatusChanged?.Invoke(_visualStatus);
+        OnHasBeenViewedChange?.Invoke(_questInfoList.hasBeenViewed);
+    }
+
+
+    IEnumerator UpdateQuest(float seconds)
+    {
+        // Cập nhật quest index
+        if (_questInfoList.currentQuestIndex < _questInfoList.questList.Count - 1)
         {
-            SetQuestInfo(_questInfoList.questList[_currentQuestIndex].nameRequester,
-                         _questInfoList.questList[_currentQuestIndex].majorRequester,
-                         _questInfoList.questList[_currentQuestIndex].itemRequest,
-                         _questInfoList.questList[_currentQuestIndex].amountRequest,
-                         _questInfoList.questList[_currentQuestIndex].coinReward);
-            _questVFX.OnShow();
-            _testIsSetQuest = true;
+            _questInfoList.currentQuestIndex++;
+            // Chờ để nhận quest mới
+
+            yield return new WaitForSeconds(seconds);
+            int curIndex = _questInfoList.currentQuestIndex;
+            var curQuest = _questInfoList.questList[curIndex];
+            SetQuestInfo(curQuest.nameRequester, curQuest.majorRequester, curQuest.itemRequest, curQuest.amountRequest, curQuest.coinReward);
+
+            // Thông báo tới VFX là quest cần show
+            _visualStatus = VisualStatus.Show;
+            NotifyStatusChanged?.Invoke(_visualStatus);
+            OnHasBeenViewedChange?.Invoke(false);
+        }
+
+    }
+
+
+
+    public void CheckAward()
+    {
+        var curIndex = _questInfoList.currentQuestIndex;
+
+        var itemWanted = _questInfoList.questList[curIndex].itemRequest;
+        var amountWanted = _questInfoList.questList[curIndex].amountRequest;
+        var coinReward = _questInfoList.questList[curIndex].coinReward;
+
+        Item item = _rM.GetItem(itemWanted);
+        ItemType itemType = item.type;
+
+        // Nếu số lượng quả đủ yêu cầu
+        if (_rM.GetAmountOfItem(itemType) >= amountWanted)
+        {
+            int coinAfter = _rM.GetCoin() + coinReward;
+            int amountAfter = _rM.GetAmountOfItem(itemType) - amountWanted;
+
+            // thay đổi lại số lượng quả và thay đổi lại số vàng
+            _rM.SetAmoutItem(itemType, amountAfter);
+            _rM.SetCoin(coinAfter);
+
+            // cập nhật status của quest đó 
+            _questInfoList.questList[curIndex].status = (int)Status.COMPLETED;
+
+            // thông báo tới VFX là quest cần hide
+            _visualStatus = VisualStatus.Hide;
+            NotifyStatusChanged?.Invoke(_visualStatus);
+            // đếm ngược thời gian để cập nhật quest mới và cập nhật quest index
+
+            float timeToNextQuest = 10f;
+            StartCoroutine(UpdateQuest(timeToNextQuest));
+
+
+        }
+        else
+        {
+            Debug.Log("Not enough item");
+        }
+
+    }
+
+    private void CheckResourceToShowQuest()
+    {
+        if (_visualStatus == VisualStatus.Hide)
+        {
+            var curIndex = _questInfoList.currentQuestIndex;
+            var itemWanted = _questInfoList.questList[curIndex].itemRequest;
+            var amountWanted = _questInfoList.questList[curIndex].amountRequest;
+            var coinReward = _questInfoList.questList[curIndex].coinReward;
+
+            Item item = _rM.GetItem(itemWanted);
+            ItemType itemType = item.type;
+
+            if (_rM.GetAmountOfItem(itemType) >= amountWanted)
+            {
+                _visualStatus = VisualStatus.Show;
+                NotifyStatusChanged?.Invoke(_visualStatus);
+                OnHasBeenViewedChange?.Invoke(false);
+            }
         }
     }
 
 
-    public void SetQuestInfoList(QuestInfoList questInfoList)
+    public void OnClickAvatar()
     {
+        _questInfoList.hasBeenViewed = true;
+        OnHasBeenViewedChange?.Invoke(true);
+    }
+
+    public void OnClickCloseButton()
+    {
+        _visualStatus = VisualStatus.Hide;
+        NotifyStatusChanged?.Invoke(_visualStatus);
+    }
+
+
+    public void SetQuestData(QuestData questInfoList)
+    {
+        _questInfoList.currentQuestIndex = questInfoList.currentQuestIndex;
+        _questInfoList.hasBeenViewed = questInfoList.hasBeenViewed;
         _questInfoList.questList = questInfoList.questList;
     }
     public void SetQuestInfo(string nameRequester, string majorRequester, string itemRequest, int amountRequest, int coinReward)
     {
-
-        // if (Enum.TryParse(itemRequest, out ItemType itemType))
-        // {
-        //     _itemWantedImage.sprite = _rM.GetItem(itemType).gameObject.GetComponent<SpriteRenderer>().sprite;
-        // }
         var item = _rM.GetItem(itemRequest);
         _itemWantedImage.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
 
@@ -73,33 +179,18 @@ public class QuestManager : GenericSingleton<QuestManager>
         _itemWantedAmountText.text = amountRequest.ToString();
         // coinReward
         _coinRewardText.text = coinReward.ToString();
+
     }
 
-    public void CheckAward()
+    private void OnEnable()
     {
-        var itemWanted = _questInfoList.questList[_currentQuestIndex].itemRequest;
-        var amountWanted = _questInfoList.questList[_currentQuestIndex].amountRequest;
-        var coinReward = _questInfoList.questList[_currentQuestIndex].coinReward;
-
-        // ItemType itemWantedType = (ItemType)Enum.Parse(typeof(ItemType), itemWanted);
-
-        Item item = _rM.GetItem(itemWanted);
-        ItemType itemType = item.type;
-        Debug.Log(itemType);
-
-        if (_rM.GetAmountOfItem(itemType) >= amountWanted)
-        {
-            int coinAfter = _rM.GetCoin() + coinReward;
-            int amountAfter = _rM.GetAmountOfItem(itemType) - amountWanted;
-
-            _rM.SetAmoutItem(itemType, amountAfter);
-            _rM.SetCoin(coinAfter);
-            _questVFX.OnHide();
-        }
-        else
-        {
-            Debug.Log("Not enough item");
-        }
+        DataManager.OnDataLoaded += LoadData;
+        ResourceManager.OnResourceChanged += CheckResourceToShowQuest;
     }
 
+    private void OnDisable()
+    {
+        DataManager.OnDataLoaded -= LoadData;
+        ResourceManager.OnResourceChanged -= CheckResourceToShowQuest;
+    }
 }
