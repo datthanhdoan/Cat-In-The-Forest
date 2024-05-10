@@ -37,7 +37,7 @@
     {
       "nameRequester": "Jerry",
       "majorRequester": "Mouse",
-      "itemRequest": "Carpenter",
+      "itemRequest": "AppleCandy",
       "amountRequest": 2,
       "coinReward": 60,
       "status": 0
@@ -53,7 +53,7 @@
     {
       "nameRequester": "Fox",
       "majorRequester": "Thief",
-      "itemRequest": "Grape",
+      "itemRequest": "GrapeCandy",
       "amountRequest": 8,
       "coinReward": 55,
       "status": 0

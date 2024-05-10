@@ -1,0 +1,841 @@
+fileFormatVersion: 2
+guid: e2abd0b538c289b49a8073e771c00baf
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_1
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 458
+        width: 132
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f56874d1b316c49a2424cdaa06d955
+      internalID: -436539137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 424
+        width: 240
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3e746ff943aeb84a909400cdd71690d
+      internalID: -1133506721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_6
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 514
+        width: 127
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 158f32f2198d3434d975229b353f9a9a
+      internalID: 797527774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_11
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 489
+        width: 136
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479ef3682478a964aa5e2cf36b9e9dd5
+      internalID: 581612866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_15
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 430
+        width: 131
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1d75b5a8da949941a707d7444f95739
+      internalID: -929390218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_19
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 399
+        width: 136
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4db285e0f8b4ca045a0e20aaf9a69ad1
+      internalID: -1024679811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_20
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 334
+        width: 92
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eed22068f8de54a46bfee06190b5c934
+      internalID: 952441054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_21
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 270
+        width: 136
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d5cf083f0a267b49b1a1c2c0d0b834a
+      internalID: 1309680487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_22
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 375
+        width: 136
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c814c4abdf64734dbc7e0ac6be3147e
+      internalID: 788396230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_23
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 274
+        width: 92
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f718db6f74ed66e4bab09bc292c6e918
+      internalID: -1235347734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_24
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 314
+        width: 122
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8a8e7b4056909f49883846d0394367a
+      internalID: -1346690613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_25
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 274
+        width: 52
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eda6b8ff3750744f8534d72cc5e2a13
+      internalID: 1187335853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_26
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 274
+        width: 56
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 704da11fe6aad5b489b29519a1cd0b56
+      internalID: 672253583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_27
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 229
+        width: 96
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ba0d601bd016004b945302d365f7329
+      internalID: 329230509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_28
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 270
+        width: 131
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7204a0bce9c96b04790b3a7768fc96bf
+      internalID: 2143993528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_29
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 214
+        width: 92
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99a1a3ead34d5a649869b7fc8f66e308
+      internalID: 2001696037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_30
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 214
+        width: 96
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efcb74601d8828346a58bc4b484eb204
+      internalID: 1156078093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_31
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 150
+        width: 96
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ad10af1d43317a4caf8281944d5973c
+      internalID: 1586552107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_32
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 154
+        width: 91
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170c66dbc32fc0b43ab981f8d1308be3
+      internalID: -1510459573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_33
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 154
+        width: 92
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d27a56ca2a87464c918d3503faccb43
+      internalID: -243852416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_34
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 99
+        width: 91
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c89b09394684d834eabd87e97355a404
+      internalID: -525634551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_35
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 34
+        width: 142
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b973943ac7c448149ac51fa89efec0ea
+      internalID: 1618609663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_36
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 30
+        width: 166
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91d9fc9778a69cd45a01a4b2fcdf0fbd
+      internalID: 1507875772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_37
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 40
+        width: 122
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73468ddda51c90744a1d857260823a13
+      internalID: -1672810205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_38
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 94
+        width: 92
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 452207695be78ee428982b2e33e8c5ba
+      internalID: 729440640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_39
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 94
+        width: 96
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 502bc39e104a0c14383be750027c01c5
+      internalID: -1905329209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_40
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 50
+        width: 36
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0359045fc065ec947a794f8e2a5483d5
+      internalID: -804939827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_41
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 34
+        width: 91
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b75ae3f673ce45b418222f3f62863794
+      internalID: -1314399757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_42
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 30
+        width: 96
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a060c33d797d77342974003c12e56c53
+      internalID: 921369478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_43
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 99
+        width: 87
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a91afbd06731e44a8bb3dcc9e16369
+      internalID: -1782563699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_44
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 34
+        width: 92
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a88afade9ee911244959c8a7e03b6cad
+      internalID: 1711986993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beekeepin-set-transparent_45
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 34
+        width: 96
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6688fec40f1f71f4f98a346375faba8f
+      internalID: -1296224046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      beekeepin-set-transparent_0: -264244005
+      beekeepin-set-transparent_1: -436539137
+      beekeepin-set-transparent_10: -220401492
+      beekeepin-set-transparent_11: 581612866
+      beekeepin-set-transparent_12: 1132400530
+      beekeepin-set-transparent_13: -1338262325
+      beekeepin-set-transparent_14: -1551085039
+      beekeepin-set-transparent_15: -929390218
+      beekeepin-set-transparent_16: -372749563
+      beekeepin-set-transparent_17: 441330372
+      beekeepin-set-transparent_18: -172869547
+      beekeepin-set-transparent_19: -1024679811
+      beekeepin-set-transparent_2: 1118060127
+      beekeepin-set-transparent_20: 952441054
+      beekeepin-set-transparent_21: 1309680487
+      beekeepin-set-transparent_22: 788396230
+      beekeepin-set-transparent_23: -1235347734
+      beekeepin-set-transparent_24: -1346690613
+      beekeepin-set-transparent_25: 1187335853
+      beekeepin-set-transparent_26: 672253583
+      beekeepin-set-transparent_27: 329230509
+      beekeepin-set-transparent_28: 2143993528
+      beekeepin-set-transparent_29: 2001696037
+      beekeepin-set-transparent_3: -1133506721
+      beekeepin-set-transparent_30: 1156078093
+      beekeepin-set-transparent_31: 1586552107
+      beekeepin-set-transparent_32: -1510459573
+      beekeepin-set-transparent_33: -243852416
+      beekeepin-set-transparent_34: -525634551
+      beekeepin-set-transparent_35: 1618609663
+      beekeepin-set-transparent_36: 1507875772
+      beekeepin-set-transparent_37: -1672810205
+      beekeepin-set-transparent_38: 729440640
+      beekeepin-set-transparent_39: -1905329209
+      beekeepin-set-transparent_4: 244254875
+      beekeepin-set-transparent_40: -804939827
+      beekeepin-set-transparent_41: -1314399757
+      beekeepin-set-transparent_42: 921369478
+      beekeepin-set-transparent_43: -1782563699
+      beekeepin-set-transparent_44: 1711986993
+      beekeepin-set-transparent_45: -1296224046
+      beekeepin-set-transparent_5: 1380489917
+      beekeepin-set-transparent_6: 797527774
+      beekeepin-set-transparent_7: -267000676
+      beekeepin-set-transparent_8: -1918812521
+      beekeepin-set-transparent_9: 1810933465
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

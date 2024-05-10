@@ -127,23 +127,24 @@ public class QuestManager : MonoBehaviour
 
     private void CheckResourceToShowQuest()
     {
-        if (_visualStatus == VisualStatus.Hide)
-        {
-            var curIndex = _questInfoList.currentQuestIndex;
-            var itemWanted = _questInfoList.questList[curIndex].itemRequest;
-            var amountWanted = _questInfoList.questList[curIndex].amountRequest;
-            var coinReward = _questInfoList.questList[curIndex].coinReward;
+        // TODO : Can sua lai dieu kien de show quest
+        // if (_visualStatus == VisualStatus.Hide)
+        // {
+        //     var curIndex = _questInfoList.currentQuestIndex;
+        //     var itemWanted = _questInfoList.questList[curIndex].itemRequest;
+        //     var amountWanted = _questInfoList.questList[curIndex].amountRequest;
+        //     var coinReward = _questInfoList.questList[curIndex].coinReward;
 
-            Item item = _rM.GetItem(itemWanted);
-            ItemType itemType = item.type;
+        //     Item item = _rM.GetItem(itemWanted);
+        //     ItemType itemType = item.type;
 
-            if (_rM.GetAmountOfItem(itemType) >= amountWanted)
-            {
-                _visualStatus = VisualStatus.Show;
-                NotifyStatusChanged?.Invoke(_visualStatus);
-                OnHasBeenViewedChange?.Invoke(false);
-            }
-        }
+        //     if (_rM.GetAmountOfItem(itemType) >= amountWanted)
+        //     {
+        //         _visualStatus = VisualStatus.Show;
+        //         NotifyStatusChanged?.Invoke(_visualStatus);
+        //         OnHasBeenViewedChange?.Invoke(false);
+        //     }
+        // }
     }
 
 
