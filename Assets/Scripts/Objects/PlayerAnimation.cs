@@ -48,16 +48,16 @@ public class PlayerAnimation : MonoBehaviour
     {
         // remove previous animation and reset scale
         _currentSequence?.Kill();
-
-        transform.DOKill();
-        transform.DOScale(new Vector3(1, 1, 1), 0.1f);
-        transform.DORotate(new Vector3(0, 0, 0), 0.1f);
-
-        var originalScale = new Vector3(1, 1, 1);
+var originalScale = new Vector3(1, 1, 1);
         var duration = 0.5f;
+        transform.DOKill();
 
+        // LOL fuking ugly , but it works ( ͡° ͜ʖ ͡°) will be using sequence in the future
+        transform.DOScale(new Vector3(1, 1, 1), 0.05f).OnComplete(() => transform.DORotate(new Vector3(0, 0, 0), 0.05f).OnComplete(()=> 
         transform.DOScale(new Vector2(0.9f, 1.15f), duration / 2).SetEase(Ease.OutCirc).OnComplete(
-            () => transform.DOScale(originalScale, duration / 2).SetEase(Ease.OutCirc)).SetLoops(-1, LoopType.Yoyo);
+            () => transform.DOScale(originalScale, duration / 2).SetEase(Ease.OutCirc)).SetLoops(-1, LoopType.Yoyo)));
+        
+
     }
 
     private void OnEnable()
