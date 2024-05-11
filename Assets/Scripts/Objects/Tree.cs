@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.UIElements;
-public class Tree : ClickableWithLayerChange
+public class Tree : Clicker
 {
     // TODO : tach rieng effect
 
@@ -16,11 +16,12 @@ public class Tree : ClickableWithLayerChange
     private float _timeToSpawn = 8f;
     private float _timeToSpawnTimer = 0f;
     private ResourceManager _rM;
+    private Player _player;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         _rM = ResourceManager.Instance;
+        _player = Player.Instance;
         _effect = GetComponent<IEffect>();
         _hasFruit = true;
         _treeSprite.sprite = _sprite[1];
@@ -29,8 +30,6 @@ public class Tree : ClickableWithLayerChange
     {
         base.Update();
         // Change order layer
-        ChangeOrderLayer(_treeSprite, _useOrderLayer, _cheatDistance, _orderToFront, _orderToBack);
-
         // Timer to spawn fruit
         _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
         if (_timeToSpawnTimer >= _timeToSpawn)

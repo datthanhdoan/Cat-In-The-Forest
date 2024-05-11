@@ -420,6 +420,9 @@ GameObject:
   m_Component:
   - component: {fileID: 67991748}
   - component: {fileID: 67991749}
+  - component: {fileID: 67991752}
+  - component: {fileID: 67991751}
+  - component: {fileID: 67991750}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -494,6 +497,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &67991750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67991747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4d7ef3a8b544b479a175a4ea0aa45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useOrderLayer: 1
+  _spriteRenderer: {fileID: 67991749}
+--- !u!114 &67991751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67991747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
+--- !u!70 &67991752
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67991747}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0016238384, y: -0.24286184}
+  m_Size: {x: 1.8782729, y: 1.0924374}
+  m_Direction: 1
 --- !u!4 &70109525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7144128990101866926, guid: 66021892271922c4daac62c7d6d245f8, type: 3}
@@ -54655,6 +54704,7 @@ GameObject:
   - component: {fileID: 1622439381}
   - component: {fileID: 1622439383}
   - component: {fileID: 1622439384}
+  - component: {fileID: 1622439385}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -54771,6 +54821,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.399478, y: 1.5449082}
   m_EdgeRadius: 0
+--- !u!114 &1622439385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622439379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4d7ef3a8b544b479a175a4ea0aa45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useOrderLayer: 1
+  _spriteRenderer: {fileID: 0}
 --- !u!4 &1641563081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1897967399097281511, guid: 76fddcbc9cb78e648a416ea323fd1913, type: 3}
@@ -56875,8 +56939,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756894bc67e41124b87f7440f5189ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useOrderLayer: 1
-  _spriteRenderer: {fileID: 1622439381}
 --- !u!114 &1762276717
 MonoBehaviour:
   m_ObjectHideFlags: 0
