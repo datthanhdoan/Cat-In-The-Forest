@@ -16,7 +16,7 @@ public class BeeVFX : MonoBehaviour
         initialPosition = transform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // dung dotween de tao hieu ung di chuyen
         transform.DOShakePosition(duration, strength, vibrato, randomness, false, true);

@@ -1,6 +1,6 @@
 {
-  "hasBeenViewed": true,
-  "currentQuestIndex": 24,
+  "hasBeenViewed": false,
+  "currentQuestIndex": 0,
   "questList": [
     {
       "nameRequester": "John",
@@ -56,7 +56,7 @@
       "itemRequest": "GrapeCandy",
       "amountRequest": 8,
       "coinReward": 55,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Anna",
@@ -64,7 +64,7 @@
       "itemRequest": "Wood",
       "amountRequest": 5,
       "coinReward": 30,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Alex",
@@ -72,7 +72,7 @@
       "itemRequest": "Grape",
       "amountRequest": 5,
       "coinReward": 35,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Liam",
@@ -80,7 +80,7 @@
       "itemRequest": "GrapeCandy",
       "amountRequest": 5,
       "coinReward": 70,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Sophia",
@@ -88,7 +88,7 @@
       "itemRequest": "Apple",
       "amountRequest": 10,
       "coinReward": 30,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Lucas",
@@ -96,7 +96,7 @@
       "itemRequest": "Wood",
       "amountRequest": 7,
       "coinReward": 45,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Emma",
@@ -104,7 +104,7 @@
       "itemRequest": "Grape",
       "amountRequest": 3,
       "coinReward": 25,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Oliver",
@@ -112,7 +112,7 @@
       "itemRequest": "AppleCandy",
       "amountRequest": 3,
       "coinReward": 55,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Isabella",
@@ -120,7 +120,7 @@
       "itemRequest": "Wood",
       "amountRequest": 4,
       "coinReward": 40,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "William",
@@ -128,7 +128,7 @@
       "itemRequest": "Grape",
       "amountRequest": 4,
       "coinReward": 20,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Ava",
@@ -136,7 +136,7 @@
       "itemRequest": "Apple",
       "amountRequest": 6,
       "coinReward": 25,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "James",
@@ -144,7 +144,7 @@
       "itemRequest": "GrapeCandy",
       "amountRequest": 4,
       "coinReward": 65,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Mia",
@@ -152,7 +152,7 @@
       "itemRequest": "Wood",
       "amountRequest": 6,
       "coinReward": 35,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Benjamin",
@@ -160,7 +160,7 @@
       "itemRequest": "Grape",
       "amountRequest": 6,
       "coinReward": 30,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Ethan",
@@ -168,7 +168,7 @@
       "itemRequest": "AppleCandy",
       "amountRequest": 4,
       "coinReward": 40,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Evelyn",
@@ -176,7 +176,7 @@
       "itemRequest": "Wood",
       "amountRequest": 8,
       "coinReward": 55,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Logan",
@@ -184,7 +184,7 @@
       "itemRequest": "Grape",
       "amountRequest": 3,
       "coinReward": 20,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Harper",
@@ -192,7 +192,7 @@
       "itemRequest": "Apple",
       "amountRequest": 12,
       "coinReward": 45,
-      "status": 1
+      "status": 0
     },
     {
       "nameRequester": "Mason",

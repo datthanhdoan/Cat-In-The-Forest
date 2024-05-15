@@ -7,7 +7,7 @@ public class Bee : MonoBehaviour
 {
 
 
-    private float _speed = 5f;
+    private float _speed = 0.5f;
     private float _timeToTakeHoney = 3f;
     private float _TIMER = 0f;
     [SerializeField] private Flower _targetFlower;
@@ -34,7 +34,7 @@ public class Bee : MonoBehaviour
         _beeState = BeeState.MovingToFlower;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandelMoving();
         HandelTakingHoney();
@@ -72,7 +72,7 @@ public class Bee : MonoBehaviour
                 _isAtFlowerPosition = Vector2.Distance(pos, _targetFlower.transform.position) < 0.1f;
                 if (!_isAtFlowerPosition)
                 {
-                    transform.position = Vector2.MoveTowards(pos, _targetFlower.transform.position, _speed * Time.deltaTime);
+                    transform.position = Vector2.Lerp(pos, _targetFlower.transform.position, _speed * Time.fixedDeltaTime);
                     Debug.Log("Moving to flower");
                 }
                 else
@@ -84,7 +84,7 @@ public class Bee : MonoBehaviour
                 break;
             case BeeState.GoingBack:
                 // nếu không ở vị trí ban đầu thì di chuyển về vị trí của tổ
-                transform.position = Vector2.MoveTowards(pos, _beeHive.position, _speed * Time.deltaTime);
+                transform.position = Vector2.Lerp(pos, _beeHive.position, _speed * Time.fixedDeltaTime);
                 Debug.Log("Going back");
                 if (Vector2.Distance(pos, _beeHive.position) < 0.1f)
                 {

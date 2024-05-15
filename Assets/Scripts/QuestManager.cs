@@ -51,15 +51,21 @@ public class QuestManager : MonoBehaviour
     {
         int curIndex = _questInfoList.currentQuestIndex;
         Debug.Log("Current Quest Index: " + curIndex);
-        Debug.Log("Quest List Count: " + _questInfoList.questList.Count);
         var curQuest = _questInfoList.questList[curIndex];
         SetQuestInfo(curQuest.nameRequester, curQuest.majorRequester, curQuest.itemRequest, curQuest.amountRequest, curQuest.coinReward);
 
+        // wait for 1 second to show quest
+        float seconds = 3f;
+        StartCoroutine(ShowQuest(seconds));
+    }
+
+    IEnumerator ShowQuest(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         _visualStatus = VisualStatus.Show;
         NotifyStatusChanged?.Invoke(_visualStatus);
         OnHasBeenViewedChange?.Invoke(_questInfoList.hasBeenViewed);
     }
-
 
     IEnumerator UpdateQuest(float seconds)
     {

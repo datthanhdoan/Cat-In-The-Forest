@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-[System.Serializable]
+[Serializable]
 public class Item : MonoBehaviour
 {
     public ItemType type;
