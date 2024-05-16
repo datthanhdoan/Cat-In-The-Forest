@@ -6,11 +6,12 @@ public class DataManager : MonoBehaviour
     public static event Action OnDataLoaded;
     private ResourceManager _rM;
     private MapManager _mapManager;
-    [SerializeField] private QuestManager _questManager;
 
     private DataManagerBase<Resource> _resourceDataManager;
     private DataManagerBase<QuestData> _questDataManager;
     private DataManagerBase<RegionData> _regionDataManager;
+
+    [SerializeField] private QuestManager _questManager;
 
     private void Start()
     {
@@ -93,8 +94,6 @@ public class DataManager : MonoBehaviour
 
         _questManager.SetQuestData(questInfoListWrapper);
     }
-
-
 
     private void OnApplicationQuit()
     {

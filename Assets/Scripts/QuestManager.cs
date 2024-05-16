@@ -24,7 +24,6 @@ public class QuestManager : MonoBehaviour
 {
     public static event Action<VisualStatus> NotifyStatusChanged;
     public static event Action<bool> OnHasBeenViewedChange;
-    [field: SerializeField] public QuestData _questInfoList { get; private set; }
     private float _timerTesting = 0;
     private float _timeToNextQuest = 0;
     private bool _testIsSetQuest = false;
@@ -44,6 +43,8 @@ public class QuestManager : MonoBehaviour
     [Header("Quest Info")]
     // Reward
     [SerializeField] private TextMeshProUGUI _coinRewardText;
+
+    [field: SerializeField] public QuestData _questInfoList { get; private set; }
 
 
 

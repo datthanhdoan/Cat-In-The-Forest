@@ -7,18 +7,16 @@ using UnityEngine.UI;
 
 public class CandiedFruitFactory : MonoBehaviour
 {
+    public int fruitRequired = 1;
+    public int woodRequired = 1;
+    private float _timeToCook = 12f;
+    private float _timer = 0;
+    public ItemType itemTypeInput; // select in Unity inspector
+    public ItemType itemTypeResult; // select in Unity inspector
+    private Item itemInput, wood, itemResult;
+    private ItemPopup _itemPopup;
     private ResourceManager _rM;
     private Player _player;
-    // Select item type in Unity Editor`
-    public ItemType itemTypeInput;
-    public ItemType itemTypeResult;
-
-    // set item-type to item
-    private Item itemInput, wood, itemResult;
-
-
-
-
     [Header("Text")]
     [SerializeField] TextMeshProUGUI _itemInputText, _woodText, _itemResultText;
     [Header("Image")]
@@ -33,15 +31,10 @@ public class CandiedFruitFactory : MonoBehaviour
     [NonSerialized] public bool _allConditions = false;
     [NonSerialized] public bool playerInRange = false;
 
-    public int fruitRequired = 1;
-    public int woodRequired = 1;
-
-    float _timeToCook = 12f;
-    float _timer = 0;
     [NonSerialized] public bool _isCooking = false;
     [SerializeField] CanvasGroup _canvasGroup;
 
-
+    [SerializeField] private ItemPopupSpawner _itemPopupSpawner;
 
 
     private void Start()
@@ -49,23 +42,28 @@ public class CandiedFruitFactory : MonoBehaviour
         _player = Player.Instance;
         _rM = ResourceManager.Instance;
 
+        // Get the item from the resource manager by the item type
         itemInput = _rM.GetItem(itemTypeInput);
         wood = _rM.GetItem(ItemType.Wood);
         itemResult = _rM.GetItem(itemTypeResult);
 
+        // Set the image
         _itemInputImage.sprite = itemInput.gameObject.GetComponent<SpriteRenderer>().sprite;
         _woodImage.sprite = wood.gameObject.GetComponent<SpriteRenderer>().sprite;
         _itemResultImage.sprite = itemResult.gameObject.GetComponent<SpriteRenderer>().sprite;
 
+        // Set the text
         _itemInputText.text = fruitRequired.ToString();
         _woodText.text = woodRequired.ToString();
         _itemResultText.text = "1";
 
+        // Set the slider
         _slider.maxValue = _timeToCook;
         _slider.value = 0;
         _slider.gameObject.SetActive(false);
 
-        _buttonImage.sprite = _imageForButton[0];
+        // Set the button image
+        _buttonImage.sprite = _imageForButton[0]; // 0 means X image
     }
 
     private void Update()
@@ -77,35 +75,51 @@ public class CandiedFruitFactory : MonoBehaviour
         }
         if (_isCooking)
         {
-            _canvasGroup.interactable = false;
+            HandelCooking();
+        }
+    }
 
-            _slider.gameObject.SetActive(true);
-            _timer += Time.deltaTime;
-            _slider.value = _timer;
+    private void HandelCooking()
+    {
 
-            // if cooking is done
-            if (_timer >= _timeToCook)
+        _canvasGroup.interactable = false;
+
+        _slider.gameObject.SetActive(true);
+        _timer += Time.deltaTime;
+        _slider.value = _timer;
+
+        // if cooking is done
+        if (_timer >= _timeToCook)
+        {
+            // Can interact with the factory again
+            _canvasGroup.interactable = true;
+
+            // spawn the item popup
+            if (_itemPopup == null)
             {
-                // Can interact with the factory again
-                _canvasGroup.interactable = true;
-
-                // update the amount of the item
-                _rM.SetAmoutItem(itemTypeResult, itemResult.amount + 1);
-
-                // reset the timer
-                _timer = 0;
-
-                // reset the conditions
-                _isCooking = false;
-                _allConditions = false;
-
-                // update the button image to the default
-                _buttonImage.sprite = _imageForButton[0];
-
-                // reset the slider
-                _slider.value = 0;
-                _slider.gameObject.SetActive(false);
+                _itemPopup = _itemPopupSpawner._pool.Get();
+                _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
+                _itemPopup.transform.position = transform.position + new Vector3(0, 1, 0);
             }
+            else
+            {
+                var amount = _itemPopup._amount;
+                _itemPopup.SetItem(itemTypeResult, amount + 1);
+            }
+
+            // reset the timer
+            _timer = 0;
+
+            // reset the conditions
+            _isCooking = false;
+            _allConditions = false;
+
+            // update the button image to the default
+            _buttonImage.sprite = _imageForButton[0];
+
+            // reset the slider
+            _slider.value = 0;
+            _slider.gameObject.SetActive(false);
         }
     }
 

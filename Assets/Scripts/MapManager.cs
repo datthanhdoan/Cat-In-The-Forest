@@ -38,7 +38,15 @@ public class MapManager : GenericSingleton<MapManager>
         {
             if (i <= index - 1)
             {
-                region.transform.GetChild(i).gameObject.SetActive(true);
+                var regionChild = region.transform.GetChild(i);
+                regionChild.gameObject.SetActive(true);
+
+                // Hide connected regions , but show the last one
+                // region has child and not the last region
+                if (regionChild.transform.childCount > 0 && i != index - 1)
+                {
+                    regionChild.transform.GetChild(0).gameObject.SetActive(false);
+                }
             }
             else
             {

@@ -117,6 +117,17 @@ public class ResourceManager : GenericSingleton<ResourceManager>
         return null;
     }
 
+    public Sprite GetItemSprite(ItemType itemType)
+    {
+        foreach (GameObject item in _itemSO.itemList)
+        {
+            if (item.GetComponent<Item>().type == itemType)
+            {
+                return item.GetComponent<SpriteRenderer>().sprite;
+            }
+        }
+        return null;
+    }
     public int GetAmountOfItem(ItemType itemType)
     {
         foreach (GameObject item in _itemSO.itemList)

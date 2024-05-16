@@ -73,19 +73,16 @@ public class Bee : MonoBehaviour
                 if (!_isAtFlowerPosition)
                 {
                     transform.position = Vector2.Lerp(pos, _targetFlower.transform.position, _speed * Time.fixedDeltaTime);
-                    Debug.Log("Moving to flower");
                 }
                 else
                 {
                     // nếu ở vị trí hoa thì chuyển sang trạng thái chờ lấy mật ong
                     _beeState = BeeState.WaitToTakeHoney;
-                    Debug.Log("Wait to take honey");
                 }
                 break;
             case BeeState.GoingBack:
                 // nếu không ở vị trí ban đầu thì di chuyển về vị trí của tổ
                 transform.position = Vector2.Lerp(pos, _beeHive.position, _speed * Time.fixedDeltaTime);
-                Debug.Log("Going back");
                 if (Vector2.Distance(pos, _beeHive.position) < 0.1f)
                 {
                     // nếu ở vị trí tổ thì chuyển sang trạng thái Done
