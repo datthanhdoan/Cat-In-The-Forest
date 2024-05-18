@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class ItemPopup : MonoBehaviour, IItem
 {
-    private ItemType _itemType;
+    public ItemType _itemType { get; private set; }
     public int _amount { get; private set; }
     private ResourceManager _resourceManager;
     private ObjectPool<ItemPopup> _pool;
@@ -38,6 +38,8 @@ public class ItemPopup : MonoBehaviour, IItem
 
     public void OnClick()
     {
+        if (_resourceManager == null)
+            _resourceManager = ResourceManager.Instance;
         _resourceManager.SetAmoutItem(_itemType, _amount);
         GetComponent<IShowHide>().Hide(_transformParent).OnComplete(() =>
         {
@@ -47,9 +49,14 @@ public class ItemPopup : MonoBehaviour, IItem
 
     public void SetTransformParent(Transform transformParent)
     {
-        GetComponent<IShowHide>().Show(_transformParent);
-        transform.position = transformParent.position;
         this._transformParent = transformParent;
+        ShowGO();
+    }
+
+    public void ShowGO()
+    {
+        GetComponent<IShowHide>().Show(this._transformParent);
+        transform.position = this._transformParent.position;
     }
     public void SetPool(ObjectPool<ItemPopup> pool)
     {

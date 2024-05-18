@@ -40,7 +40,7 @@ public class ConnectedRegion : Task
                 // Update the navigation mesh
                 _mapManager.UpdateNavMesh();
 
-                Destroy(this.gameObject);
+                // Destroy(this.gameObject);
             }
             else
             {

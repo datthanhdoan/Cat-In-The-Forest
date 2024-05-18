@@ -64,6 +64,7 @@ public class CandiedFruitFactory : MonoBehaviour
 
         // Set the button image
         _buttonImage.sprite = _imageForButton[0]; // 0 means X image
+        Debug.Log("CandiedFruitFactory Start - Item Popup GO : " + _itemPopup);
     }
 
     private void Update()
@@ -98,10 +99,11 @@ public class CandiedFruitFactory : MonoBehaviour
             if (_itemPopup == null)
             {
                 _itemPopup = _itemPopupSpawner._pool.Get();
-                _itemPopup.SetTransformParent(transform);
+                _itemPopup.SetTransformParent(this.transform);
                 _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
             }
-            else if (_itemPopup != null)
+            // TODO : Lỗi logic
+            else if (_itemPopup != null || _itemPopup._itemType != ItemType.Wood)
             {
                 _itemPopup.OnClick();
                 _itemPopup = null;
