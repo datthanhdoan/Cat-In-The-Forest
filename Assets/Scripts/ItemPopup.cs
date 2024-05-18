@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Pool;
 using TMPro;
+using DG.Tweening;
 
 public class ItemPopup : MonoBehaviour, IItem
 {
@@ -13,6 +14,7 @@ public class ItemPopup : MonoBehaviour, IItem
     [SerializeField] private TextMeshProUGUI _amountText;
 
     [SerializeField] private Image _itemImage;
+    private Transform _transformParent;
 
     public void SetItem(ItemType itemType, int amount)
     {
@@ -33,12 +35,22 @@ public class ItemPopup : MonoBehaviour, IItem
         _amount = 0;
         _itemImage.sprite = null;
     }
+
     public void OnClick()
     {
         _resourceManager.SetAmoutItem(_itemType, _amount);
-        _pool.Release(this);
+        GetComponent<IShowHide>().Hide(_transformParent).OnComplete(() =>
+        {
+            _pool.Release(this);
+        });
     }
 
+    public void SetTransformParent(Transform transformParent)
+    {
+        GetComponent<IShowHide>().Show(_transformParent);
+        transform.position = transformParent.position;
+        this._transformParent = transformParent;
+    }
     public void SetPool(ObjectPool<ItemPopup> pool)
     {
         _pool = pool;

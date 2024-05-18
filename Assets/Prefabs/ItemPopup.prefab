@@ -224,6 +224,8 @@ GameObject:
   - component: {fileID: 2856691288815588682}
   - component: {fileID: 2856691288815588683}
   - component: {fileID: 2856691288815588680}
+  - component: {fileID: 6956673713197258025}
+  - component: {fileID: 6979465379566696344}
   m_Layer: 0
   m_Name: ItemPopup
   m_TagString: Untagged
@@ -296,7 +298,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2856691288815588683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +330,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _amountText: {fileID: 7680746765646749944}
   _itemImage: {fileID: 2856691287828061038}
+--- !u!114 &6956673713197258025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856691288815588686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5de3c59e0a8cd04ca2479d0204f4515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &6979465379566696344
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856691288815588686}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7042921234986663408
 GameObject:
   m_ObjectHideFlags: 0

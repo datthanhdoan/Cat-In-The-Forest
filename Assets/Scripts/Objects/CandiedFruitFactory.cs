@@ -14,7 +14,7 @@ public class CandiedFruitFactory : MonoBehaviour
     public ItemType itemTypeInput; // select in Unity inspector
     public ItemType itemTypeResult; // select in Unity inspector
     private Item itemInput, wood, itemResult;
-    private ItemPopup _itemPopup;
+    private ItemPopup _itemPopup = null;
     private ResourceManager _rM;
     private Player _player;
     [Header("Text")]
@@ -98,13 +98,17 @@ public class CandiedFruitFactory : MonoBehaviour
             if (_itemPopup == null)
             {
                 _itemPopup = _itemPopupSpawner._pool.Get();
+                _itemPopup.SetTransformParent(transform);
                 _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
-                _itemPopup.transform.position = transform.position + new Vector3(0, 1, 0);
             }
-            else
+            else if (_itemPopup != null)
             {
-                var amount = _itemPopup._amount;
-                _itemPopup.SetItem(itemTypeResult, amount + 1);
+                _itemPopup.OnClick();
+                _itemPopup = null;
+
+                _itemPopup = _itemPopupSpawner._pool.Get();
+                _itemPopup.SetTransformParent(transform);
+                _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
             }
 
             // reset the timer
