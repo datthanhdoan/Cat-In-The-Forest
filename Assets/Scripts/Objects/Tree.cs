@@ -3,20 +3,18 @@ using UnityEngine;
 using UnityEngine.UIElements;
 public class Tree : Clicker
 {
-    // TODO : tach rieng effect
+    private bool _hasFruit = true;
+    private float _timeToSpawn = 8f;
+    private float _timeToSpawnTimer = 0f;
+    private bool _playerInRange = false;
+    private IEffect _effect;
+    private ResourceManager _rM;
+    private Player _player;
 
     [Tooltip("0: No fruit, 1: Has fruit")]
     [SerializeField] protected Sprite[] _sprite;
     [SerializeField] protected SpriteRenderer _treeSprite;
     [SerializeField] protected ItemType _fruitType;
-
-    private IEffect _effect;
-
-    private bool _hasFruit = true;
-    private float _timeToSpawn = 8f;
-    private float _timeToSpawnTimer = 0f;
-    private ResourceManager _rM;
-    private Player _player;
 
     private void Start()
     {
@@ -29,8 +27,6 @@ public class Tree : Clicker
     protected override void Update()
     {
         base.Update();
-        // Change order layer
-        // Timer to spawn fruit
         _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
         if (_timeToSpawnTimer >= _timeToSpawn)
         {
@@ -42,8 +38,7 @@ public class Tree : Clicker
 
     protected override void HandleClick()
     {
-        float rangeradius = 1.5f;
-        if (_player.playerState == PlayerState.Idle && DistanceToPlayer() <= rangeradius && _hasFruit)
+        if (_player.playerState == PlayerState.Idle && _playerInRange && _hasFruit)
         {
             _hasBeenClicked = false;
             TakeFruit();
@@ -64,13 +59,6 @@ public class Tree : Clicker
         }
     }
 
-
-    public float DistanceToPlayer()
-    {
-        float distance = Vector2.Distance(_player.transform.position, transform.position);
-        return distance;
-    }
-
     public void TakeFruit()
     {
         if (_hasFruit)
@@ -89,10 +77,23 @@ public class Tree : Clicker
         int newAmout = _rM.GetItem(_fruitType).amount += 1;
         _rM.SetAmoutItem(_fruitType, newAmout);
     }
-    protected void OnDrawGizmos()
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1.5f);
+        Debug.Log("OnTriggerEnter2D : " + other.gameObject.name);
+        if (other.CompareTag("Player"))
+        {
+            _playerInRange = true;
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _playerInRange = false;
+        }
+    }
+
 
 }

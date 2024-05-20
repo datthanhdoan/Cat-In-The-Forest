@@ -51,7 +51,7 @@ public class QuestManager : MonoBehaviour
     private void LoadData()
     {
         int curIndex = _questInfoList.currentQuestIndex;
-        Debug.Log("Current Quest Index: " + curIndex);
+        // Debug.Log("Current Quest Index: " + curIndex);
         var curQuest = _questInfoList.questList[curIndex];
         SetQuestInfo(curQuest.nameRequester, curQuest.majorRequester, curQuest.itemRequest, curQuest.amountRequest, curQuest.coinReward);
 

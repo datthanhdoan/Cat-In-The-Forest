@@ -59,7 +59,7 @@ public class Player : GenericSingleton<Player>
         {
             OnPlayerStateChanged?.Invoke(playerState);
             previousState = playerState;
-            Debug.Log("State changed to: " + playerState);
+            // Debug.Log("State changed to: " + playerState);
         }
     }
 
@@ -75,18 +75,18 @@ public class Player : GenericSingleton<Player>
         }
     }
 
-    public void OnClick(Vector3 clickPos)
+    public void OnPlayerClickInMap(Vector3 clickPos)
     {
         _currentPosition = clickPos;
     }
 
     private void OnEnable()
     {
-        InputManager.OnClick += OnClick;
+        InputManager.OnClick += OnPlayerClickInMap;
     }
     private void OnDisable()
     {
-        InputManager.OnClick -= OnClick;
+        InputManager.OnClick -= OnPlayerClickInMap;
     }
 
     public void DoMove()

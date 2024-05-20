@@ -69,7 +69,6 @@ public class CandiedFruitFactory : MonoBehaviour
 
     private void Update()
     {
-        CheckDistance();
         if (playerInRange)
         {
             CheckConditions();
@@ -102,7 +101,6 @@ public class CandiedFruitFactory : MonoBehaviour
                 _itemPopup.SetTransformParent(this.transform);
                 _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
             }
-            // TODO : Lỗi logic
             else if (_itemPopup != null || _itemPopup._itemType != ItemType.Wood)
             {
                 _itemPopup.OnClick();
@@ -129,6 +127,21 @@ public class CandiedFruitFactory : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
     public void OnClickedButton()
     {
         // check conditions
@@ -156,23 +169,5 @@ public class CandiedFruitFactory : MonoBehaviour
         }
 
     }
-    public void CheckDistance()
-    {
-        if (Vector2.Distance(transform.position, _player.transform.position) < 2)
-        {
-            playerInRange = true;
-        }
-        else
-        {
-            playerInRange = false;
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 2);
-    }
-
 
 }

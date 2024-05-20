@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 1897967399097281511}
   - component: {fileID: 1897967399097281508}
   - component: {fileID: 1897967399097281509}
+  - component: {fileID: 8336771813007395189}
   m_Layer: 0
   m_Name: CandiedFruitFactory
   m_TagString: Untagged
@@ -364,6 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97059789e03be5428ec1a298827c719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruitRequired: 5
+  woodRequired: 5
   itemTypeInput: 2
   itemTypeResult: 4
   _itemInputText: {fileID: 1897967399800318012}
@@ -377,9 +380,8 @@ MonoBehaviour:
   - {fileID: 125472474, guid: bca1a5831a516ad4b97b6baf8419b04d, type: 3}
   _buttonImage: {fileID: 1897967400396541283}
   _slider: {fileID: 1897967400464087987}
-  fruitRequired: 5
-  woodRequired: 5
   _canvasGroup: {fileID: 1897967400111167004}
+  _itemPopupSpawner: {fileID: 0}
 --- !u!114 &1897967399097281509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +398,22 @@ MonoBehaviour:
   _resourceTrans: {fileID: 1897967398551696014}
   _buttonTrans: {fileID: 1897967400396541285}
   _spriteRenderer: {fileID: 1897967398819973029}
+--- !u!58 &8336771813007395189
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897967399097281510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.0032279491}
+  serializedVersion: 2
+  m_Radius: 2.0009239
 --- !u!1 &1897967399152047981
 GameObject:
   m_ObjectHideFlags: 0

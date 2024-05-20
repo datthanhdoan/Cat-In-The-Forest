@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7414167500014119624}
-  - component: {fileID: 7414167500014119625}
   - component: {fileID: 14517725769114168}
   - component: {fileID: 6652260046017018385}
   - component: {fileID: 4786151494857447190}
+  - component: {fileID: 8258462109623704991}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -36,22 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &7414167500014119625
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7414167500014119627}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0040688515, y: -0.021277785}
-  m_Size: {x: 1.0199442, y: 1.0199444}
-  m_Direction: 0
 --- !u!114 &14517725769114168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +77,22 @@ MonoBehaviour:
   - {fileID: -1001747798, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   _treeSprite: {fileID: 7414167500105159157}
   _fruitType: 0
+--- !u!58 &8258462109623704991
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414167500014119627}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0032621622, y: -0.011416197}
+  serializedVersion: 2
+  m_Radius: 0.58643687
 --- !u!1 &7414167500105159162
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,5 +190,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4d7ef3a8b544b479a175a4ea0aa45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useOrderLayer: 1
+  _useOrderLayer: 0
   _spriteRenderer: {fileID: 7414167500105159157}

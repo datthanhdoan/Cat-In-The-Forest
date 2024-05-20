@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7144128990101866926}
-  - component: {fileID: 7144128990101866921}
   - component: {fileID: 2871424889215431549}
   - component: {fileID: 7745457449437178454}
   - component: {fileID: 1550293283100753406}
+  - component: {fileID: 261142665795521377}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Untagged
@@ -36,22 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &7144128990101866921
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7144128990101866913}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.5, y: 1.9375}
-  m_Direction: 0
 --- !u!114 &2871424889215431549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +77,22 @@ MonoBehaviour:
   - {fileID: -1866991913, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
   _treeSprite: {fileID: 7144128991136806783}
   _fruitType: 1
+--- !u!58 &261142665795521377
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144128990101866913}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.004839897}
+  serializedVersion: 2
+  m_Radius: 1.1969523
 --- !u!1 &7144128991136806771
 GameObject:
   m_ObjectHideFlags: 0

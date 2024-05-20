@@ -12,9 +12,12 @@ public class AutoChangeLayer : MonoBehaviour
     {
         _player = Player.Instance;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        ChangeOrderLayer(_spriteRenderer, _useOrderLayer, _cheatDistance, _orderToFront, _orderToBack);
+        if (_player.playerState == PlayerState.Move)
+        {
+            ChangeOrderLayer(_spriteRenderer, _useOrderLayer, _cheatDistance, _orderToFront, _orderToBack);
+        }
     }
     public void ChangeOrderLayer(SpriteRenderer spriteRenderer, bool useOrderLayer, float cheatDistance, int orderToFront, int orderToBack)
     {
