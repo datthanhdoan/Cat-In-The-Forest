@@ -37,6 +37,18 @@ public class ResourceManager : GenericSingleton<ResourceManager>
         }
         OnResourceChanged?.Invoke();
     }
+
+    public void IncreaseItemAmount(ItemType itemType, int amount)
+    {
+        foreach (GameObject item in _itemSO.itemList)
+        {
+            if (item.GetComponent<Item>().type == itemType)
+            {
+                item.GetComponent<Item>().amount += amount;
+            }
+        }
+        OnResourceChanged?.Invoke();
+    }
     public void SetItemDataList(List<ItemData> itemDataList)
     {
         for (int i = 0; i < itemDataList.Count; i++)

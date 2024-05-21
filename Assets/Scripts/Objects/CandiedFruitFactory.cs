@@ -17,6 +17,14 @@ public class CandiedFruitFactory : MonoBehaviour
     private ItemPopup _itemPopup = null;
     private ResourceManager _rM;
     private Player _player;
+
+
+    [NonSerialized] public bool _allConditions = false;
+    [NonSerialized] public bool playerInRange = false;
+
+    [NonSerialized] public bool _isCooking = false;
+
+
     [Header("Text")]
     [SerializeField] TextMeshProUGUI _itemInputText, _woodText, _itemResultText;
     [Header("Image")]
@@ -28,10 +36,7 @@ public class CandiedFruitFactory : MonoBehaviour
     [Header("Slider")]
     [SerializeField] Slider _slider;
 
-    [NonSerialized] public bool _allConditions = false;
-    [NonSerialized] public bool playerInRange = false;
 
-    [NonSerialized] public bool _isCooking = false;
     [SerializeField] CanvasGroup _canvasGroup;
 
     [SerializeField] private ItemPopupSpawner _itemPopupSpawner;
@@ -101,7 +106,7 @@ public class CandiedFruitFactory : MonoBehaviour
                 _itemPopup.SetTransformParent(this.transform);
                 _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
             }
-            else if (_itemPopup != null || _itemPopup._itemType != ItemType.Wood)
+            else if (_itemPopup != null)
             {
                 _itemPopup.OnClick();
                 _itemPopup = null;

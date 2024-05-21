@@ -6,6 +6,7 @@
     { "name": "AppleCandy", "amount": 0 },
     { "name": "Grape", "amount": 0 },
     { "name": "GrapeCandy", "amount": 0 },
-    { "name": "Wood", "amount": 0 }
+    { "name": "Wood", "amount": 0 },
+    { "name": "Honey", "amount": 0 }
   ]
 }
