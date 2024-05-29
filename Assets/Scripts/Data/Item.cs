@@ -28,5 +28,7 @@ public enum ItemType
     Grape,
     AppleCandy,
     GrapeCandy,
-    Honey
+    Honey,
+    Rice,
+    Tomato
 }

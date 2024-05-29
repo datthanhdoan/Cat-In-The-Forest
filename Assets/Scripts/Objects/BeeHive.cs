@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class BeeHive : MonoBehaviour
+public class BeeHive : MonoBehaviour, IObserver
 {
 
     public int _floralHoneyRequired { get; private set; } = 10;
@@ -52,21 +52,12 @@ public class BeeHive : MonoBehaviour
     private void SpawnItemPopup()
     {
         var honeyAmount = _rM.GetAmountOfItem(ItemType.Honey);
-        if (_itemPopup == null)
-        {
-            _itemPopup = _itemPopupSpawner._pool.Get();
-            _itemPopup.SetTransformParent(this.transform);
-            _itemPopup.SetItem(ItemType.Honey, honeyAmount + 1);
-        }
-        else if (_itemPopup != null)
-        {
-            _itemPopup.OnClick();
-            _itemPopup = null;
+        _itemPopup = _itemPopupSpawner._pool.Get();
+        _itemPopup.AddObserver(this);
+        _itemPopup.SetTransformParent(this.transform);
+        _itemPopup.SetItem(ItemType.Honey, honeyAmount + 1);
 
-            _itemPopup = _itemPopupSpawner._pool.Get();
-            _itemPopup.SetTransformParent(transform);
-            _itemPopup.SetItem(ItemType.Honey, honeyAmount + 1);
-        }
+
     }
     IEnumerator ActiveBee(float second)
     {
@@ -78,6 +69,18 @@ public class BeeHive : MonoBehaviour
     private bool HasEnoughFloralHoney()
     {
         return _floralHoneyCollected >= _floralHoneyRequired;
+    }
+
+    public void OnNotify()
+    {
+        // when the player clicks take honey
+        if (_honeyState == HoneyState.EnoughHoney)
+        {
+            _rM.SetAmoutItem(ItemType.Honey, _rM.GetAmountOfItem(ItemType.Honey) + 1);
+            _floralHoneyCollected = 0;
+            _honeyState = HoneyState.NotEnoughHoney;
+            StartCoroutine(ActiveBee(_timerToSpawnBee));
+        }
     }
 
 

@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f32c4f2772ea640bacc1177b8295a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeToSpawn: 5
   _sprite:
   - {fileID: 0}
   - {fileID: -1001747798, guid: 2143144e9eeb4e54cbc72bffdcde49d1, type: 3}
@@ -190,5 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4d7ef3a8b544b479a175a4ea0aa45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cheatDistance: 0.5
   _useOrderLayer: 0
   _spriteRenderer: {fileID: 7414167500105159157}
