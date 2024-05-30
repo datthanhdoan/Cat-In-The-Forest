@@ -92,7 +92,7 @@ public class ResourceManager : GenericSingleton<ResourceManager>
         return itemDataList;
     }
 
-    public List<GameObject> GetGameObjectList()
+    public List<GameObject> GetItemGOList()
     {
         return _itemSO.itemList;
     }

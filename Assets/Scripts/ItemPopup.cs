@@ -31,7 +31,7 @@ public class ItemPopup : MonoBehaviour, IItem
         this._amount = amount;
 
         _itemImage.sprite = _resourceManager.GetItemSprite(_itemType);
-        int amoutVisual = _amount - _resourceManager.GetAmountOfItem(_itemType);
+        int amoutVisual = _amount;
         _amountText.text = amoutVisual > 1 ? amoutVisual.ToString() : "";
     }
 
@@ -47,11 +47,8 @@ public class ItemPopup : MonoBehaviour, IItem
     {
         if (_resourceManager == null)
             _resourceManager = ResourceManager.Instance;
-        _resourceManager.SetAmoutItem(_itemType, _amount);
-        GetComponent<IShowHide>().Hide(_transformParent).OnComplete(() =>
-        {
-            _pool.Release(this);
-        });
+        var currentItemAmount = _resourceManager.GetAmountOfItem(_itemType);
+        _resourceManager.SetAmoutItem(_itemType, currentItemAmount + this._amount);
         // notify observers that the item has been clicked
         if (_observers.Count > 0)
         {
@@ -60,6 +57,11 @@ public class ItemPopup : MonoBehaviour, IItem
                 observer.OnNotify();
             }
         }
+        GetComponent<IShowHide>().Hide(_transformParent).OnComplete(() =>
+        {
+            _pool.Release(this);
+        });
+        Debug.Log("Update resource " + _itemType + _amount);
     }
 
     public void SetTransformParent(Transform transformParent)

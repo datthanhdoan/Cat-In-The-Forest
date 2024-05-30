@@ -9,7 +9,7 @@ public class CandiedFruitFactory : MonoBehaviour
 {
     public int fruitRequired = 1;
     public int woodRequired = 1;
-    private float _timeToCook = 12f;
+    private readonly float _timeToCook = 12f;
     private float _timer = 0;
     public ItemType itemTypeInput; // select in Unity inspector
     public ItemType itemTypeResult; // select in Unity inspector
@@ -104,16 +104,16 @@ public class CandiedFruitFactory : MonoBehaviour
             {
                 _itemPopup = _itemPopupSpawner._pool.Get();
                 _itemPopup.SetTransformParent(this.transform);
-                _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
+                _itemPopup.SetItem(itemTypeResult, 1);
             }
-            else if (_itemPopup != null)
+            else if (_itemPopup != null && _itemPopup.gameObject.activeSelf != false)
             {
                 _itemPopup.OnClick();
                 _itemPopup = null;
 
                 _itemPopup = _itemPopupSpawner._pool.Get();
                 _itemPopup.SetTransformParent(transform);
-                _itemPopup.SetItem(itemTypeResult, itemResult.amount + 1);
+                _itemPopup.SetItem(itemTypeResult, 1);
             }
 
             // reset the timer

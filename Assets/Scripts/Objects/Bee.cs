@@ -87,7 +87,6 @@ public class Bee : MonoBehaviour
                 {
                     // nếu ở vị trí tổ thì chuyển sang trạng thái Done
                     _beeState = BeeState.Done;
-                    Debug.Log("Done");
                 }
 
                 break;

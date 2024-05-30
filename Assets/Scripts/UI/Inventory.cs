@@ -18,36 +18,8 @@ public class Inventory : MonoBehaviour
 
     private void VisualItemInInventory()
     {
-        // if (_rM == null) _rM = ResourceManager.Instance;
-
-
         // Nếu không có item nào thì thoát
-        if (_rM.GetGameObjectList().Count <= 0) return;
-
-        // foreach (GameObject itemGo in _rM.GetGameObjectList())
-        // {
-        //     var item = itemGo.GetComponent<Item>();
-
-        //     var slotIndexImage = slotList[index].transform.GetChild(0).GetComponent<Image>();
-        //     var slotIndexText = slotList[index].transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-
-
-        //     if (item.amount > 0)
-        //     {
-        //         // Nếu số lượng item > 0 thì hiển thị item đó
-        //         index += 1;
-        //         slotIndexImage.sprite = itemGo.GetComponent<SpriteRenderer>().sprite;
-        //         slotIndexText.text = item.amount.ToString();
-
-        //         slotIndexImage.gameObject.SetActive(true);
-        //         slotIndexText.gameObject.SetActive(true);
-        //     }
-        //     else
-        //     {
-        //         slotIndexImage.gameObject.SetActive(false);
-        //         slotIndexText.gameObject.SetActive(false);
-        //     }
-        // }
+        if (_rM.GetItemGOList().Count <= 0) return;
         UpdateInventory();
     }
     void UpdateSlot(int slotIndex, Sprite sprite, string amount, bool isActive)
@@ -66,7 +38,7 @@ public class Inventory : MonoBehaviour
     void UpdateInventory()
     {
         int slotIndex = 0;
-        var gameObjects = _rM.GetGameObjectList();
+        var gameObjects = _rM.GetItemGOList();
 
         for (int i = 0; i < slotList.Length; i++)
         {
@@ -79,14 +51,10 @@ public class Inventory : MonoBehaviour
                     UpdateSlot(slotIndex, sprite, item.amount.ToString(), true);
                     slotIndex += 1;
                 }
-                else
-                {
-                    UpdateSlot(slotIndex, null, null, false);
-                }
             }
             else
             {
-                UpdateSlot(slotIndex, null, null, false);
+                UpdateSlot(i, null, null, false);
             }
         }
     }

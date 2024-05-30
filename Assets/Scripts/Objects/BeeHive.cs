@@ -51,13 +51,13 @@ public class BeeHive : MonoBehaviour, IObserver
 
     private void SpawnItemPopup()
     {
-        var honeyAmount = _rM.GetAmountOfItem(ItemType.Honey);
         _itemPopup = _itemPopupSpawner._pool.Get();
         _itemPopup.AddObserver(this);
         _itemPopup.SetTransformParent(this.transform);
-        _itemPopup.SetItem(ItemType.Honey, honeyAmount + 1);
 
-
+        int amount = 1;
+        _itemPopup.SetItem(ItemType.Honey, amount);
+        Debug.Log("Call SpawnItemPopup");
     }
     IEnumerator ActiveBee(float second)
     {

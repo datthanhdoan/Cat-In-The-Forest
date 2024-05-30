@@ -42,7 +42,7 @@ public class Trader : Clicker
         // random item require
         for (int i = 0; i < _maxItem; i++)
         {
-            _requiredItemAmounts[i] = Random.Range(0, 10);
+            _requiredItemAmounts[i] = Random.Range(2, 10);
         }
         // ramdom coin award
         _diamondAward = Random.Range(0, 5);
@@ -77,6 +77,11 @@ public class Trader : Clicker
         if (isEnough)
         {
             _rM.SetDiamond(_rM.GetDiamond() + _diamondAward);
+            // minus item in table
+            for (int i = 0; i < _maxItem; i++)
+            {
+                _rM.SetAmoutItem(_itemsDic[i], _rM.GetAmountOfItem(_itemsDic[i]) - _requiredItemAmounts[i]);
+            }
             UpdateItemRequire();
         }
     }
