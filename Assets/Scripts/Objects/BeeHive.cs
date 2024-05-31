@@ -76,7 +76,6 @@ public class BeeHive : MonoBehaviour, IObserver
         // when the player clicks take honey
         if (_honeyState == HoneyState.EnoughHoney)
         {
-            _rM.SetAmoutItem(ItemType.Honey, _rM.GetAmountOfItem(ItemType.Honey) + 1);
             _floralHoneyCollected = 0;
             _honeyState = HoneyState.NotEnoughHoney;
             StartCoroutine(ActiveBee(_timerToSpawnBee));

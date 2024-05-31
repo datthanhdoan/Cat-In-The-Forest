@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Screen UI
+    uniqueID: 1821104689
+    locked: 0
+  - name: Normal UI
+    uniqueID: 1374212887
+    locked: 0
