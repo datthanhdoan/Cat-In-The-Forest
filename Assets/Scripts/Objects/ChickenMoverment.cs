@@ -35,12 +35,9 @@ public class ChickenMoverment : Subject
 
     private void Update()
     {
-        if (_agent.velocity.magnitude > 0.4f)
+        if (_agent.remainingDistance < 0.1f)
         {
-            _currentState = ChickenState.Walk;
-        }
-        else
-        {
+            _agent.ResetPath();
             _currentState = ChickenState.Idle;
         }
         if (_currentState != _previousState)
@@ -68,6 +65,7 @@ public class ChickenMoverment : Subject
     {
         _targetPos = _pasture.RandomPositionInBounds();
         _agent.SetDestination(_targetPos);
+        _currentState = ChickenState.Walk;
         StartCoroutine(WaitAndWalk(Random.Range(10, 20)));
     }
 }

@@ -65,7 +65,7 @@ public class Player : GenericSingleton<Player>
 
     public void UpdatePlayerState()
     {
-        if (agent.velocity == Vector3.zero)
+        if (agent.remainingDistance < 0.1f)
         {
             playerState = PlayerState.Idle;
         }
