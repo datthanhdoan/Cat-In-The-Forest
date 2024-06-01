@@ -4,9 +4,10 @@ using UnityEngine.AI;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    private Sequence _currentSequence;
+    private Vector3 _originalScale = new Vector3(1, 1, 1);
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private ParticleSystem _trailEffect;
-    private Sequence _currentSequence;
 
     private void OnPlayerStateChanged(PlayerState state)
     {
@@ -32,6 +33,10 @@ public class PlayerAnimation : MonoBehaviour
     {
         transform.DOKill();
 
+        // Reset scale
+        transform.DOScale(_originalScale, 0.05f);
+
+        // Create a new Sequence
         _currentSequence = DOTween.Sequence();
 
         // Add animations to the Sequence
@@ -47,16 +52,17 @@ public class PlayerAnimation : MonoBehaviour
     private void IdleState()
     {
         // remove previous animation and reset scale
-        _currentSequence?.Kill();
-var originalScale = new Vector3(1, 1, 1);
-        var duration = 0.5f;
         transform.DOKill();
+        _currentSequence?.Kill();
+
+        // Reset scale
+        var duration = 0.5f;
 
         // LOL fuking ugly , but it works ( ͡° ͜ʖ ͡°) will be using sequence in the future
-        transform.DOScale(new Vector3(1, 1, 1), 0.05f).OnComplete(() => transform.DORotate(new Vector3(0, 0, 0), 0.05f).OnComplete(()=> 
+        transform.DOScale(new Vector3(1, 1, 1), 0.05f).OnComplete(() => transform.DORotate(new Vector3(0, 0, 0), 0.05f).OnComplete(() =>
         transform.DOScale(new Vector2(0.9f, 1.15f), duration / 2).SetEase(Ease.OutCirc).OnComplete(
-            () => transform.DOScale(originalScale, duration / 2).SetEase(Ease.OutCirc)).SetLoops(-1, LoopType.Yoyo)));
-        
+            () => transform.DOScale(_originalScale, duration / 2).SetEase(Ease.OutCirc)).SetLoops(-1, LoopType.Yoyo)));
+
 
     }
 
