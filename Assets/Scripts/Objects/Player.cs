@@ -18,7 +18,7 @@ public class Player : GenericSingleton<Player>
     public static event Action<PlayerState> OnPlayerStateChanged;
     public PlayerState playerState { get; private set; } = PlayerState.Idle;
     private PlayerState previousState = PlayerState.Idle;
-    [NonSerialized] public NavMeshAgent agent;
+    [NonSerialized] public NavMeshAgent _agent;
     private InputManager _inputManager;
 
     [SerializeField] float _speed = 5;
@@ -29,10 +29,10 @@ public class Player : GenericSingleton<Player>
     void Start()
     {
         _inputManager = InputManager.Instance;
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-        agent.speed = _speed;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
+        _agent.speed = _speed;
         OnPlayerStateChanged?.Invoke(playerState);
     }
 
@@ -65,7 +65,7 @@ public class Player : GenericSingleton<Player>
 
     public void UpdatePlayerState()
     {
-        if (agent.remainingDistance < 0.1f)
+        if (_agent.remainingDistance < 0.1f)
         {
             playerState = PlayerState.Idle;
         }
@@ -91,13 +91,13 @@ public class Player : GenericSingleton<Player>
 
     public void DoMove()
     {
-        agent.SetDestination(_currentPosition);
+        _agent.SetDestination(_currentPosition);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
     public void PlayerSpeed(float newSpeed)
     {
         _speed = newSpeed;
-        agent.speed = _speed;
+        _agent.speed = _speed;
     }
 
 }

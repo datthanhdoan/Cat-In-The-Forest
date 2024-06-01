@@ -43,11 +43,9 @@ public class ChickenAnim : MonoBehaviour, IObserver
             case ChickenMoverment.ChickenState.Run:
 
                 break;
-            case ChickenMoverment.ChickenState.Eat:
-
-                break;
-            case ChickenMoverment.ChickenState.Sleep:
-
+            case ChickenMoverment.ChickenState.NeedToEat:
+                Flip();
+                _anim.CrossFade(_walk, 0);
                 break;
         }
     }

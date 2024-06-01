@@ -28,40 +28,18 @@ public class CandiedFactoryVFX : MonoBehaviour
         Hide
     }
     State _state = State.Hide;
-    void Update()
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        ChangeOrderLayer();
-        if (_candiedFruitFactory.playerInRange)
-        {
-            if (_state == State.Hide)
-            {
-                ShowResource();
-                _state = State.Show;
-            }
-        }
-        else
-        {
-            if (_state == State.Show)
-            {
-                HideResource();
-                _state = State.Hide;
-            }
-        }
+        _state = State.Show;
+        ShowResource();
     }
 
-
-    private void ChangeOrderLayer()
+    private void OnTriggerExit2D(Collider2D other)
     {
 
-        float cheatDistance = 0.5f;
-        if (_player.transform.position.y + cheatDistance > transform.position.y)
-        {
-            _spriteRenderer.sortingOrder = 10;
-        }
-        else
-        {
-            _spriteRenderer.sortingOrder = 3;
-        }
+        HideResource();
+        _state = State.Hide;
     }
 
     public void AnimButton()
@@ -84,7 +62,7 @@ public class CandiedFactoryVFX : MonoBehaviour
 
     void ShowResource()
     {
-        _canvasGroup.alpha = 0;
+        _canvasGroup.gameObject.SetActive(true);
         _resourceTrans.localPosition = new Vector3(0, -_gap, 0);
         _resourceTrans.DOAnchorPos(new Vector2(0, 0), _animTime, false).SetEase(Ease.OutExpo);
         _canvasGroup.DOFade(1, _animTime);
@@ -92,10 +70,12 @@ public class CandiedFactoryVFX : MonoBehaviour
 
     void HideResource()
     {
-        _canvasGroup.alpha = 1;
         _resourceTrans.localPosition = new Vector3(0, 0, 0);
         _resourceTrans.DOAnchorPos(new Vector2(0, -_gap), _animTime, false).SetEase(Ease.InExpo);
-        _canvasGroup.DOFade(0, _animTime);
+        _canvasGroup.DOFade(0, _animTime).SetEase(Ease.OutCubic).OnComplete(() =>
+        {
+            _canvasGroup.gameObject.SetActive(false);
+        });
     }
 
 }
