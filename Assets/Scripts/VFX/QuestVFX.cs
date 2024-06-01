@@ -30,7 +30,7 @@ public class QuestVFX : MonoBehaviour
     }
     public void OnShow()
     {
-        _rectTransform.DOAnchorPosX(35, 0.5f).SetEase(Ease.OutBack);
+        _rectTransform.DOAnchorPosX(30, 0.5f).SetEase(Ease.OutBack);
 
         var questCanvasGroup = GetComponent<CanvasGroup>();
         questCanvasGroup.DOFade(1, 0.5f).SetEase(Ease.OutBack);
