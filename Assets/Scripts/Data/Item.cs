@@ -21,6 +21,16 @@ public class Resource
     public List<ItemData> itemList;
 }
 
+// Pricing
+// Apple: 10
+// Wood: 15
+// Grape: 20
+// AppleCandy: 30
+// GrapeCandy: 40
+// Honey: 25
+// Rice: 8
+// Tomato: 12
+
 public enum ItemType
 {
     Wood,
