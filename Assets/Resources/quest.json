@@ -7,7 +7,7 @@
       "majorRequester": "Fammer",
       "itemRequest": "Apple",
       "amountRequest": 4,
-      "coinReward": 15,
+      "coinReward": 40,
       "status": 0
     },
     {
@@ -15,7 +15,7 @@
       "majorRequester": "Baker",
       "itemRequest": "Grape",
       "amountRequest": 2,
-      "coinReward": 10,
+      "coinReward": 40,
       "status": 0
     },
     {
@@ -23,7 +23,7 @@
       "majorRequester": "Thief",
       "itemRequest": "Apple",
       "amountRequest": 8,
-      "coinReward": 25,
+      "coinReward": 80,
       "status": 0
     },
     {
@@ -31,7 +31,7 @@
       "majorRequester": "Carpenter",
       "itemRequest": "Wood",
       "amountRequest": 3,
-      "coinReward": 20,
+      "coinReward": 45,
       "status": 0
     },
     {
@@ -46,16 +46,16 @@
       "nameRequester": "John",
       "majorRequester": "Fammer",
       "itemRequest": "Apple",
-      "amountRequest": 20,
-      "coinReward": 40,
+      "amountRequest": 10,
+      "coinReward": 100,
       "status": 0
     },
     {
       "nameRequester": "Fox",
       "majorRequester": "Thief",
       "itemRequest": "GrapeCandy",
-      "amountRequest": 8,
-      "coinReward": 55,
+      "amountRequest": 4,
+      "coinReward": 160,
       "status": 0
     },
     {
@@ -63,7 +63,7 @@
       "majorRequester": "Candy Maker",
       "itemRequest": "Wood",
       "amountRequest": 5,
-      "coinReward": 30,
+      "coinReward": 75,
       "status": 0
     },
     {
@@ -71,7 +71,7 @@
       "majorRequester": "Gardener",
       "itemRequest": "Grape",
       "amountRequest": 5,
-      "coinReward": 35,
+      "coinReward": 100,
       "status": 0
     },
     {
@@ -79,135 +79,135 @@
       "majorRequester": "Woodcutter",
       "itemRequest": "GrapeCandy",
       "amountRequest": 5,
-      "coinReward": 70,
+      "coinReward": 200,
       "status": 0
     },
     {
       "nameRequester": "Sophia",
       "majorRequester": "Baker",
-      "itemRequest": "Apple",
-      "amountRequest": 10,
-      "coinReward": 30,
+      "itemRequest": "Honey",
+      "amountRequest": 4,
+      "coinReward": 100,
       "status": 0
     },
     {
       "nameRequester": "Lucas",
       "majorRequester": "Carpenter",
-      "itemRequest": "Wood",
+      "itemRequest": "AppleCandy",
       "amountRequest": 7,
-      "coinReward": 45,
+      "coinReward": 210,
       "status": 0
     },
     {
       "nameRequester": "Emma",
       "majorRequester": "Fammer",
-      "itemRequest": "Grape",
+      "itemRequest": "GrapeCandy",
       "amountRequest": 3,
-      "coinReward": 25,
+      "coinReward": 120,
       "status": 0
     },
     {
       "nameRequester": "Oliver",
       "majorRequester": "Mouse",
-      "itemRequest": "AppleCandy",
-      "amountRequest": 3,
-      "coinReward": 55,
+      "itemRequest": "Honey",
+      "amountRequest": 4,
+      "coinReward": 100,
       "status": 0
     },
     {
       "nameRequester": "Isabella",
       "majorRequester": "Thief",
-      "itemRequest": "Wood",
-      "amountRequest": 4,
-      "coinReward": 40,
+      "itemRequest": "Rice",
+      "amountRequest": 40,
+      "coinReward": 320,
       "status": 0
     },
     {
       "nameRequester": "William",
       "majorRequester": "Gardener",
-      "itemRequest": "Grape",
-      "amountRequest": 4,
-      "coinReward": 20,
+      "itemRequest": "Tomato",
+      "amountRequest": 30,
+      "coinReward": 360,
       "status": 0
     },
     {
-      "nameRequester": "Ava",
-      "majorRequester": "Candy Maker",
-      "itemRequest": "Apple",
-      "amountRequest": 6,
-      "coinReward": 25,
+      "nameRequester": "Aiden",
+      "majorRequester": "Chef",
+      "itemRequest": "Rice",
+      "amountRequest": 50,
+      "coinReward": 400,
       "status": 0
     },
     {
-      "nameRequester": "James",
-      "majorRequester": "Baker",
-      "itemRequest": "GrapeCandy",
-      "amountRequest": 4,
-      "coinReward": 65,
+      "nameRequester": "Grace",
+      "majorRequester": "Farmer",
+      "itemRequest": "Tomato",
+      "amountRequest": 25,
+      "coinReward": 300,
       "status": 0
     },
     {
-      "nameRequester": "Mia",
-      "majorRequester": "Carpenter",
+      "nameRequester": "David",
+      "majorRequester": "Builder",
       "itemRequest": "Wood",
-      "amountRequest": 6,
-      "coinReward": 35,
+      "amountRequest": 10,
+      "coinReward": 150,
       "status": 0
     },
     {
-      "nameRequester": "Benjamin",
-      "majorRequester": "Fammer",
-      "itemRequest": "Grape",
-      "amountRequest": 6,
-      "coinReward": 30,
-      "status": 0
-    },
-    {
-      "nameRequester": "Ethan",
-      "majorRequester": "Mouse",
-      "itemRequest": "AppleCandy",
-      "amountRequest": 4,
-      "coinReward": 40,
-      "status": 0
-    },
-    {
-      "nameRequester": "Evelyn",
-      "majorRequester": "Thief",
-      "itemRequest": "Wood",
-      "amountRequest": 8,
-      "coinReward": 55,
-      "status": 0
-    },
-    {
-      "nameRequester": "Logan",
+      "nameRequester": "Eva",
       "majorRequester": "Gardener",
-      "itemRequest": "Grape",
-      "amountRequest": 3,
-      "coinReward": 20,
-      "status": 0
-    },
-    {
-      "nameRequester": "Harper",
-      "majorRequester": "Candy Maker",
       "itemRequest": "Apple",
-      "amountRequest": 12,
-      "coinReward": 45,
+      "amountRequest": 15,
+      "coinReward": 150,
       "status": 0
     },
     {
-      "nameRequester": "Mason",
-      "majorRequester": "Baker",
+      "nameRequester": "Jack",
+      "majorRequester": "Thief",
       "itemRequest": "GrapeCandy",
-      "amountRequest": 5,
-      "coinReward": 70,
+      "amountRequest": 6,
+      "coinReward": 240,
       "status": 0
     },
     {
-      "nameRequester": "Amelia",
-      "majorRequester": "Carpenter",
+      "nameRequester": "Ella",
+      "majorRequester": "Candy Maker",
+      "itemRequest": "AppleCandy",
+      "amountRequest": 5,
+      "coinReward": 150,
+      "status": 0
+    },
+    {
+      "nameRequester": "Ryan",
+      "majorRequester": "Fisherman",
+      "itemRequest": "Rice",
+      "amountRequest": 60,
+      "coinReward": 480,
+      "status": 0
+    },
+    {
+      "nameRequester": "Nora",
+      "majorRequester": "Chef",
+      "itemRequest": "Honey",
+      "amountRequest": 10,
+      "coinReward": 250,
+      "status": 0
+    },
+    {
+      "nameRequester": "Sophie",
+      "majorRequester": "Gardener",
+      "itemRequest": "Tomato",
+      "amountRequest": 35,
+      "coinReward": 420,
+      "status": 0
+    },
+    {
+      "nameRequester": "Leo",
+      "majorRequester": "Builder",
       "itemRequest": "Wood",
-      "amountRequest": 4,
-      "coinReward": 30,
+      "amountRequest": 20,
+      "coinReward": 300,
       "status": 0
     }
   ]

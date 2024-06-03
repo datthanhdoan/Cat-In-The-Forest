@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEditor.EventSystems;
 using Random = UnityEngine.Random;
-using Unity.VisualScripting;
 
 public class ChickenMoverment : Subject
 {

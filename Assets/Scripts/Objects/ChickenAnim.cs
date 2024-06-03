@@ -1,4 +1,3 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class ChickenAnim : MonoBehaviour, IObserver
