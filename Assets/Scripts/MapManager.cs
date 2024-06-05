@@ -1,8 +1,10 @@
+using System;
 using NavMeshPlus.Components;
 using UnityEngine;
 
 public class MapManager : GenericSingleton<MapManager>
 {
+    public static event Action<int> OnLevelChange;
     public RegionData _regionData { get; private set; }
     public GameObject region;
     private int level = 1; // default level
@@ -29,6 +31,7 @@ public class MapManager : GenericSingleton<MapManager>
         };
 
         UpdateRegions(level);
+        OnLevelChange?.Invoke(level);
     }
     public int GetLevel() => level;
 

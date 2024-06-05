@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Trader : Clicker
+public class Shop : Clicker
 {
     private int _maxItem;
     private int _diamondAward;
