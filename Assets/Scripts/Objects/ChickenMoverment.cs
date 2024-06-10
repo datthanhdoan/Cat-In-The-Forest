@@ -9,13 +9,16 @@ public class ChickenMoverment : Subject
     private int _maxHunger = 100;
     private int _hungerLevel = 0;
     private int _eatThreshold = 30; // GO TO EAT
-    private int _hungerLimit = 5; // GO TO HELL 
+    private int _hungerLimit = 5; // Ăn vạ =))
+
     private NavMeshAgent _agent;
     private ChickenState _currentState = ChickenState.Idle;
     private ChickenState _previousState = ChickenState.Idle;
+
     public ChickenState CurrentState => _currentState;
     private Vector3 _targetPos;
     public Vector3 TargetPos => _targetPos;
+
     [SerializeField] private Pasture _pasture;
     [SerializeField] private Troung _trough;
 

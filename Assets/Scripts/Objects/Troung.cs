@@ -30,18 +30,24 @@ public class Troung : MonoBehaviour
         _amountText.text = (_troughCapacity - _amountToFull).ToString() + "/" + _troughCapacity;
     }
 
+    // ON CLICK
     public void FillTrough()
     {
         int riceAmout = _rM.GetAmountOfItem(ItemType.Rice);
-        if (riceAmout >= _amountToFull)
+
+        if (riceAmout > 0)
         {
-            _state = State.HasRice;
-            _currentFill = _troughCapacity;
-            _rM.SetAmoutItem(ItemType.Rice, riceAmout - _amountToFull);
+            if (riceAmout <= _amountToFull)
+            {
+                _currentFill = _currentFill + riceAmout;
+                _rM.SetAmoutItem(ItemType.Rice, 0);
+            }
+            else
+            {
+                _currentFill = _currentFill + _amountToFull;
+                _rM.SetAmoutItem(ItemType.Rice, riceAmout - _amountToFull);
+            }
             UpdateAmountToFull();
-        }
-        else
-        {
             _state = State.HasRice;
         }
         OnTroughStateChange?.Invoke(_state);
