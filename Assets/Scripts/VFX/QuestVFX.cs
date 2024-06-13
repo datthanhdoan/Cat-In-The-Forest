@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class QuestVFX : MonoBehaviour
 {
@@ -8,12 +9,16 @@ public class QuestVFX : MonoBehaviour
     [SerializeField] private GameObject _exclamationMark;
     private bool _isTableDesShow = false;
     private bool _isQuestShow = false;
+    private PlayerInputAction _inputActions;
 
     private RectTransform _rectTransform;
 
     private void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
+        _inputActions = new PlayerInputAction();
+        _inputActions.UI.QuestTableDecription.performed += ToggleTableDescription;
+        _inputActions.Enable();
     }
 
 
@@ -92,7 +97,7 @@ public class QuestVFX : MonoBehaviour
         });
     }
 
-    public void ToggleTableDescription()
+    public void ToggleTableDescription(InputAction.CallbackContext context)
     {
         if (_isTableDesShow)
         {

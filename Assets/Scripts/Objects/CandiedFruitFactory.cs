@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CandiedFruitFactory : MonoBehaviour
+public class CandiedFruitFactory : MonoBehaviour, IInteractive
 {
     public int fruitRequired = 1;
     public int woodRequired = 1;
@@ -137,6 +137,7 @@ public class CandiedFruitFactory : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            other.GetComponent<Player>().SetInteractiveObject(this);
         }
     }
 
@@ -145,6 +146,10 @@ public class CandiedFruitFactory : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            if (other.GetComponent<Player>().GetInteractiveObject().Equals(this))
+            {
+                other.GetComponent<Player>().SetInteractiveObject(null);
+            }
         }
     }
     public void OnClickedButton()
@@ -175,4 +180,20 @@ public class CandiedFruitFactory : MonoBehaviour
 
     }
 
+    public void OnInteractive()
+    {
+        if (_itemPopup != null && _itemPopup.gameObject.activeSelf == true)
+        {
+            _itemPopup.OnClick();
+        }
+    }
+
+    public void OnButtonInteractive()
+    {
+        OnClickedButton();
+        if (TryGetComponent(out CandiedFactoryVFX candiedFactoryVFX))
+        {
+            candiedFactoryVFX.AnimButton();
+        }
+    }
 }

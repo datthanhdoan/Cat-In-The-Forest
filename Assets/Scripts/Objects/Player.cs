@@ -1,16 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public enum PlayerState
 {
     Idle,
     Move
-
 }
 
 public class Player : GenericSingleton<Player>
@@ -19,85 +16,175 @@ public class Player : GenericSingleton<Player>
     public PlayerState playerState { get; private set; } = PlayerState.Idle;
     private PlayerState previousState = PlayerState.Idle;
     [NonSerialized] public NavMeshAgent _agent;
-    private InputManager _inputManager;
 
     [SerializeField] float _speed = 5;
 
-    private Vector3 _previousPosition;
-    private Vector3 _currentPosition;
+    private PlayerInputAction _inputActions;
+    private Vector2 _moveInput;
+    private Vector3 _clickPosition;
+    private Vector3 _targetVector;
+    private bool _isGamepadMove = false;
+    private bool _isClickMove = false;
+
+    // target object
+    public IInteractive interactiveObject;
 
     void Start()
     {
-        _inputManager = InputManager.Instance;
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _agent.speed = _speed;
         OnPlayerStateChanged?.Invoke(playerState);
+
+        _inputActions = new PlayerInputAction();
+        _inputActions.Player.Move.performed += OnMove;
+        _inputActions.Player.Move.canceled += OnMove;
+
+        _inputActions.Player.Interactive.performed += OnInteractive;
+        _inputActions.Player.ButtonInteractive.performed += OnButtonInteractive;
+        // _inputActions.Player.Click.performed += OnClick;
+        _inputActions.Enable();
+    }
+
+    private void OnButtonInteractive(InputAction.CallbackContext context)
+    {
+        Debug.Log("ButtonInteractive");
+        if (interactiveObject != null)
+        {
+            interactiveObject.OnButtonInteractive();
+        }
+    }
+
+    private void OnInteractive(InputAction.CallbackContext context)
+    {
+        Debug.Log("Interactive");
+        if (interactiveObject != null)
+        {
+            interactiveObject.OnInteractive();
+        }
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        _moveInput = context.ReadValue<Vector2>();
+        _isGamepadMove = _moveInput != Vector2.zero;
+    }
+
+    public void SetInteractiveObject(IInteractive interactive)
+    {
+        interactiveObject = interactive;
+    }
+
+    public IInteractive GetInteractiveObject()
+    {
+        return interactiveObject;
+    }
+
+    // private void OnClick(InputAction.CallbackContext context)
+    // {
+    //     if (Mouse.current != null)
+    //     {
+    //         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+    //         if (Physics.Raycast(ray, out RaycastHit hit))
+    //         {
+    //             _clickPosition = hit.point;
+    //             _isClickMove = true;
+    //         }
+    //     }
+    // }
+
+
+    private void OnClick(Vector3 clickPosition)
+    {
+        _clickPosition = clickPosition;
+        _isClickMove = true;
     }
 
     private void FixedUpdate()
     {
-        // If player clicks on the screen 
-        if (_previousPosition != _currentPosition)
+        bool isMoving = false;
+
+        if (_isClickMove)
         {
-            // Move player to the clicked position
-            DoMove();
-            _previousPosition = _currentPosition;
+            // Di chuyển đến vị trí được click
+            _agent.SetDestination(_clickPosition);
+            _isClickMove = false;
+            isMoving = true;
         }
-        // If player is not moving
+        else if (_isGamepadMove)
+        {
+            // Di chuyển bằng gamepad
+            Vector3 inputVector = new Vector3(_moveInput.x, _moveInput.y, 0);
+            Vector3 targetPosition = transform.position + inputVector * _speed * 7 * Time.fixedDeltaTime;
 
-        UpdatePlayerState();
+            if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
+            {
+                _agent.SetDestination(hit.position);
+                isMoving = true;
+            }
+        }
 
-        // Only invoke the event if the state has actually changed
+        UpdatePlayerState(isMoving);
         DetectStateChange();
     }
-
     private void DetectStateChange()
     {
         if (playerState != previousState)
         {
             OnPlayerStateChanged?.Invoke(playerState);
             previousState = playerState;
-            // Debug.Log("State changed to: " + playerState);
         }
     }
 
-    public void UpdatePlayerState()
+    public void UpdatePlayerState(bool isMoving)
     {
-        if (_agent.remainingDistance < 0.1f)
+        if (_agent.enabled)
         {
-            playerState = PlayerState.Idle;
+            if (_agent.remainingDistance < 0.1f)
+            {
+                playerState = PlayerState.Idle;
+            }
+            else
+            {
+                playerState = PlayerState.Move;
+            }
         }
         else
         {
-            playerState = PlayerState.Move;
+            playerState = isMoving ? PlayerState.Move : PlayerState.Idle;
         }
-    }
-
-    public void OnPlayerClickInMap(Vector3 clickPos)
-    {
-        _currentPosition = clickPos;
     }
 
     private void OnEnable()
     {
-        InputManager.OnClick += OnPlayerClickInMap;
-    }
-    private void OnDisable()
-    {
-        InputManager.OnClick -= OnPlayerClickInMap;
+        if (_inputActions != null)
+        {
+            _inputActions.Player.Move.performed += OnMove;
+            _inputActions.Player.Move.canceled += OnMove;
+            // _inputActions.Player.Click.performed += OnClick;
+            _inputActions.Enable();
+        }
+
+        InputManager.OnClick += OnClick;
     }
 
-    public void DoMove()
+    private void OnDisable()
     {
-        _agent.SetDestination(_currentPosition);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        if (_inputActions != null)
+        {
+            _inputActions.Player.Move.performed -= OnMove;
+            _inputActions.Player.Move.canceled -= OnMove;
+            // _inputActions.Player.Click.performed -= OnClick;
+            _inputActions.Disable();
+        }
+
+        InputManager.OnClick -= OnClick;
     }
+
     public void PlayerSpeed(float newSpeed)
     {
         _speed = newSpeed;
         _agent.speed = _speed;
     }
-
 }

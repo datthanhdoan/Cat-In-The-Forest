@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 
 /// <summary>
@@ -28,6 +29,7 @@ public class QuestManager : MonoBehaviour
     private float _timeToNextQuest = 0;
     private bool _testIsSetQuest = false;
     private VisualStatus _visualStatus = VisualStatus.Show;
+    private PlayerInputAction _inputActions;
     [SerializeField] private ResourceManager _rM; // Import in Unity Editor
 
     // Item Wanted
@@ -46,6 +48,12 @@ public class QuestManager : MonoBehaviour
 
     [field: SerializeField] public QuestData _questInfoList { get; private set; }
 
+    private void Start()
+    {
+        _inputActions = new PlayerInputAction();
+        _inputActions.UI.ClaimAward.performed += CheckAward;
+        _inputActions.Enable();
+    }
 
 
     private void LoadData()
@@ -91,7 +99,7 @@ public class QuestManager : MonoBehaviour
 
 
 
-    public void CheckAward()
+    public void CheckAward(InputAction.CallbackContext context)
     {
         var curIndex = _questInfoList.currentQuestIndex;
 
@@ -200,5 +208,7 @@ public class QuestManager : MonoBehaviour
     {
         DataManager.OnDataLoaded -= LoadData;
         ResourceManager.OnResourceChanged -= CheckResourceToShowQuest;
+        _inputActions.UI.ClaimAward.performed -= CheckAward;
+        _inputActions.Dispose();
     }
 }

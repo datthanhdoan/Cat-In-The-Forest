@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class Troung : MonoBehaviour
+public class Troung : MonoBehaviour, IInteractive
 {
     public static event Action<State> OnTroughStateChange;
     private int _troughCapacity = 100;
@@ -64,6 +64,25 @@ public class Troung : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             UpdateAmountToFull();
+            other.GetComponent<Player>().SetInteractiveObject(this);
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (other.GetComponent<Player>().GetInteractiveObject().Equals(this))
+            {
+                other.GetComponent<Player>().SetInteractiveObject(null);
+            }
+        }
+    }
+
+    public void OnInteractive() { }
+
+    public void OnButtonInteractive()
+    {
+        FillTrough();
     }
 }

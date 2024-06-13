@@ -1,7 +1,8 @@
 
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UIElements;
-public class Tree : Clicker
+public class Tree : Clicker, IInteractive
 {
     private bool _hasFruit = true;
     private float _timeToSpawnTimer = 0f;
@@ -73,6 +74,17 @@ public class Tree : Clicker
         }
     }
 
+    protected void HandelGamepadClick()
+    {
+        if (_playerInRange && _hasFruit)
+        {
+            _hasBeenClicked = false;
+            TakeFruit();
+            // Update number of fruit 
+            UpdateFruit();
+        }
+    }
+
 
     public void SpawnFruit()
     {
@@ -110,16 +122,31 @@ public class Tree : Clicker
         if (other.CompareTag("Player"))
         {
             _playerInRange = true;
+            _player.SetInteractiveObject(this);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        Debug.Log("OnTriggerExit2D : " + other.gameObject.name);
         if (other.CompareTag("Player"))
         {
             _playerInRange = false;
+            if (other.TryGetComponent(out Player player))
+            {
+                if (player.GetInteractiveObject().Equals(this))
+                {
+                    player.SetInteractiveObject(null);
+                }
+
+            }
         }
     }
 
+    public void OnInteractive()
+    {
+        HandelGamepadClick();
+    }
 
+    public void OnButtonInteractive() { }
 }

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class BeeHive : MonoBehaviour, IObserver
+public class BeeHive : MonoBehaviour, IObserver, IInteractive
 {
 
     public int _floralHoneyRequired { get; private set; } = 10;
@@ -71,6 +71,8 @@ public class BeeHive : MonoBehaviour, IObserver
         return _floralHoneyCollected >= _floralHoneyRequired;
     }
 
+
+
     public void OnNotify()
     {
         // when the player clicks take honey
@@ -82,5 +84,32 @@ public class BeeHive : MonoBehaviour, IObserver
         }
     }
 
+    public void OnInteractive()
+    {
+        if (_honeyState == HoneyState.EnoughHoney)
+        {
+            _itemPopup.OnClick();
+        }
+    }
 
+    public void OnButtonInteractive() { }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<Player>().SetInteractiveObject(this);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (other.GetComponent<Player>().GetInteractiveObject().Equals(this))
+            {
+                other.GetComponent<Player>().SetInteractiveObject(null);
+            }
+        }
+    }
 }

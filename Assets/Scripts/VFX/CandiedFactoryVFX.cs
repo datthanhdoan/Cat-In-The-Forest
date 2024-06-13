@@ -7,8 +7,8 @@ public class CandiedFactoryVFX : MonoBehaviour
     [SerializeField] CanvasGroup _canvasGroup;
     [SerializeField] RectTransform _resourceTrans;
     [SerializeField] RectTransform _buttonTrans;
-    Vector3 _originalButtonTrans => _buttonTrans.position; // Changed here
-
+    Vector3 _originalButtonTrans; // Changed here
+    Vector3 OriginalButtonTrans { get => _originalButtonTrans; }
     [SerializeField] private SpriteRenderer _spriteRenderer;
     private Player _player;
 
@@ -19,8 +19,8 @@ public class CandiedFactoryVFX : MonoBehaviour
         _player = Player.Instance;
         _candiedFruitFactory = GetComponent<CandiedFruitFactory>();
         _resourceTrans.localPosition = new Vector3(0, -_gap, 0);
-        _buttonTrans.position = _originalButtonTrans; // Changed here
         _canvasGroup.alpha = 0;
+        _originalButtonTrans = _buttonTrans.position;
     }
     enum State
     {
@@ -51,8 +51,7 @@ public class CandiedFactoryVFX : MonoBehaviour
         else
         {
             _canvasGroup.interactable = false;
-            _buttonTrans.position = _originalButtonTrans; // Changed here
-            _buttonTrans.DOShakeAnchorPos(0.5f, 2, 90, 90, false, true).onComplete += () =>
+            _buttonTrans.DOShakeAnchorPos(0.5f, 2, 90, 90, false, true).SetEase(Ease.InOutElastic).onComplete += () =>
             {
                 _canvasGroup.interactable = true;
             };
