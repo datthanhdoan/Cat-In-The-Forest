@@ -9,12 +9,11 @@ public class CandiedFruitFactory : MonoBehaviour, IInteractive
 {
     public int fruitRequired = 1;
     public int woodRequired = 1;
-    private readonly float _timeToCook = 12f;
+    private readonly float _timeToCook = 12f; // default 12 seconds
     private float _timer = 0;
     public ItemType itemTypeInput; // select in Unity inspector
     public ItemType itemTypeResult; // select in Unity inspector
     private Item itemInput, wood, itemResult;
-    private ItemPopup _itemPopup = null;
     private ResourceManager _rM;
     private Player _player;
 
@@ -39,7 +38,7 @@ public class CandiedFruitFactory : MonoBehaviour, IInteractive
 
     [SerializeField] CanvasGroup _canvasGroup;
 
-    [SerializeField] private ItemPopupSpawner _itemPopupSpawner;
+    [SerializeField] private ItemPopup _itemPopup;
 
 
     private void Start()
@@ -67,6 +66,7 @@ public class CandiedFruitFactory : MonoBehaviour, IInteractive
         _slider.value = 0;
         _slider.gameObject.SetActive(false);
 
+        _itemPopup.gameObject.SetActive(false);
         // Set the button image
         _buttonImage.sprite = _imageForButton[0]; // 0 means X image
         Debug.Log("CandiedFruitFactory Start - Item Popup GO : " + _itemPopup);
@@ -100,21 +100,13 @@ public class CandiedFruitFactory : MonoBehaviour, IInteractive
             _canvasGroup.interactable = true;
 
             // spawn the item popup
-            if (_itemPopup == null)
+            if (_itemPopup.gameObject.activeSelf == false)
             {
-                _itemPopup = _itemPopupSpawner._pool.Get();
-                _itemPopup.SetTransformParent(this.transform);
+                _itemPopup.gameObject.SetActive(true);
+                _itemPopup.SetTransformParentAndShow(this.transform);
                 _itemPopup.SetItem(itemTypeResult, 1);
             }
-            else if (_itemPopup != null && _itemPopup.gameObject.activeSelf != false)
-            {
-                _itemPopup.OnClick();
-                _itemPopup = null;
 
-                _itemPopup = _itemPopupSpawner._pool.Get();
-                _itemPopup.SetTransformParent(transform);
-                _itemPopup.SetItem(itemTypeResult, 1);
-            }
 
             // reset the timer
             _timer = 0;
@@ -162,6 +154,11 @@ public class CandiedFruitFactory : MonoBehaviour, IInteractive
 
             // start cooking
             _isCooking = true;
+
+            if (_itemPopup.gameObject.activeSelf == true)
+            {
+                _itemPopup.OnClick();
+            }
         }
     }
     public void CheckConditions()

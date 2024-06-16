@@ -128,17 +128,20 @@ public class Tree : Clicker, IInteractive
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("OnTriggerExit2D : " + other.gameObject.name);
-        if (other.CompareTag("Player"))
+        if (other != null && other.gameObject != null)
         {
-            _playerInRange = false;
-            if (other.TryGetComponent(out Player player))
+            Debug.Log("OnTriggerExit2D : " + other.gameObject.name);
+            if (other.CompareTag("Player"))
             {
-                if (player.GetInteractiveObject().Equals(this))
+                _playerInRange = false;
+                if (other.TryGetComponent(out Player player))
                 {
-                    player.SetInteractiveObject(null);
+                    var interactiveObject = player.GetInteractiveObject();
+                    if (interactiveObject != null && interactiveObject.Equals(this))
+                    {
+                        player.SetInteractiveObject(null);
+                    }
                 }
-
             }
         }
     }

@@ -9,26 +9,19 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// This file is still in testing phase
 /// </summary>
-
-public enum Status
-{
-    COMPLETED = 1,
-    INCOMPLETE = 0
-}
-
-public enum VisualStatus
-{
-    Show,
-    Hide
-}
 public class QuestManager : MonoBehaviour
 {
-    public static event Action<VisualStatus> NotifyStatusChanged;
-    public static event Action<bool> OnHasBeenViewedChange;
-    private float _timerTesting = 0;
-    private float _timeToNextQuest = 0;
-    private bool _testIsSetQuest = false;
-    private VisualStatus _visualStatus = VisualStatus.Show;
+    public enum EachQuestStatus
+    {
+        NOTCCOMPLETED = 0,
+        COMPLETED = 1
+    }
+    public enum VisualStatus
+    {
+        Show,
+        Hide
+    }
+    public event Action<VisualStatus> OnVisualQuestChanged;
     private PlayerInputAction _inputActions;
     [SerializeField] private ResourceManager _rM; // Import in Unity Editor
 
@@ -48,14 +41,6 @@ public class QuestManager : MonoBehaviour
 
     [field: SerializeField] public QuestData _questInfoList { get; private set; }
 
-    private void Start()
-    {
-        _inputActions = new PlayerInputAction();
-        _inputActions.UI.ClaimAward.performed += CheckAward;
-        _inputActions.Enable();
-    }
-
-
     private void LoadData()
     {
         int curIndex = _questInfoList.currentQuestIndex;
@@ -63,7 +48,7 @@ public class QuestManager : MonoBehaviour
         var curQuest = _questInfoList.questList[curIndex];
         SetQuestInfo(curQuest.nameRequester, curQuest.majorRequester, curQuest.itemRequest, curQuest.amountRequest, curQuest.coinReward);
 
-        // wait for 1 second to show quest
+        // wait seconds to show quest
         float seconds = 3f;
         StartCoroutine(ShowQuest(seconds));
     }
@@ -71,9 +56,7 @@ public class QuestManager : MonoBehaviour
     IEnumerator ShowQuest(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        _visualStatus = VisualStatus.Show;
-        NotifyStatusChanged?.Invoke(_visualStatus);
-        OnHasBeenViewedChange?.Invoke(_questInfoList.hasBeenViewed);
+        OnVisualQuestChanged?.Invoke(VisualStatus.Show);
     }
 
     IEnumerator UpdateQuest(float seconds)
@@ -90,16 +73,14 @@ public class QuestManager : MonoBehaviour
             SetQuestInfo(curQuest.nameRequester, curQuest.majorRequester, curQuest.itemRequest, curQuest.amountRequest, curQuest.coinReward);
 
             // Thông báo tới VFX là quest cần show
-            _visualStatus = VisualStatus.Show;
-            NotifyStatusChanged?.Invoke(_visualStatus);
-            OnHasBeenViewedChange?.Invoke(false);
+            OnVisualQuestChanged?.Invoke(VisualStatus.Show);
         }
 
     }
 
 
 
-    public void CheckAward(InputAction.CallbackContext context)
+    public void CheckAward()
     {
         var curIndex = _questInfoList.currentQuestIndex;
 
@@ -121,11 +102,11 @@ public class QuestManager : MonoBehaviour
             _rM.SetCoin(coinAfter);
 
             // cập nhật status của quest đó 
-            _questInfoList.questList[curIndex].status = (int)Status.COMPLETED;
+            _questInfoList.questList[curIndex].status = (int)EachQuestStatus.COMPLETED;
+
 
             // thông báo tới VFX là quest cần hide
-            _visualStatus = VisualStatus.Hide;
-            NotifyStatusChanged?.Invoke(_visualStatus);
+            OnVisualQuestChanged?.Invoke(VisualStatus.Hide);
             // đếm ngược thời gian để cập nhật quest mới và cập nhật quest index
 
             float timeToNextQuest = 10f;
@@ -140,39 +121,14 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    private void CheckResourceToShowQuest()
-    {
-        // TODO : Can sua lai dieu kien de show quest
-        // if (_visualStatus == VisualStatus.Hide)
-        // {
-        //     var curIndex = _questInfoList.currentQuestIndex;
-        //     var itemWanted = _questInfoList.questList[curIndex].itemRequest;
-        //     var amountWanted = _questInfoList.questList[curIndex].amountRequest;
-        //     var coinReward = _questInfoList.questList[curIndex].coinReward;
-
-        //     Item item = _rM.GetItem(itemWanted);
-        //     ItemType itemType = item.type;
-
-        //     if (_rM.GetAmountOfItem(itemType) >= amountWanted)
-        //     {
-        //         _visualStatus = VisualStatus.Show;
-        //         NotifyStatusChanged?.Invoke(_visualStatus);
-        //         OnHasBeenViewedChange?.Invoke(false);
-        //     }
-        // }
-    }
-
-
     public void OnClickAvatar()
     {
         _questInfoList.hasBeenViewed = true;
-        OnHasBeenViewedChange?.Invoke(true);
     }
 
     public void OnClickCloseButton()
     {
-        _visualStatus = VisualStatus.Hide;
-        NotifyStatusChanged?.Invoke(_visualStatus);
+        OnVisualQuestChanged?.Invoke(VisualStatus.Hide);
     }
 
 
@@ -201,14 +157,23 @@ public class QuestManager : MonoBehaviour
     private void OnEnable()
     {
         DataManager.OnDataLoaded += LoadData;
-        ResourceManager.OnResourceChanged += CheckResourceToShowQuest;
+        _inputActions = new PlayerInputAction();
+        _inputActions.UI.ClaimAward.performed += OnClaimAwardGamePad;
+        _inputActions.Enable();
     }
 
     private void OnDisable()
     {
         DataManager.OnDataLoaded -= LoadData;
-        ResourceManager.OnResourceChanged -= CheckResourceToShowQuest;
-        _inputActions.UI.ClaimAward.performed -= CheckAward;
+        _inputActions.UI.ClaimAward.performed -= OnClaimAwardGamePad;
         _inputActions.Dispose();
     }
+
+    #region Gamepad
+
+    public void OnClaimAwardGamePad(InputAction.CallbackContext context)
+    {
+        CheckAward();
+    }
+    #endregion
 }

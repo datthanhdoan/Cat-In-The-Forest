@@ -1,22 +1,24 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Pool;
 using TMPro;
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class ItemPopup : MonoBehaviour, IItem
 {
+    public int _amount { get; private set; }
+    private float duration = 1;
+    private float distance = 1;
+    private Vector3 _originalPosition;
     private List<IObserver> _observers = new List<IObserver>();
     public ItemType _itemType { get; private set; }
-    public int _amount { get; private set; }
     private ResourceManager _resourceManager;
-    private ObjectPool<ItemPopup> _pool;
+    private Transform _transformParent;
     [SerializeField] private TextMeshProUGUI _amountText;
 
     [SerializeField] private Image _itemImage;
-    private Transform _transformParent;
 
     public void AddObserver(IObserver observer)
     {
@@ -57,14 +59,11 @@ public class ItemPopup : MonoBehaviour, IItem
                 observer.OnNotify();
             }
         }
-        GetComponent<IShowHide>().Hide(_transformParent).OnComplete(() =>
-        {
-            _pool.Release(this);
-        });
-        Debug.Log("Update resource " + _itemType + _amount);
+        GetComponent<IShowHide>().Hide(this.transform, distance, duration).OnComplete(
+            () => { gameObject.SetActive(false); });
     }
 
-    public void SetTransformParent(Transform transformParent)
+    public void SetTransformParentAndShow(Transform transformParent)
     {
         this._transformParent = transformParent;
         ShowGO();
@@ -72,12 +71,10 @@ public class ItemPopup : MonoBehaviour, IItem
 
     public void ShowGO()
     {
-        GetComponent<IShowHide>().Show(this._transformParent);
+
+        GetComponent<IShowHide>().Show(this.transform, distance, duration);
         transform.position = this._transformParent.position;
     }
-    public void SetPool(ObjectPool<ItemPopup> pool)
-    {
-        _pool = pool;
-    }
+
 
 }

@@ -11,10 +11,9 @@ public class BeeHive : MonoBehaviour, IObserver, IInteractive
     public float _timerToSpawnBee { get; private set; } = 4f;
     private HoneyState _honeyState = HoneyState.NotEnoughHoney;
     private ResourceManager _rM;
-    private ItemPopup _itemPopup;
+    [SerializeField] private ItemPopup _itemPopup;
     [SerializeField] private Transform _flower;
     [SerializeField] private Transform _bee;
-    [SerializeField] private ItemPopupSpawner _itemPopupSpawner;
 
 
     public enum HoneyState
@@ -24,6 +23,8 @@ public class BeeHive : MonoBehaviour, IObserver, IInteractive
     }
     private void Start()
     {
+        _itemPopup.gameObject.SetActive(false);
+
         _rM = ResourceManager.Instance;
         float randomTime = Random.Range(5, 10);
         if (!HasEnoughFloralHoney())
@@ -40,7 +41,7 @@ public class BeeHive : MonoBehaviour, IObserver, IInteractive
         if (HasEnoughFloralHoney())
         {
             _honeyState = HoneyState.EnoughHoney;
-            SpawnItemPopup();
+            ActiveItemPopup();
         }
         else
         {
@@ -49,11 +50,11 @@ public class BeeHive : MonoBehaviour, IObserver, IInteractive
         }
     }
 
-    private void SpawnItemPopup()
+    private void ActiveItemPopup()
     {
-        _itemPopup = _itemPopupSpawner._pool.Get();
+        _itemPopup.gameObject.SetActive(true);
         _itemPopup.AddObserver(this);
-        _itemPopup.SetTransformParent(this.transform);
+        _itemPopup.SetTransformParentAndShow(this.transform);
 
         int amount = 1;
         _itemPopup.SetItem(ItemType.Honey, amount);

@@ -5,47 +5,134 @@ using UnityEngine.InputSystem;
 
 public class QuestVFX : MonoBehaviour
 {
+    private bool _isTableDesShow = false;
+    private bool _isTableTransition = false;
+    private bool _isQuestShow = false;
+    private bool _isQuestTransition = false;
+    private bool _isQuestHasBeenViewed = false;
+    private PlayerInputAction _inputActions;
+    private RectTransform _rectTransform;
+    [SerializeField] private QuestManager _questManager;
+
     [SerializeField] private RectTransform _tableDescription;
     [SerializeField] private GameObject _exclamationMark;
-    private bool _isTableDesShow = false;
-    private bool _isQuestShow = false;
-    private PlayerInputAction _inputActions;
-
-    private RectTransform _rectTransform;
 
     private void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
+    }
+
+    #region Logic for VFX
+    private void HandelVisual(QuestManager.VisualStatus status)
+    {
+        if (!_isQuestTransition)
+        {
+            switch (status)
+            {
+                case QuestManager.VisualStatus.Show:
+                    ShowQuest();
+                    _isQuestHasBeenViewed = true;
+                    break;
+                case QuestManager.VisualStatus.Hide:
+                    HideQuest();
+                    _isQuestHasBeenViewed = false;
+                    break;
+            }
+
+            ExclamationMark__HandelStatus(_isQuestHasBeenViewed);
+        }
+    }
+
+
+    public void ToggleTableDescriptionGamePad(InputAction.CallbackContext context)
+    {
+        ToggleTableDescription();
+    }
+
+    public void ToggleTableDescription()
+    {
+        if (_isTableTransition) return;
+        if (!_isQuestShow) return;
+
+        if (!_isQuestHasBeenViewed)
+        {
+            _isQuestHasBeenViewed = true;
+            ExclamationMark__HandelStatus(_isQuestHasBeenViewed);
+        }
+
+        if (_isTableDesShow)
+        {
+            HideTableDescription();
+        }
+        else
+        {
+            ShowTableDescription();
+        }
+    }
+
+
+
+
+    private void ExclamationMark__HandelStatus(bool hasBeenViewed)
+    {
+        if (hasBeenViewed)
+        {
+            _exclamationMark.SetActive(false);
+        }
+        else
+        {
+            _exclamationMark.SetActive(true);
+        }
+    }
+    private void OnEnable()
+    {
+        _questManager.OnVisualQuestChanged += HandelVisual;
+
+        // input
         _inputActions = new PlayerInputAction();
-        _inputActions.UI.QuestTableDecription.performed += ToggleTableDescription;
+        _inputActions.UI.QuestTableDecription.performed += ToggleTableDescriptionGamePad;
         _inputActions.Enable();
     }
-
-
-    private void ControlShowHideQuest(VisualStatus status)
+    private void OnDisable()
     {
-        if (status == VisualStatus.Show)
-        {
-            OnShow();
-        }
-        if (status == VisualStatus.Hide)
-        {
-            OnHide();
-        }
+        _questManager.OnVisualQuestChanged -= HandelVisual;
+
+        // input
+        _inputActions.UI.QuestTableDecription.performed -= ToggleTableDescriptionGamePad;
+        _inputActions.Disable();
     }
-    public void OnShow()
+    #endregion
+
+    #region VFX
+
+    public void ShowQuest()
     {
-        _rectTransform.DOAnchorPosX(30, 0.5f).SetEase(Ease.OutBack);
+        // set transition to true
+        _isQuestTransition = true;
+
+        _rectTransform.DOAnchorPosX(30, 0.5f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            // after show quest, set transition to false
+            _isQuestTransition = false;
+            _isQuestShow = true;
+        });
 
         var questCanvasGroup = GetComponent<CanvasGroup>();
         questCanvasGroup.DOFade(1, 0.5f).SetEase(Ease.OutBack);
 
-        _isQuestShow = true;
     }
 
-    public void OnHide()
+    public void HideQuest()
     {
-        _rectTransform.DOAnchorPosX(-30, 0.5f).SetEase(Ease.InBack);
+        // set transition to true
+        _isQuestTransition = true;
+
+        _rectTransform.DOAnchorPosX(-30, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            // after hide quest, set transition to false
+            _isQuestTransition = false;
+            _isQuestShow = false;
+        });
 
         var questCanvasGroup = GetComponent<CanvasGroup>();
         questCanvasGroup.DOFade(0, 0.5f).SetEase(Ease.InBack);
@@ -55,16 +142,16 @@ public class QuestVFX : MonoBehaviour
         {
             HideTableDescription();
         }
-
-        _isQuestShow = false;
-
     }
 
 
 
     public void ShowTableDescription()
     {
-        // _tableDescription.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutBack);
+        // set transition to true
+        _isTableTransition = true;
+
+        // control alpha of table description
         var tableCanvasGroup = _tableDescription.GetComponent<CanvasGroup>();
         tableCanvasGroup.alpha = 0;
 
@@ -78,12 +165,18 @@ public class QuestVFX : MonoBehaviour
             // sau khi show xong thì cho click vào bảng
             tableCanvasGroup.interactable = true;
             _isTableDesShow = true;
+
+            // set transition to false
+            _isTableTransition = false;
         });
 
     }
 
     public void HideTableDescription()
     {
+        // set transition to true
+        _isTableTransition = true;
+
         var tableCanvasGroup = _tableDescription.GetComponent<CanvasGroup>();
 
         // trong lúc đang hide thì không cho click vào bảng
@@ -94,41 +187,11 @@ public class QuestVFX : MonoBehaviour
             tableCanvasGroup.interactable = true;
             _tableDescription.gameObject.SetActive(false);
             _isTableDesShow = false;
+
+            // set transition to false
+            _isTableTransition = false;
         });
     }
 
-    public void ToggleTableDescription(InputAction.CallbackContext context)
-    {
-        if (_isTableDesShow)
-        {
-            HideTableDescription();
-        }
-        else
-        {
-            ShowTableDescription();
-        }
-    }
-
-
-    private void ExclamationMarkStatus(bool hasBeenViewed)
-    {
-        if (hasBeenViewed)
-        {
-            _exclamationMark.SetActive(false);
-        }
-        else
-        {
-            _exclamationMark.SetActive(true);
-        }
-    }
-    private void OnEnable()
-    {
-        QuestManager.NotifyStatusChanged += ControlShowHideQuest;
-        QuestManager.OnHasBeenViewedChange += ExclamationMarkStatus;
-    }
-    private void OnDisable()
-    {
-        QuestManager.NotifyStatusChanged -= ControlShowHideQuest;
-        QuestManager.OnHasBeenViewedChange -= ExclamationMarkStatus;
-    }
+    #endregion
 }
