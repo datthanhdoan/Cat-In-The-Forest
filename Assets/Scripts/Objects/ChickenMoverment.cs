@@ -56,7 +56,6 @@ public class ChickenMoverment : Subject
 
     private void GotoEat()
     {
-        Debug.Log(this.gameObject.name + " is going to eat");
         var riceAmountTaken = 4;
         _targetPos = _trough.transform.position;
         _agent.SetDestination(_targetPos);

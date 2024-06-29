@@ -51,7 +51,6 @@ public class ChickenAnim : MonoBehaviour, IObserver
 
     private void Flip()
     {
-        Debug.Log(transform.parent.name + "Flip");
         if (_chickenMoverment.TargetPos.x > transform.position.x && !_faceRight)
         {
             _faceRight = true;

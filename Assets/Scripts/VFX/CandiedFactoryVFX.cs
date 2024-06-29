@@ -22,16 +22,8 @@ public class CandiedFactoryVFX : MonoBehaviour
         _canvasGroup.alpha = 0;
         _originalButtonTrans = _buttonTrans.position;
     }
-    enum State
-    {
-        Show,
-        Hide
-    }
-    State _state = State.Hide;
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        _state = State.Show;
         ShowResource();
     }
 
@@ -39,7 +31,6 @@ public class CandiedFactoryVFX : MonoBehaviour
     {
 
         HideResource();
-        _state = State.Hide;
     }
 
     public void AnimButton()

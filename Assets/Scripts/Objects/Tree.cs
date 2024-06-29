@@ -1,16 +1,14 @@
-
-using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 public class Tree : Clicker, IInteractive
 {
     private bool _hasFruit = true;
     private float _timeToSpawnTimer = 0f;
     private bool _playerInRange = false;
     private int _stateOfTree;
-    private int _currentState = 1;
+    private int _currentState = 0; // Khởi tạo là 0 để phù hợp với mảng sprite
     private IEffect _effect;
-    private ResourceManager _rM;
+    private ResourceManager _resourceManager;
     private Player _player;
     [SerializeField] private float _timeToSpawn = 8f;
 
@@ -19,43 +17,61 @@ public class Tree : Clicker, IInteractive
     [SerializeField] protected SpriteRenderer _treeSprite;
     [SerializeField] protected ItemType _fruitType;
 
+    #region Init
     private void Start()
     {
-        _rM = ResourceManager.Instance;
+        InitializeComponents();
+        InitializeState();
+        UpdateSprite(_sprite.Length - 1);
+    }
+
+    private void InitializeComponents()
+    {
+        _resourceManager = ResourceManager.Instance;
         _player = Player.Instance;
         _effect = GetComponent<IEffect>();
-
-        _hasFruit = true;
-
-        _stateOfTree = _sprite.Length;
-
-        UpdateSprite(_sprite.Length - 1);
-
     }
+
+    private void InitializeState()
+    {
+        _hasFruit = true;
+        _stateOfTree = _sprite.Length;
+    }
+
+    #endregion
+
     protected override void Update()
     {
         base.Update();
         _timeToSpawnTimer = _hasFruit ? 0f : _timeToSpawnTimer + Time.deltaTime;
-        // if tree has more than 2 states 
-        if (_stateOfTree > 2 && !_hasFruit)
-        {
-            // eg if tree has 3 states , fraction of time to spawn fruit is 1/3 and so on
-            var timeFraction = _timeToSpawn * (_currentState / (float)_sprite.Length);
-            if (_timeToSpawnTimer >= timeFraction)
-            {
-                _currentState++;
-                if (_currentState > _sprite.Length)
-                {
-                    _currentState = 1;
-                }
-                UpdateSprite(_currentState - 1);
-            }
-        }
-
+        HandelUpdateSprite();
         if (_timeToSpawnTimer >= _timeToSpawn)
         {
             SpawnFruit();
         }
+    }
+
+    private void HandelUpdateSprite()
+    {
+        if (_stateOfTree > 2 && !_hasFruit)
+        {
+            // Tính toán thời gian cho mỗi trạng thái
+            var timeFraction = _timeToSpawn / (_sprite.Length - 1);
+            if (_timeToSpawnTimer >= timeFraction * (_currentState + 1))
+            {
+                UpdateTreeState();
+            }
+        }
+    }
+
+    private void UpdateTreeState()
+    {
+        _currentState++;
+        if (_currentState >= _sprite.Length - 1)
+        {
+            _currentState = 0;
+        }
+        UpdateSprite(_currentState);
     }
 
     private void UpdateSprite(int index)
@@ -65,12 +81,9 @@ public class Tree : Clicker, IInteractive
 
     protected override void HandleClick()
     {
-        if (_player.playerState == PlayerState.Idle && _playerInRange && _hasFruit)
+        if (_playerInRange && _hasFruit)
         {
-            _hasBeenClicked = false;
-            TakeFruit();
-            // Update number of fruit 
-            UpdateFruit();
+            ProcessClick();
         }
     }
 
@@ -78,11 +91,15 @@ public class Tree : Clicker, IInteractive
     {
         if (_playerInRange && _hasFruit)
         {
-            _hasBeenClicked = false;
-            TakeFruit();
-            // Update number of fruit 
-            UpdateFruit();
+            ProcessClick();
         }
+    }
+
+    private void ProcessClick()
+    {
+        _hasBeenClicked = false;
+        TakeFruit();
+        UpdateFruit();
     }
 
 
@@ -112,8 +129,8 @@ public class Tree : Clicker, IInteractive
     private void UpdateFruit()
     {
         // plus 1 fruit
-        int newAmout = _rM.GetItem(_fruitType).amount += 1;
-        _rM.SetAmoutItem(_fruitType, newAmout);
+        int newAmout = _resourceManager.GetItem(_fruitType).amount += 1;
+        _resourceManager.SetAmoutItem(_fruitType, newAmout);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -126,25 +143,38 @@ public class Tree : Clicker, IInteractive
         }
     }
 
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other != null && other.gameObject != null)
+        if (!IsValidCollider(other)) return;
+
+        Debug.Log("OnTriggerExit2D : " + other.gameObject.name);
+
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("OnTriggerExit2D : " + other.gameObject.name);
-            if (other.CompareTag("Player"))
+            HandlePlayerExit(other);
+        }
+    }
+
+    private bool IsValidCollider(Collider2D other)
+    {
+        return other != null && other.gameObject != null;
+    }
+
+    private void HandlePlayerExit(Collider2D other)
+    {
+        _playerInRange = false;
+
+        if (other.TryGetComponent(out Player player))
+        {
+            var interactiveObject = player.GetInteractiveObject();
+            if (interactiveObject != null && interactiveObject.Equals(this))
             {
-                _playerInRange = false;
-                if (other.TryGetComponent(out Player player))
-                {
-                    var interactiveObject = player.GetInteractiveObject();
-                    if (interactiveObject != null && interactiveObject.Equals(this))
-                    {
-                        player.SetInteractiveObject(null);
-                    }
-                }
+                player.SetInteractiveObject(null);
             }
         }
     }
+
 
     public void OnInteractive()
     {
