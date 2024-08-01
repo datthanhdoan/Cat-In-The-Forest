@@ -31,11 +31,11 @@ public class QuestVFX : MonoBehaviour
             {
                 case QuestManager.VisualStatus.Show:
                     ShowQuest();
-                    _isQuestHasBeenViewed = true;
+                    _isQuestHasBeenViewed = false;
                     break;
                 case QuestManager.VisualStatus.Hide:
                     HideQuest();
-                    _isQuestHasBeenViewed = false;
+                    _isQuestHasBeenViewed = true;
                     break;
             }
 

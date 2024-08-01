@@ -28,11 +28,21 @@ public class Inventory : MonoBehaviour
         var slotImage = slot.transform.GetChild(0).GetComponent<Image>();
         var slotText = slot.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
-        slotImage.sprite = sprite;
-        slotText.text = amount;
+        if (isActive == true)
+        {
+            slotImage.sprite = sprite;
+            slotText.text = amount;
+        }
 
         slotImage.gameObject.SetActive(isActive);
         slotText.gameObject.SetActive(isActive);
+
+
+
+
+
+
+
     }
 
     void UpdateInventory()
@@ -52,10 +62,11 @@ public class Inventory : MonoBehaviour
                     slotIndex += 1;
                 }
             }
-            else
-            {
-                UpdateSlot(i, null, null, false);
-            }
+        }
+
+        for (int i = slotIndex; i < slotList.Length; i++)
+        {
+            UpdateSlot(i, null, "", false);
         }
     }
     private void OnEnable()
