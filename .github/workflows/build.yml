@@ -10,17 +10,19 @@ on:
 jobs:
   build-windows:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Setup Unity
+
+    - name: Setup Unity for Windows
       uses: game-ci/unity-builder@v2.1.0
+      with:
+        projectPath: .
+        targetPlatform: StandaloneWindows64
+        customImage: 'unityci/editor:ubuntu-2022.3.58f1-windows-mono-3.1.0'
       env:
         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        UNITY_VERSION: 2022.3.58f1
-        UNITY_BUILDER_DOCKER_IMAGE: unityci/editor:ubuntu-2022.3.58f1-windows-mono-3.1.0
-        
+
     - name: Build Windows
       run: |
         unity-builder \
@@ -28,24 +30,27 @@ jobs:
           -buildTarget StandaloneWindows64 \
           -customParameters "-quit -batchmode -nographics -silent-crashes -logFile"
       if: github.event_name == 'push'
-        
+
     - uses: actions/upload-artifact@v4.6.0
       with:
         name: Windows Build
         path: build/StandaloneWindows64
       if: github.event_name == 'push'
-        
+
   build-android:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Setup Unity
+
+    - name: Setup Unity for Android
       uses: game-ci/unity-builder@v2.1.0
+      with:
+        projectPath: .
+        targetPlatform: Android
       env:
         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        
+
     - name: Build Android
       run: |
         unity-builder \
@@ -53,28 +58,28 @@ jobs:
           -buildTarget Android \
           -customParameters "-quit -batchmode -nographics -silent-crashes -logFile"
       if: github.event_name == 'push'
-        
+
     - uses: actions/upload-artifact@v4.6.0
       with:
         name: Android Build
         path: build/Android
       if: github.event_name == 'push'
-        
+
   release:
     needs: [build-windows, build-android]
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Download Windows Artifact
       uses: actions/download-artifact@v2
       with:
         name: Windows Build
-        
+
     - name: Download Android Artifact
       uses: actions/download-artifact@v2
       with:
         name: Android Build
-        
+
     - name: Create Release
       uses: actions/create-release@v1.1.4
       env:
@@ -82,7 +87,7 @@ jobs:
       with:
         tag_name: v1.0.0
         release_name: Release v1.0.0
-        
+
     - name: Upload Windows Asset
       uses: actions/upload-release-asset@v1.0.2
       env:
@@ -92,7 +97,7 @@ jobs:
         asset_path: ./StandaloneWindows64/YourProjectName.exe
         asset_name: YourProjectName-Windows.exe
         asset_content_type: application/vnd.microsoft.portable-executable
-        
+
     - name: Upload Android Asset 
       uses: actions/upload-release-asset@v1.0.2
       env:
@@ -101,4 +106,4 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./Android/YourProjectName.apk
         asset_name: YourProjectName-Android.apk
-        asset_content_type: application/vnd.android.package-archive 
+        asset_content_type: application/vnd.android.package-archive
