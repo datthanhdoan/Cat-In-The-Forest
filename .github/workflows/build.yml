@@ -18,6 +18,7 @@ jobs:
       uses: game-ci/unity-builder@v2.1.0
       env:
         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        UNITY_BUILDER_DOCKER_IMAGE: unityci/editor:ubuntu-2021.3.34f1-windows-mono
         
     - name: Build Windows
       run: |
